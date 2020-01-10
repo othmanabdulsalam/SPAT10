@@ -35,7 +35,7 @@
             //set session variables
             $_SESSION['loggedIn'] = true;
             $_SESSION['username'] = $userDetails['username'];
-            $_SESSION['C'] = $userDetails['accessLevel'];
+            $_SESSION['accessLevel'] = $userDetails['accessLevel'];
             //session has been set, refresh page where user will be logged in and their options displayed
             header("Location: index.php");
         }
