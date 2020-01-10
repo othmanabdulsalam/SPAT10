@@ -25,21 +25,21 @@ class LoginQuery
         //                                         OR ((Scorers.username = $username OR Scorers.email = $email) AND Scorers.passwordHash = $passwordHash) "));
 
         //tries to fetch admins
-        $tuple = $this->database->retrieve("SELECT username, passwordHash, email, accessLevel FROM Admins WHERE (username= \"$usernameOrEmail\" OR email =\"$usernameOrEmail\") AND passwordHash = \"$passwordHash\"");
+        $tuple = $this->database->retrieve("SELECT AdminID, username, passwordHash, email, accessLevel FROM Admins WHERE (username= \"$usernameOrEmail\" OR email =\"$usernameOrEmail\") AND passwordHash = \"$passwordHash\"");
         if(!isset($tuple[0]['username'])) //if it did not fetch a client
         {
             //tries to fetch client
-            $tuple = $this->database->retrieve("SELECT username, passwordHash, email, accessLevel FROM Clients WHERE (username= \"$usernameOrEmail\" OR email =\"$usernameOrEmail\") AND passwordHash = \"$passwordHash\"");
+            $tuple = $this->database->retrieve("SELECT clientID, username, passwordHash, email, accessLevel FROM Clients WHERE (username= \"$usernameOrEmail\" OR email =\"$usernameOrEmail\") AND passwordHash = \"$passwordHash\"");
         }
         if(!isset($tuple[0]['username'])) //if it did not fetch a client
         {
             //tries to fetch Questioner
-            $tuple = $this->database->retrieve("SELECT username, passwordHash, email, accessLevel FROM Questioners WHERE (username= \"$usernameOrEmail\" OR email =\"$usernameOrEmail\") AND passwordHash = \"$passwordHash\"");
+            $tuple = $this->database->retrieve("SELECT questionerID, username, passwordHash, email, accessLevel FROM Questioners WHERE (username= \"$usernameOrEmail\" OR email =\"$usernameOrEmail\") AND passwordHash = \"$passwordHash\"");
         }
         if(!isset($tuple[0]['username'])) //if it did not fetch a questioner
         {
             //tries to fetch Scorer
-            $tuple = $this->database->retrieve("SELECT username, passwordHash, email, accessLevel FROM Scorers WHERE (username= \"$usernameOrEmail\" OR email =\"$usernameOrEmail\") AND passwordHash = \"$passwordHash\"");
+            $tuple = $this->database->retrieve("SELECT scorerID, username, passwordHash, email, accessLevel FROM Scorers WHERE (username= \"$usernameOrEmail\" OR email =\"$usernameOrEmail\") AND passwordHash = \"$passwordHash\"");
         }
         if(!isset($tuple[0]['username'])) //if it did not fetch a scorer
         {

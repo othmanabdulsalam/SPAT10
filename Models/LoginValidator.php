@@ -3,7 +3,7 @@
  * created by Michael Jarratt
  * this class compares supplied login information with the database to validate login attempts
  */
-require_once("Models/LoginQuery.php");
+require_once __DIR__."\LoginQuery.php";
 
 class LoginValidator
 {
@@ -19,11 +19,10 @@ class LoginValidator
     {
         $passwordHash = md5($password); //hashes password for comparison
         $userTuple = $this->loginQuery->fetchUserTuple($usernameOrEmail,$passwordHash)[0]; //takes tuple from array of tuples
-
-        if(isset($userTuple[0])) //checks if field is set (successfully retrieved)
+        if(isset($userTuple['username'])) //checks if field is set (successfully retrieved)
         {
             //picks out information to return
-            $userDetails["userID"] = $userTuple[0]; //takes ID
+            $userDetails["userID"] = $userTuple['clientID']; //takes ID
             $userDetails['username'] = $userTuple['username'];
             $userDetails['email'] = $userTuple['email'];
             $userDetails['accessLevel'] = $userTuple['accessLevel'];
