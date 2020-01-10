@@ -23,7 +23,7 @@
     //setup report size
     $dompdf->setPaper('A4','portrait');
 
-
+    var_dump($_POST['view']);
     //if view button was pressed
     if(isset($_POST['view']))
     {
