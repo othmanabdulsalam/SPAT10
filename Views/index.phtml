@@ -102,6 +102,18 @@ if(isset($_SESSION['loggedIn']) && ($_SESSION['accessLevel'] == 'A'))
     <p>You are logged in as Admin teehee</p>
 <?php }
 
+
+if(isset($_SESSION['loggedIn']) && ($_SESSION['accessLevel'] == 'S'))
+{
+    require_once('Views/template/header.phtml'); ?>
+    <p>You are logged in as Scorer teehee</p>
+<?php }
+
+if(isset($_SESSION['loggedIn']) && ($_SESSION['accessLevel'] == 'Q'))
+{
+    require_once('Views/template/header.phtml'); ?>
+    <p>You are logged in as Questioner teehee</p>
+<?php }
 require_once('Views/template/footer.phtml');
 
 
