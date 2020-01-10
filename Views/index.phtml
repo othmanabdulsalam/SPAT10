@@ -92,8 +92,8 @@ if(isset($_SESSION['loggedIn']) && ($_SESSION['accessLevel'] == 'C'))
                 <h4 class="card-title">South China Sea oil rig #10120</h4>
                 <p class="card-text">Created: 09/01/2020</p>
                 <!-- <a href="/images/Compliance%20Audit%20Report.pdf" class="card-link">View</a> -->
-                 <a href="/Controllers/report.php" class="card-link">View</a>
-                <a href="" download="/images/Compliance%20Audit%20Report.pdf" class="card-link">Download</a>
+                <a href="/Controllers/report.php" name="view" class="card-link" value="<?php if (isset($_POST['view'])) {echo $_POST['view']; 	} ?>">View</a>
+                <a href="" download="/Controllers/report.php" class="card-link">Download</a>
             </div>
         </div>
     </div>
