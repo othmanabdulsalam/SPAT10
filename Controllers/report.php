@@ -26,5 +26,18 @@
     //rendered as PDF
     $dompdf->render();
 
-    //PDF is now output, pop up appears because of value "1"
-    $dompdf->stream("Audit Report", array("Attachment" => 1));
+    //if view button was pressed
+    if(isset($_POST['view']))
+    {
+        //open through browser
+        $dompdf->stream("Audit Report", array("Attachment" => 0));
+    }
+
+    //else the download button was pressed
+    else
+    {
+        //pdf is downloaded onto machine
+        $dompdf->stream("Audit Report", array("Attachment" => 1));
+    }
+
+    require_once("../Views/report.phtml");
