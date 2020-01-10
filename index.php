@@ -33,7 +33,7 @@
         //details have been retrieved
         else
         {
-            //set session variables
+            //set session variables for loggedIn, userID, username & accessLevel
             $_SESSION['loggedIn'] = true;
             $_SESSION['userID'] = $userDetails['userID'];
             $_SESSION['username'] = $userDetails['username'];
