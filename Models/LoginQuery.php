@@ -18,12 +18,6 @@ class LoginQuery
     //retrieves user where their email and password or username and password match
     public function fetchUserTuple($usernameOrEmail,$passwordHash)
     {
-        //return($this->database->retrieve("SELECT * FROM Admins, Clients, Questioners, Scorers
-        //                                         WHERE ((Admins.username = $username OR Admins.email = $email) AND Admins.passwordHash = $passwordHash)
-        //                                         OR ((Clients.username = $username OR Clients.email = $email) AND Clients.passwordHash = $passwordHash)
-        //                                         OR ((Questioners.username = $username OR Questioners.email = $email) AND Questioners.passwordHash = $passwordHash)
-        //                                         OR ((Scorers.username = $username OR Scorers.email = $email) AND Scorers.passwordHash = $passwordHash) "));
-
         //tries to fetch admins
         $tuple = $this->database->retrieve("SELECT AdminID, username, passwordHash, email, accessLevel FROM Admins WHERE (username= \"$usernameOrEmail\" OR email =\"$usernameOrEmail\") AND passwordHash = \"$passwordHash\"");
         if(!isset($tuple[0]['username'])) //if it did not fetch a client

@@ -18,6 +18,7 @@ class LoginValidator
     public function validate($usernameOrEmail,$password)
     {
         $passwordHash = md5($password); //hashes password for comparison
+
         $userTuple = $this->loginQuery->fetchUserTuple($usernameOrEmail,$passwordHash)[0]; //takes tuple from array of tuples
         if(isset($userTuple['username'])) //checks if field is set (successfully retrieved)
         {

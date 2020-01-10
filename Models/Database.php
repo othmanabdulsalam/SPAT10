@@ -1,10 +1,11 @@
-<?php
 /*
 * created by Michael Jarratt
 * this class processes queries, it can either run inserts and return nothing,
 * or can run selects and return the results as an associative index.
 * this is a singleton class
 */
+<?php
+
 
 class Database
 {
