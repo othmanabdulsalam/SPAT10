@@ -32,12 +32,11 @@
         }
         else
         {
+            //set session variables
             $_SESSION['loggedIn'] = true;
             $_SESSION['username'] = $userDetails['username'];
             $_SESSION['C'] = $userDetails['accessLevel'];
             //session has been set, refresh page where user will be logged in and their options displayed
-            $_SESSION['userID'] = $userDetails['userID'];
-            $_SESSION['username'] = $userDetails['username'];
             header("Location: index.php");
         }
     }
