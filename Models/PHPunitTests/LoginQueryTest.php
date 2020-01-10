@@ -26,8 +26,8 @@ class LoginQueryTest extends TestCase
         $tuple = $loginQuery->fetchUserTuple("scorer",  md5("scorer"))[0];
         $this->assertTrue($tuple['username'] == "scorer");
         //checks invalid login
-        $tuple = $loginQuery->fetchUserTuple("invalid", "invalid");
-        $this->assertTrue(!isset($tuple[0]));
+        $tuple = $loginQuery->fetchUserTuple("invalid", "invalid")[0];
+        $this->assertTrue(!isset($tuple['username']));
 
     }
 }

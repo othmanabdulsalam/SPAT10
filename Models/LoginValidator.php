@@ -15,18 +15,10 @@ class LoginValidator
     }
 
     //takes credentials, returns users tuple if valid, returns nothing otherwise
-    public function validate($username,$email,$password)
+    public function validate($usernameOrEmail,$password)
     {
         $passwordHash = md5($password); //hashes password for comparison
-        if(!isset($username))
-        {
-            $username = ""; //if username is null (not entered by user) it is set to empty string
-        }
-        else
-        {
-            $email = ""; //else email has not been set, so email is changed from nul to empty string
-        }
-        $userTuple = $this->loginQuery->fetchUserTuple($username,$email,$passwordHash)[0]; //takes tuple from array of tuples
+        $userTuple = $this->loginQuery->fetchUserTuple($usernameOrEmail,$passwordHash)[0]; //takes tuple from array of tuples
 
         if(isset($userTuple[0])) //checks if field is set (successfully retrieved)
         {

@@ -41,6 +41,14 @@ class LoginQuery
             //tries to fetch Scorer
             $tuple = $this->database->retrieve("SELECT username, passwordHash, email, accessLevel FROM Scorers WHERE (username= \"$usernameOrEmail\" OR email =\"$usernameOrEmail\") AND passwordHash = \"$passwordHash\"");
         }
+        if(!isset($tuple[0]['username'])) //if it did not fetch a scorer
+        {
+            //create empty tuple
+            var_dump($tuple);
+            $temp = [];
+            $temp['username'] = null;
+            $tuple[0] =$temp;
+        }
 
         //returns either empty tuple or filled tuple of login was valid
         return $tuple;
