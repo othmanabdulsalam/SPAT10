@@ -42,4 +42,5 @@
         }
     }
 
+    //phtml file for the index page
     require("Views/index.phtml");
