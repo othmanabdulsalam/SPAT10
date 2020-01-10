@@ -16,7 +16,7 @@ class Database
         $serverName = "poseidon.salford.ac.uk";
         $username = "hackcamp10";
         $password = "ITvf6adLXvLNjmP";
-        $this->connection = new PDO("mysql:host=$serverName;dbname=sye564_forum", $username, $password);
+        $this->connection = new PDO("mysql:host=$serverName;dbname=hackcamp10_spatdb", $username, $password);
         $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); //sets error mode to create an exception saying what went wrong
     }
 
