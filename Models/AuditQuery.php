@@ -23,4 +23,12 @@ class AuditQuery
     {
         return $this->database->retrieve("SELECT auditID, location, dateScored FROM Audit WHERE scored = 1 AND clientID = \"$clientID\"");
     }
+
+    /*
+     * gets specific audit by ID
+     */
+    public function getAudit($auditID)
+    {
+        return $this->database->retrieve("SELECT location, dateScored FROM Audit WHERE auditID = \"$auditID\"")[0]; //returns the single tuple from array
+    }
 }

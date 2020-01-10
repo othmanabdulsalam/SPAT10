@@ -18,8 +18,17 @@ class AuditQueryTest extends TestCase
     {
         $auditQuery = new AuditQuery();
         $clientAudits = $auditQuery->getAudits(1);
-        var_dump($clientAudits);
+        //var_dump($clientAudits);
         $this->assertTrue($clientAudits[0]['auditID'] == 1);
         $this->assertTrue(!isset($clientAudits[1]));
+    }
+
+    //test method to get single audit by ID
+    public function testGetAudit()
+    {
+        $auditQuery = new AuditQuery();
+        $audit = $auditQuery->getAudit(1);
+        //var_dump($audit);
+        $this->assertTrue($audit['location'] == "bigg Stiggs oil rigg");
     }
 }
