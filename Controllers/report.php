@@ -7,6 +7,8 @@
      */
 
 
+    session_start();
+
     //require the autoloader from dompdf
     require_once('../dompdf/autoload.inc.php');
 
@@ -37,5 +39,5 @@
         //rendered as PDF
         $dompdf->render();
         //pdf is downloaded onto machine
-        $dompdf->stream("Audit Report", array("Attachment" => 0));
+        $dompdf->stream("Audit Report", array("Attachment" => 1));
     }
