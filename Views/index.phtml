@@ -94,7 +94,15 @@ if(isset($_SESSION['loggedIn']) && ($_SESSION['accessLevel'] == 'C'))
             </div>
         </div>
     </div>
-    <?php } require_once('Views/template/footer.phtml');
+    <?php }
+
+if(isset($_SESSION['loggedIn']) && ($_SESSION['accessLevel'] == 'A'))
+{
+    require_once('Views/template/header.phtml'); ?>
+    <p>You are logged in as Admin teehee</p>
+<?php }
+
+require_once('Views/template/footer.phtml');
 
 
 
