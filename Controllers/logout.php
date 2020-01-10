@@ -1,8 +1,5 @@
 <?php
-    $view = new stdClass(); //creating the view
-    $view->pageTitle = 'Logged out'; //giving tab a name
-
-
+    
     //session is started,session details are still saved
     session_start();
 
