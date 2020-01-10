@@ -7,6 +7,22 @@
      */
 
     $view = new stdClass(); //creating the view
-    $view->pageTitle = 'Please Login'; //giving tab a name
+    //$view->pageTitle = 'Please Login'; //giving tab a name
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    //$view->pageTitle = 'Please Login'; //giving tab a name
     require('../Views/report.phtml');
