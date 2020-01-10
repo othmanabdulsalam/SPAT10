@@ -37,7 +37,5 @@
         //rendered as PDF
         $dompdf->render();
         //pdf is downloaded onto machine
-        $dompdf->stream("Audit Report", array("Attachment" => 1));
+        $dompdf->stream("Audit Report", array("Attachment" => 0));
     }
-
-    require_once("../Views/report.phtml");
