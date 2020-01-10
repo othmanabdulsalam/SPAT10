@@ -2,7 +2,7 @@
 
 
 use PHPUnit\Framework\TestCase;
-require __DIR__."\..\Database.php";
+require_once __DIR__."\..\Database.php"; //absolute path for PHP query
 class DatabaseTest extends TestCase
 {
 
