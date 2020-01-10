@@ -23,21 +23,21 @@
     //setup report size
     $dompdf->setPaper('A4','portrait');
 
-    //rendered as PDF
-    $dompdf->render();
 
     //if view button was pressed
     if(isset($_POST['view']))
     {
         //open through browser
-        $dompdf->stream("Audit Report", array("Attachment" => 0));
+        $dompdf->render();
     }
 
     //else the download button was pressed
-    else
+    else if (isset($_POST['download']))
     {
+        //rendered as PDF
+        $dompdf->render();
         //pdf is downloaded onto machine
-        $dompdf->stream("Audit Report", array("Attachment" => 1));
+        $dompdf->stream("Audit Report", array("Attachment" => 0));
     }
 
     require_once("../Views/report.phtml");
