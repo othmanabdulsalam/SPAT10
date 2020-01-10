@@ -93,7 +93,7 @@ if(isset($_SESSION['loggedIn']) && ($_SESSION['accessLevel'] == 'C'))
                 <p class="card-text">Created: 09/01/2020</p>
                 <!-- <a href="/images/Compliance%20Audit%20Report.pdf" class="card-link">View</a> -->
                 <a href="/Controllers/report.php" name="view" class="card-link" value="<?php if (isset($_POST['view'])) {echo $_POST['view']; 	} ?>">View</a>
-                <a href="" download="/Controllers/report.php" class="card-link">Download</a>
+                <a href="/Controllers/report.php" name="download" class="card-link" value="<?php if (isset($_POST['download'])) {echo $_POST['download']; 	} ?>">Download</a>
             </div>
         </div>
     </div>
