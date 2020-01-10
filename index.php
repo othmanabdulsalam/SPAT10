@@ -16,6 +16,7 @@
         //Once button is clicked, grab user data from the loginValidator class
         $loginValidator = new LoginQuery();
         $userDetails = $loginValidator->validate($usernameOrEmail,$usernameOrEmail,$password);
+        var_dump($userDetails);
         //if no details, that means the details input were incorrect
         if(!$userDetails)
         {
@@ -24,6 +25,10 @@
         }
         else
         {
+            $_SESSION['loggedIn'] = true;
+            $_SESSION['username'] = $userDetails['username'];
+            $_SESSION['C'] = $userDetails['accessLevel'];
+            var_dump($_SESSION['loggedIn']);
             //session has been set, refresh page where user will be logged in and their options displayed
             header("Location: index.php");
         }
