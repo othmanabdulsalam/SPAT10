@@ -14,11 +14,15 @@
         $password = $_POST['password'];
 
         //Once button is clicked, grab user data from the loginValidator class
+
+        
         $loginValidator = new LoginQuery();
         $userDetails = $loginValidator->validate($usernameOrEmail,$usernameOrEmail,$password);
         var_dump($userDetails);
+        $loginValidator = new LoginValidator();
+        $userDetails = $loginValidator->validate($usernameOrEmail,null,$password); //need to find a way to identify email
         //if no details, that means the details input were incorrect
-        if(!$userDetails)
+        if(!isset($userDetails))
         {
             //if details where entered incorrectly, output error message
             $view->loginError = "Incorrect Login Details, please try again";
@@ -30,6 +34,9 @@
             $_SESSION['C'] = $userDetails['accessLevel'];
             var_dump($_SESSION['loggedIn']);
             //session has been set, refresh page where user will be logged in and their options displayed
+            session_start();
+            $_SESSION['userID'] = $userDetails['userID'];
+            $_SESSION['username'] = $userDetails['username'];
             header("Location: index.php");
         }
     }
