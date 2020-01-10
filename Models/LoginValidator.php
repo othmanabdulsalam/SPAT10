@@ -23,11 +23,12 @@ class LoginValidator
         if(isset($userTuple['username'])) //checks if field is set (successfully retrieved)
         {
             //picks out information to return
-            $userDetails["userID"] = $userTuple['clientID']; //takes ID
+           /* $userDetails["userID"] = $userTuple['userID']; //takes ID
             $userDetails['username'] = $userTuple['username'];
             $userDetails['email'] = $userTuple['email'];
             $userDetails['accessLevel'] = $userTuple['accessLevel'];
-            return $userDetails;
+            */
+            return $userTuple;
         }
         else
         {
