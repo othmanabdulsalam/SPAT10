@@ -49,6 +49,11 @@ body:before {
     color: white;
 }
 
+.card-header img{
+   float: right;
+
+}
+
 .social_icon{
     position: absolute;
     right: 20px;
@@ -97,4 +102,8 @@ input:focus{
 
 .links a{
     margin-left: 4px;
+}
+
+.form-group #errormessage{
+    color: red;
 }
