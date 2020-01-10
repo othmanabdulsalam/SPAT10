@@ -8,7 +8,7 @@
 
 
     //require the autoloader from dompdf
-    require_once('dompdf/autoload.inc.php');
+    require_once('../dompdf/autoload.inc.php');
 
     //reference dompdf namespace
     use Dompdf\Dompdf;
