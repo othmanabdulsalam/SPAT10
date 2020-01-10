@@ -75,7 +75,7 @@ if(!isset($_SESSION['loggedIn']))
     </html>
 
 <?php }
-if(isset($_SESSION['loggedIn']) && ($_SESSION['C']))
+if(isset($_SESSION['loggedIn']) && ($_SESSION['accessLevel'] == 'C'))
 {
     require_once('Views/template/header.phtml'); ?>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">

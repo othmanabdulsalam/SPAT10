@@ -40,7 +40,7 @@ class LoginQuery
         if(!isset($tuple[0]['username'])) //if it did not fetch a scorer
         {
             //create empty tuple
-            var_dump($tuple);
+            //var_dump($tuple);
             $temp = [];
             $temp['username'] = null;
             $tuple[0] =$temp;
