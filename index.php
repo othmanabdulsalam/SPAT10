@@ -1,4 +1,12 @@
 <?php
+    /**
+     * Index Controller created by Othman Abdulsalam
+     *
+     * Index is the login screen when no login has been successful
+     *
+     * If login is successful, page is reloaded with appropriate user options
+     * displayed and navigation across the website becomes possible
+     */
     $view = new stdClass(); //creating the view
     $view->pageTitle = 'Please Login'; //giving tab a name
     require_once('Models/LoginValidator.php');
