@@ -30,6 +30,7 @@
             //if details where entered incorrectly, output error message
             $view->loginError = "Incorrect Login Details, please try again";
         }
+        //details have been retrieved
         else
         {
             //set session variables
