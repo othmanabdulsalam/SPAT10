@@ -25,9 +25,9 @@
     //setup report size
     $dompdf->setPaper('A4','portrait');
 
-    var_dump($_POST['view']);
+    var_dump($_POST['checked']);
     //if view button was pressed
-    if(isset($_POST['view']))
+    if(isset($_POST['checked']))
     {
         //open through browser
         $dompdf->render();
