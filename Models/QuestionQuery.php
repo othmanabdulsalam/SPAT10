@@ -24,8 +24,12 @@ class QuestionQuery
         return $this->database->retrieve("SELECT * FROM Questions WHERE questionID IN (SELECT questionID FROM AuditQuestions WHERE auditID = \"$auditID\")");
     }
 
-    /*
+    /**
      * returns array containing ID's of all questions in an audit
+     *
+     * @param String $auditID  ID(s) of the aduit to fetch Questions IDs for
+     *
+     * @return array containing ID of audits questions
      */
     public function getQuestionIDs($auditID)
     {

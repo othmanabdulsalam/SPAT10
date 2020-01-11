@@ -22,4 +22,12 @@ class CategoryQueryTest extends TestCase
         $result2 = $categoryQuery->getCategoryIDs("1,4,7");
         $this->assertTrue($result2[0]==1 && $result2[1]==2 && $result2[2]==3);
     }
+
+    public function testGetCategories()
+    {
+        $categoryQuery = new CategoryQuery();
+        $result = $categoryQuery->getCategories("1,2,3");
+        var_dump($result);
+        self::assertTrue($result[0]["catID"] == 1);
+    }
 }

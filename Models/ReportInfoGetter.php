@@ -10,6 +10,7 @@ require_once __DIR__."/AuditQuery.php";
 require_once __DIR__."/UserQuery.php";
 require_once __DIR__."/QuestionQuery.php";
 require_once __DIR__."/SubCatQuery.php";
+require_once __DIR__."/CategoryQuery.php";
 
 require_once __DIR__."/Database.php"; //temporary to make queries faster MUST REMOVE and separate queries into their classes
 
@@ -19,6 +20,7 @@ class ReportInfoGetter
     private $userQuery;
     private $questionQuery;
     private $subCatQuery;
+    private $categoryQuery;
 
     public function __construct()
     {
@@ -26,6 +28,7 @@ class ReportInfoGetter
         $this->userQuery = new UserQuery();
         $this->questionQuery = new QuestionQuery();
         $this->subCatQuery = new SubCatQuery();
+        $this->categoryQuery = new CategoryQuery();
     }
 
     /*
@@ -43,25 +46,7 @@ class ReportInfoGetter
         //$reportInfo['comment'] = $this->CommentQuery->getComments($auditID);// comments scorer made
         //$reportInfo['complianceBand'] = $this->ComplianceQuery->getComplianceBand($percentileID);// compliance band
         $reportInfo['reportContent'] = $this->getContent('auditID');
-        $database = Database::getInstance();
-        //Question IDs
-        $questionIDs = $this->questionQuery->getQuestionIDs($auditID);
-        $questionIDs = join(",",$questionIDs); //turns array into comma separated list
 
-        //SubCategory IDs
-        $subcatIDs = $database->retrieve("SELECT DISTINCT subCatID FROM Questions
-                                                WHERE questionID IN ($questionIDs)");
-        $temp = [];
-        foreach ($subcatIDs as $tuple)
-        {
-            array_push($temp, $tuple['subCatID']); //extracts subCatIDs from tuples
-        }
-        $subcatIDs = $temp;
-        $subcatIDs = join(",",$subcatIDs); //turns into a comma seporated list
-
-        //Category IDs
-        $catiDs = $database->retrieve("SELECT DISTINCT catID FROM SubCategories WHERE subCatID in (\"$subcatIDs\")");
-        var_dump($catiDs);
         return $reportInfo;
     }
 
@@ -74,8 +59,35 @@ class ReportInfoGetter
         //gets Question IDs
         $questionIDs = $this->questionQuery->getQuestionIDs($auditID);
         //gets SubCategory IDs
-        $subCatIDs = $this->subCatQuery->getCatID(join(",",$questionIDs); //join turns array to comma seporated string -> "1,2,3"...
+        $subCatIDs = $this->subCatQuery->getCatID(join(",",$questionIDs)); //join turns array to comma separated string -> "1,2,3"...
         //gets Category IDs
+        $categoryIDs = $this->categoryQuery->getCategoryIDs(join(",",$subCatIDs));
 
+        //$content = []; //root of datastructure - array of categories
+
+        $content = $this->categoryQuery->getCategories(join(",",$categoryIDs));
+
+        var_dump($content);
+        return 1;
     }
+
+/*$database = Database::getInstance();
+    //Question IDs
+$questionIDs = $this->questionQuery->getQuestionIDs($auditID);
+$questionIDs = join(",",$questionIDs); //turns array into comma separated list
+
+    //SubCategory IDs
+$subcatIDs = $database->retrieve("SELECT DISTINCT subCatID FROM Questions
+                                                WHERE questionID IN ($questionIDs)");
+$temp = [];
+foreach ($subcatIDs as $tuple)
+{
+array_push($temp, $tuple['subCatID']); //extracts subCatIDs from tuples
+}
+$subcatIDs = $temp;
+$subcatIDs = join(",",$subcatIDs); //turns into a comma seporated list
+
+//Category IDs
+$catiDs = $database->retrieve("SELECT DISTINCT catID FROM SubCategories WHERE subCatID in (\"$subcatIDs\")");
+var_dump($catiDs);*/
 }

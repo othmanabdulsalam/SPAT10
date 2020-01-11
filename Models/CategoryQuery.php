@@ -16,9 +16,10 @@ class CategoryQuery
         $this->database = Database::getInstance();
     }
 
-    /*
-     * takes a single subCategory ID or list ("1,2,3"...) and returns the Categories
-     * they belong to
+
+    /**
+     * @param String $subCatID list of category IDs formatted "1,2,3"...
+     * @return array containing IDs of categories containing the supplied subcategories
      */
     public function getCategoryIDs($subCatID)
     {
@@ -29,5 +30,29 @@ class CategoryQuery
             array_push($questionIDList,$tuple['catID']); //extracts cat ID from tuples
         }
         return $questionIDList;
+    }
+
+    /**
+     * returns of tuples from the Categories table with supplied ID
+     *
+     * @param String $catIDs ID(s) of all categories to fetch information of
+     *
+     * @return array containing Category tuples
+     */
+    public function getCategories($catIDs)
+    {
+        return $this->database->retrieve("SELECT * FROM Categories WHERE catID IN ($catIDs)");
+    }
+
+    /**
+     * returns all tuples from the Category table
+     *
+     * @param null
+     *
+     * @return array containing Category tuples
+     */
+    public function getAllCategories()
+    {
+        return $this->database->retrieve("SELECT * FROM Categories");
     }
 }

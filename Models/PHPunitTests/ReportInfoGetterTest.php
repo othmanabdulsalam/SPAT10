@@ -35,6 +35,8 @@ class ReportInfoGetterTest extends TestCase
         $getContent = $reflection->getMethod("getContent");
         $getContent->setAccessible(true);
 
-        $content = $getContent->invokeArgs($reportInfoGetter,1); // 1 = auditID
+        $content = $getContent->invokeArgs($reportInfoGetter,array(1)); // 1 = auditID
+
+        $this->assertTrue($content == 1);
     }
 }
