@@ -9,6 +9,7 @@
 require_once __DIR__."/AuditQuery.php";
 require_once __DIR__."/UserQuery.php";
 require_once __DIR__."/QuestionQuery.php";
+require_once __DIR__."/Database.php"; //temporary to make queries faster MUST REMOVE and separate queries into their classes
 
 class ReportInfoGetter
 {
@@ -24,13 +25,39 @@ class ReportInfoGetter
     }
 
     /*
-     *
+     * gets all information needed to create a report for specific audit
+     * and returns it in an associatively index array
      */
     public function getAudit($clientID, $auditID)
     {
         $reportInfo = []; //array in which information will be gathered to be passed out
-        $reportInfo['audit'] = $this->auditQuery->getAudit($clientID); //location, date scored
-        $reportInfo['user'] = $this->userQuery->getClientUsername($clientID); //name of client
-        $reportInfo['questions'] = $this->QuestionQuery->getAuditQUestions($auditID);
+        $reportInfo['audit'] = $this->auditQuery->getAudit($auditID); //location, date scored
+        $reportInfo['user'] = $this->userQuery->getUsername($clientID); //name of client
+        //$reportInfo['subCatDescription'] = $this->getSubcatagory($catID);//gets subcatagory name
+        $reportInfo['questions'] = $this->questionQuery->getAuditQuestions($auditID); //Questions
+        //$reportInfo['score'] = $this->ScoreQuery->getScores($auditID); //Scores
+        //$reportInfo['comment'] = $this->CommentQuery->getComments($auditID);// comments scorer made
+        //$reportInfo['complianceBand'] = $this->ComplianceQuery->getComplianceBand($percentileID);// compliance band
+
+        $database = Database::getInstance();
+        //Question IDs
+        $questionIDs = $this->questionQuery->getQuestionIDs($auditID);
+        $questionIDs = join(",",$questionIDs); //turns array into comma separated list
+
+        //SubCategory IDs
+        $subcatIDs = $database->retrieve("SELECT DISTINCT subCatID FROM Questions
+                                                WHERE questionID IN ($questionIDs)");
+        $temp = [];
+        foreach ($subcatIDs as $tuple)
+        {
+            array_push($temp, $tuple['subCatID']); //extracts subCatIDs from tuples
+        }
+        $subcatIDs = $temp;
+        $subcatIDs = join(",",$subcatIDs); //turns into a comma seporated list
+
+        //Category IDs
+        $catiDs = $database->retrieve("SELECT DISTINCT catID FROM SubCategories WHERE subCatID in (\"$subcatIDs\")");
+        var_dump($catiDs);
+        return $reportInfo;
     }
 }
