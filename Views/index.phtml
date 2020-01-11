@@ -7,7 +7,7 @@ if(!isset($_SESSION['loggedIn']))
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <!------ Include the above in your HEAD tag ---------->
 
-    <html>
+    <html lang="en">
     <head>
         <title>Login</title>
         <!--Made with love by Mutiullah Samim -->
@@ -135,7 +135,6 @@ if(isset($_SESSION['loggedIn']) && ($_SESSION['accessLevel'] == 'Q'))
     require_once('Views/template/header.phtml'); ?>
     <p>You are logged in as Questioner teehee</p>
 <?php }
-//This is a test
 require_once('Views/template/footer.phtml');
 
 
