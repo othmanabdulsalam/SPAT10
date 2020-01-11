@@ -84,7 +84,7 @@ if(isset($_SESSION['loggedIn']) && ($_SESSION['accessLevel'] == 'C'))
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-<form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+<form action="../Controllers/report.php" method="post">
     <div class="container">
         <h2>Audit Reports:</h2>
         <div class="card">
@@ -92,9 +92,8 @@ if(isset($_SESSION['loggedIn']) && ($_SESSION['accessLevel'] == 'C'))
                 <h4 class="card-title">South China Sea oil rig #10120</h4>
                 <p class="card-text">Created: 09/01/2020</p>
                 <!-- <a href="/images/Compliance%20Audit%20Report.pdf" class="card-link">View</a> -->
-                <input hidden name="checked" value="<?php if (isset($_POST['checked'])) {echo $_POST['checked']; 	} ?>">
-                <a href="/Controllers/report.php" class="card-link" ><input type=submit name="view" value="View"></a>
-                <a href="/Controllers/report.php" class="card-link"><input type="submit" name="download" value="Download"></a>
+                <input type=submit name="view" value="View">
+                <input type="submit" name="download" value="Download">
             </div>
         </div>
     </div>
