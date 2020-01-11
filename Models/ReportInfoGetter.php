@@ -9,6 +9,8 @@
 require_once __DIR__."/AuditQuery.php";
 require_once __DIR__."/UserQuery.php";
 require_once __DIR__."/QuestionQuery.php";
+require_once __DIR__."/SubCatQuery.php";
+
 require_once __DIR__."/Database.php"; //temporary to make queries faster MUST REMOVE and separate queries into their classes
 
 class ReportInfoGetter
@@ -16,12 +18,14 @@ class ReportInfoGetter
     private $auditQuery;
     private $userQuery;
     private $questionQuery;
+    private $subCatQuery;
 
     public function __construct()
     {
         $this->auditQuery = new AuditQuery();
         $this->userQuery = new UserQuery();
         $this->questionQuery = new QuestionQuery();
+        $this->subCatQuery = new SubCatQuery();
     }
 
     /*
@@ -38,7 +42,7 @@ class ReportInfoGetter
         //$reportInfo['score'] = $this->ScoreQuery->getScores($auditID); //Scores
         //$reportInfo['comment'] = $this->CommentQuery->getComments($auditID);// comments scorer made
         //$reportInfo['complianceBand'] = $this->ComplianceQuery->getComplianceBand($percentileID);// compliance band
-
+        $reportInfo['reportContent'] = $this->getContent('auditID');
         $database = Database::getInstance();
         //Question IDs
         $questionIDs = $this->questionQuery->getQuestionIDs($auditID);
@@ -59,5 +63,19 @@ class ReportInfoGetter
         $catiDs = $database->retrieve("SELECT DISTINCT catID FROM SubCategories WHERE subCatID in (\"$subcatIDs\")");
         var_dump($catiDs);
         return $reportInfo;
+    }
+
+    /*
+     * this function gets data and creates the datastructure containing all
+     * information to be presented in the report
+     */
+    private function getContent($auditID)
+    {
+        //gets Question IDs
+        $questionIDs = $this->questionQuery->getQuestionIDs($auditID);
+        //gets SubCategory IDs
+        $subCatIDs = $this->subCatQuery->getCatID(join(",",$questionIDs); //join turns array to comma seporated string -> "1,2,3"...
+        //gets Category IDs
+
     }
 }

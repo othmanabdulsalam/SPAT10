@@ -27,4 +27,14 @@ class ReportInfoGetterTest extends TestCase
         $this->assertTrue($reportInfo['user']['username'] == "client");
         $this->assertTrue($reportInfo['questions'][0]['questionID'] == 1);
     }
+
+    public function testGetContent()
+    {
+        $reportInfoGetter = new ReportInfoGetter();
+        $reflection = new \ReflectionClass(get_class($reportInfoGetter));
+        $getContent = $reflection->getMethod("getContent");
+        $getContent->setAccessible(true);
+
+        $content = $getContent->invokeArgs($reportInfoGetter,1); // 1 = auditID
+    }
 }

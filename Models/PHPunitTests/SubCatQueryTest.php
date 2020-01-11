@@ -1,5 +1,9 @@
 <?php
-
+/*
+ * created by Michael Jarratt
+ *
+ * tests SubCatQuery class
+ */
 
 use PHPUnit\Framework\TestCase;
 
