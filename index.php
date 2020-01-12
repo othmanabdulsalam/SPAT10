@@ -9,7 +9,8 @@
      */
     $view = new stdClass(); //creating the view
     $view->pageTitle = 'Please Login'; //giving tab a name
-    require_once('Models/LoginValidator.php');
+    require_once('Models/LoginValidator.php'); //for validating login
+    require_once('Models/AuditQuery.php'); //for querying the audits that need to be displayed
 
     //session is started
     session_start();
@@ -38,26 +39,25 @@
             $_SESSION['userID'] = $userDetails['userID'];
             $_SESSION['username'] = $userDetails['username'];
             $_SESSION['accessLevel'] = $userDetails['accessLevel'];
+
+
             //session has been set, refresh page where user will be logged in and their options displayed
             header("Location: index.php");
+
         }
 
-        if(isset($_SESSION['userID']) && $_SESSION['accessLevel'] == 'C')
-        {
-            //grab result of client's audits and set to variable
-            //$clientAudits;
-            //create view variable
-            //$view->clientAudits = $clientAudits;
-        }
 
-        if(isset($_SESSION['userID']) && $_SESSION['accessLevel'] == 'S')
-        {
-            //grab result of scorer's audits to be completed and set to variable
-            //$scorerAudits;
-            //create view variable
-            //$view->scorerAudits = $scorerAudits;
-        }
+    }
 
+    if(isset($_SESSION['userID']) && $_SESSION['accessLevel'] == 'C')
+    {
+        // initialise the audit query
+        $auditQuery = new AuditQuery();
+        //grab result of client's audits and set to variable
+        $clientAudits = $auditQuery->getAudits($_SESSION['userID']);
+        var_dump($clientAudits);
+        //create view variable
+        $view->clientAudits = $clientAudits;
     }
 
     //phtml file for the index page
