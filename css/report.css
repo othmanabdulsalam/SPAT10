@@ -18,15 +18,3 @@ body {
         box-shadow: none;
     }
 }
-
-.thead-blue th {
-    color:#009CDC;
-    background-color:#009CDC;
-    border-color:#009CDC;
-}
-
-.break {
-    page-break-before: always;
-}
-
-
