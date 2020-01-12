@@ -55,7 +55,6 @@
         $auditQuery = new AuditQuery();
         //grab result of client's audits and set to variable
         $clientAudits = $auditQuery->getAudits($_SESSION['userID']);
-        var_dump($clientAudits);
         //create view variable
         $view->clientAudits = $clientAudits;
     }
