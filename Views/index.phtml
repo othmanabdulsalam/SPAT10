@@ -90,13 +90,13 @@ if(isset($_SESSION['loggedIn']) && ($_SESSION['accessLevel'] == 'C'))
         <h2>Audit Reports:</h2>
 
         <?php
-        //$clientAudits = $view->clientAudits;
-        //foreach ($clientAudits as $ca)
+        $clientAudits = $view->clientAudits;
+        foreach ($clientAudits as $ca)
         {?>
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title">South China Sea oil rig #10120</h4>
-                <p class="card-text">Created: 09/01/2020</p>
+                <h4 class="card-title"><?php echo $ca['location'];?></h4>
+                <p class="card-text"><?php echo $ca['dateScored'];?></p>
                 <!-- <a href="/images/Compliance%20Audit%20Report.pdf" class="card-link">View</a> -->
                 <input type=submit class="btn btn-outline-primary" name="view" value="View">
                 <input type="submit" class="btn btn-outline-primary" name="download" value="Download">
