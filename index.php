@@ -41,6 +41,23 @@
             //session has been set, refresh page where user will be logged in and their options displayed
             header("Location: index.php");
         }
+
+        if(isset($_SESSION['userID']) && $_SESSION['accessLevel'] == 'C')
+        {
+            //grab result of client's audits and set to variable
+            //$clientAudits;
+            //create view variable
+            //$view->clientAudits = $clientAudits;
+        }
+
+        if(isset($_SESSION['userID']) && $_SESSION['accessLevel'] == 'S')
+        {
+            //grab result of scorer's audits to be completed and set to variable
+            //$scorerAudits;
+            //create view variable
+            //$view->scorerAudits = $scorerAudits;
+        }
+
     }
 
     //phtml file for the index page
