@@ -89,6 +89,10 @@ if(isset($_SESSION['loggedIn']) && ($_SESSION['accessLevel'] == 'C'))
     <div class="container">
         <h2>Audit Reports:</h2>
 
+        <?php
+        //$topics = $view->topics;
+        //foreach ($topics as $top)
+        {?>
         <div class="card">
             <div class="card-body">
                 <h4 class="card-title">South China Sea oil rig #10120</h4>
@@ -98,15 +102,17 @@ if(isset($_SESSION['loggedIn']) && ($_SESSION['accessLevel'] == 'C'))
                 <input type="submit" class="btn btn-outline-primary" name="download" value="Download">
             </div>
         </div>
+        <?php } ?>
     </div>
 </form>
-    <?php }
+
+<?php }
 //Admin page
 if(isset($_SESSION['loggedIn']) && ($_SESSION['accessLevel'] == 'A'))
 {
-    require_once('Views/template/header.phtml'); ?>
+    require_once('Views/template/header.phtml');
 
-<?php }
+ }
 
 //Scorer page
 if(isset($_SESSION['loggedIn']) && ($_SESSION['accessLevel'] == 'S'))
@@ -119,6 +125,10 @@ if(isset($_SESSION['loggedIn']) && ($_SESSION['accessLevel'] == 'S'))
     <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
     <div class="container">
         <h2>Assigned Audits:</h2>
+        <?php
+        //$topics = $view->topics;
+        //foreach ($topics as $top)
+        {?>
         <div class="card">
             <div class="card-body">
                 <h4 class="card-title">South China Sea oil rig #10120</h4>
@@ -126,6 +136,7 @@ if(isset($_SESSION['loggedIn']) && ($_SESSION['accessLevel'] == 'S'))
                 <input type=submit class="btn btn-outline-primary" name="scoreAudit" value="Score" href="/scorer.php?audit_id=<?= $score['audit_id']?>"><? echo $score['topic_subject']?>>
             </div>
         </div>
+        <?php } ?>
     </div>
     </form>
 <?php }
@@ -138,7 +149,4 @@ if(isset($_SESSION['loggedIn']) && ($_SESSION['accessLevel'] == 'Q'))
 
 <?php }
 require_once('Views/template/footer.phtml');
-
-
-
 
