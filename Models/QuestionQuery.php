@@ -26,7 +26,7 @@ class QuestionQuery
 
     /**
      * returns array of questions within subcategory that are included in audit
-     * 
+     *
      * @param String $auditID audit being fetched for
      * @param String $subCatID subcategory of questions
      * @return array

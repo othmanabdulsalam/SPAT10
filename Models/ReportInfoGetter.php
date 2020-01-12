@@ -11,8 +11,9 @@ require_once __DIR__."/UserQuery.php";
 require_once __DIR__."/QuestionQuery.php";
 require_once __DIR__."/SubCatQuery.php";
 require_once __DIR__."/CategoryQuery.php";
+require_once __DIR__."/AnswerQuery.php";
+require_once __DIR__."/ScoreQuery.php";
 
-require_once __DIR__."/Database.php"; //temporary to make queries faster MUST REMOVE and separate queries into their classes
 
 class ReportInfoGetter
 {
@@ -21,6 +22,8 @@ class ReportInfoGetter
     private $questionQuery;
     private $subCatQuery;
     private $categoryQuery;
+    private $answerQuery;
+    private $scoreQuery;
 
     public function __construct()
     {
@@ -29,23 +32,56 @@ class ReportInfoGetter
         $this->questionQuery = new QuestionQuery();
         $this->subCatQuery = new SubCatQuery();
         $this->categoryQuery = new CategoryQuery();
+        $this->answerQuery = new AnswerQuery();
+        $this->scoreQuery = new ScoreQuery();
     }
 
     /*
      * gets all information needed to create a report for specific audit
      * and returns it in an associatively index array
      */
+    /**
+     * gets all information needed to create a report and returns it in the following format:
+     *
+     * (array) reportInfo
+     * 'audit'          => (array) audit
+     *                      'location'      => (String)
+     *                      'dateScored'    => (DATETIME)
+     *
+     * 'user'           => (array) user
+     *                      'username'      =>(String)
+     *
+     * 'reportContent'  => (array) Categories
+     *                      [0..X]
+     *                          'catID'             => (String)
+     *                          'catCode'           => (String)
+     *                          'catDescription'    => (String)
+     *                          'subCategories'       => (array) subCategory
+     *                                                      [0..X]
+     *                                                          'subCatID'          =>  (String)
+     *                                                          'subCatCode'        =>  (String)
+     *                                                          'subCatDescription' =>  (String)
+     *                                                          'questions'         =>  (array) questions
+     *                                                                                      [0..X]
+     *                                                                                          'questionID'        => (String)
+     *                                                                                          'questionContent'   => (String)
+     *                                                                                          'subCatID'          => (String)
+     *                                                                                          'answer'            => (array) answer
+     *                                                                                                                      'content' => (String)
+     *                                                                                                                      'score'   => (array) score
+     *                                                                                                                                      'score'     =>  (int)
+     *                                                                                                                                      'comment'   =>  (String)
+     * 
+     * @param String $clientID ID of user who the audit belongs to
+     * @param String $auditID ID of audit to get info for
+     * @return array
+     */
     public function getAudit($clientID, $auditID)
     {
         $reportInfo = []; //array in which information will be gathered to be passed out
         $reportInfo['audit'] = $this->auditQuery->getAudit($auditID); //location, date scored
         $reportInfo['user'] = $this->userQuery->getUsername($clientID); //name of client
-        //$reportInfo['subCatDescription'] = $this->getSubcatagory($catID);//gets subcatagory name
-        $reportInfo['questions'] = $this->questionQuery->getAuditQuestions($auditID); //Questions
-        //$reportInfo['score'] = $this->ScoreQuery->getScores($auditID); //Scores
-        //$reportInfo['comment'] = $this->CommentQuery->getComments($auditID);// comments scorer made
-        //$reportInfo['complianceBand'] = $this->ComplianceQuery->getComplianceBand($percentileID);// compliance band
-        $reportInfo['reportContent'] = $this->getContent('auditID');
+        $reportInfo['reportContent'] = $this->getContent('auditID'); //gets cats, subCats, questions, answers and scores
 
         return $reportInfo;
     }
@@ -63,40 +99,22 @@ class ReportInfoGetter
         //gets Category IDs
         $categoryIDs = $this->categoryQuery->getCategoryIDs(join(",",$subCatIDs));
 
-        //$content = []; //root of datastructure - array of categories
 
-        $categories = $this->categoryQuery->getCategories(join(",",$categoryIDs));
+        $categories = $this->categoryQuery->getCategories(join(",",$categoryIDs)); //root of datastructure
+
         foreach($categories as &$category) //passing category by reference so it can be changes
         {
-            $category['subCategory'] = $this->subCatQuery->getSubCategories(join(",",$subCatIDs)); //puts array of subcategories into category
-            foreach($category['subCategory'] as &$subCategory) //for each subCategory
+            $category['subCategories'] = $this->subCatQuery->getSubCategories(join(",",$subCatIDs)); //puts array of subcategories into category
+            foreach($category['subCategories'] as &$subCategory) //for each subCategory
             {
                 $subCategory['questions'] = $this->questionQuery->getSubCatAuditQuestions($auditID,$subCategory['subCatID']); //gets questions from subCat that appear in query and put them in questions array
+                foreach($subCategory['questions'] as &$question) //for each question
+                {
+                    $question['answer'] = $this->answerQuery->getAnswer($auditID,$question['questionID']); //gets answer for question
+                    $question['answer']['score'] = $this->scoreQuery->getScore($auditID,$question['questionID']); //gets score tuple for answer
+                }
             }
         }
-
-        var_dump($categories);
-        var_dump($categories[0]['subCategory'][0]['questions']);
-        return 1;
+        return $categories; //return root of datastructure
     }
-
-/*$database = Database::getInstance();
-    //Question IDs
-$questionIDs = $this->questionQuery->getQuestionIDs($auditID);
-$questionIDs = join(",",$questionIDs); //turns array into comma separated list
-
-    //SubCategory IDs
-$subcatIDs = $database->retrieve("SELECT DISTINCT subCatID FROM Questions
-                                                WHERE questionID IN ($questionIDs)");
-$temp = [];
-foreach ($subcatIDs as $tuple)
-{
-array_push($temp, $tuple['subCatID']); //extracts subCatIDs from tuples
-}
-$subcatIDs = $temp;
-$subcatIDs = join(",",$subcatIDs); //turns into a comma seporated list
-
-//Category IDs
-$catiDs = $database->retrieve("SELECT DISTINCT catID FROM SubCategories WHERE subCatID in (\"$subcatIDs\")");
-var_dump($catiDs);*/
 }
