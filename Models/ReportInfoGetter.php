@@ -65,9 +65,18 @@ class ReportInfoGetter
 
         //$content = []; //root of datastructure - array of categories
 
-        $content = $this->categoryQuery->getCategories(join(",",$categoryIDs));
+        $categories = $this->categoryQuery->getCategories(join(",",$categoryIDs));
+        foreach($categories as &$category) //passing category by reference so it can be changes
+        {
+            $category['subCategory'] = $this->subCatQuery->getSubCategories(join(",",$subCatIDs)); //puts array of subcategories into category
+            foreach($category['subCategory'] as &$subCategory) //for each subCategory
+            {
+                $subCategory['questions'] = $this->questionQuery->getSubCatAuditQuestions($auditID,$subCategory['subCatID']); //gets questions from subCat that appear in query and put them in questions array
+            }
+        }
 
-        var_dump($content);
+        var_dump($categories);
+        var_dump($categories[0]['subCategory'][0]['questions']);
         return 1;
     }
 

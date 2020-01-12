@@ -25,6 +25,18 @@ class QuestionQuery
     }
 
     /**
+     * returns array of questions within subcategory that are included in audit
+     * 
+     * @param String $auditID audit being fetched for
+     * @param String $subCatID subcategory of questions
+     * @return array
+     */
+    public function getSubCatAuditQuestions($auditID, $subCatID)
+    {
+        return $this->database->retrieve("SELECT questionID,questionContent FROM Questions WHERE subCatID = \"$subCatID\" AND questionID IN (SELECT questionID FROM AuditQuestions WHERE auditID = \"$auditID\")");
+    }
+
+    /**
      * returns array containing ID's of all questions in an audit
      *
      * @param String $auditID  ID(s) of the aduit to fetch Questions IDs for

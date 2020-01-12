@@ -16,9 +16,9 @@ class SubCatQuery
         $this->database = Database::getInstance();
     }
 
-    /*
-     * takes a single question ID or list ("1,2,3"...) and returns the subCategories
-     * they belong to
+    /**
+     * @param String $questionID list of question IDs to get subCategories of "1,2,3"...
+     * @return array containing list of category IDs
      */
     public function getCatID($questionID)
     {
@@ -29,5 +29,15 @@ class SubCatQuery
             array_push($questionIDList,$tuple['subCatID']);
         }
         return $questionIDList;
+    }
+
+    /**
+     * returns tuples from categories table
+     * @param String $categoryID category IDs to get subcats of -"1,2,3"...
+     * @return array of category tuples
+     */
+    public function getSubCategories($categoryID)
+    {
+        return $this->database->retrieve("SELECT * FROM SubCategories WHERE catID IN ($categoryID)");
     }
 }

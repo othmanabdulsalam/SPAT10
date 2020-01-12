@@ -35,7 +35,7 @@ class CategoryQuery
     /**
      * returns of tuples from the Categories table with supplied ID
      *
-     * @param String $catIDs ID(s) of all categories to fetch information of
+     * @param String $catIDs ID(s) of all categories to fetch information of "1,2,3"...
      *
      * @return array containing Category tuples
      */
