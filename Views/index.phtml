@@ -77,6 +77,7 @@ if(!isset($_SESSION['loggedIn']))
     </html>
 
 <?php }
+//Client page
 if(isset($_SESSION['loggedIn']) && ($_SESSION['accessLevel'] == 'C'))
 {
     require_once('Views/template/header.phtml'); ?>
@@ -87,13 +88,14 @@ if(isset($_SESSION['loggedIn']) && ($_SESSION['accessLevel'] == 'C'))
 <form action="../Controllers/report.php" method="post">
     <div class="container">
         <h2>Audit Reports:</h2>
+
         <div class="card">
             <div class="card-body">
                 <h4 class="card-title">South China Sea oil rig #10120</h4>
                 <p class="card-text">Created: 09/01/2020</p>
                 <!-- <a href="/images/Compliance%20Audit%20Report.pdf" class="card-link">View</a> -->
-                <input type=submit name="view" value="View">
-                <input type="submit" name="download" value="Download">
+                <input type=submit class="btn btn-outline-primary" name="view" value="View">
+                <input type="submit" class="btn btn-outline-primary" name="download" value="Download">
             </div>
         </div>
     </div>
@@ -103,37 +105,37 @@ if(isset($_SESSION['loggedIn']) && ($_SESSION['accessLevel'] == 'C'))
 if(isset($_SESSION['loggedIn']) && ($_SESSION['accessLevel'] == 'A'))
 {
     require_once('Views/template/header.phtml'); ?>
-    <p>You are logged in as Admin teehee</p>
+
 <?php }
 
 //Scorer page
 if(isset($_SESSION['loggedIn']) && ($_SESSION['accessLevel'] == 'S'))
 {
     require_once('Views/template/header.phtml'); ?>
-    <p>You are logged in as Scorer teehee</p>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-
+    <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
     <div class="container">
         <h2>Assigned Audits:</h2>
         <div class="card">
             <div class="card-body">
                 <h4 class="card-title">South China Sea oil rig #10120</h4>
                 <p class="card-text">Created: 09/01/2020</p>
-                <a href="/images/Compliance%20Audit%20Report.pdf" class="card-link">View</a>
-                <a href="" download="/images/Compliance%20Audit%20Report.pdf" class="card-link">Download</a>
+                <input type=submit class="btn btn-outline-primary" name="scoreAudit" value="Score" href="/scorer.php?audit_id=<?= $score['audit_id']?>"><? echo $score['topic_subject']?>>
             </div>
         </div>
     </div>
+    </form>
 <?php }
 
 //Questioner page
 if(isset($_SESSION['loggedIn']) && ($_SESSION['accessLevel'] == 'Q'))
 {
     require_once('Views/template/header.phtml'); ?>
-    <p>You are logged in as Questioner teehee</p>
+
+
 <?php }
 require_once('Views/template/footer.phtml');
 
