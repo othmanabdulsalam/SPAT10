@@ -134,9 +134,10 @@ if(isset($_SESSION['loggedIn']) && ($_SESSION['accessLevel'] == 'S'))
             <div class="card-body">
                 <h4 class="card-title"><?php echo $unscoredAudit['location'];?></h4>
                 <p class="card-text">Created: <?php echo $unscoredAudit['dateCreated'];?></p>
-                <input type=submit class="btn btn-outline-primary" name="scoreAudit" value="<?php if(isset($_POST['scoreAudit'])) { $_SESSION['scorerAudit'] = $unscoredAudit['auditID'];}?>Score">
+                <input type="hidden" name="auditID" value="<?php echo $unscoredAudit['auditID'];  $_SESSION['auditID'] = $unscoredAudit['auditID'];?>">
+                <input type=submit class="btn btn-outline-primary" name="scoreAudit" value="Score">
             </div>
-        </div>
+        </div> <?php var_dump($_SESSION['auditID']);?>
         <?php } ?>
     </div>
     </form>
