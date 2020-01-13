@@ -5,6 +5,7 @@
     //session is started
     session_start();
     //grab the auditID from the session
+
     $auditID = $_SESSION['auditID'];
 
     //session no longer needs auditID value stored
