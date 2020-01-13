@@ -42,7 +42,7 @@ class ScoringInfoGetter
      * (array) scoringInfo
      *      'audit'         => (array) audit
      *                          'location'      => (String)
-     *                          'dateScored'    => (DATETIME)
+     *                          'dateCreated'    => (DATETIME)
      *
      *      'client'        => (array) client
      *                          'username'      => (String)
@@ -61,11 +61,10 @@ class ScoringInfoGetter
      *                                                                                          [0..X]
      *                                                                                            'questionID'        => (String)
      *                                                                                            'questionContent'   => (String)
-     *                                                                                            'subCatID'          => (String)
      *                                                                                            'legalFlag'         => (String/null)
      *                                                                                            'answer'            => (array) answer
      *                                                                                                                          'content' => (String)
-     *                                                                                                                          'score'   => (array) score
+     *                                                                                                                          'comment' => (String)
      *
      *
      * @param String $auditID audit to fetch information for
