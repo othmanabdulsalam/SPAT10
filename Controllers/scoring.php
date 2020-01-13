@@ -8,11 +8,8 @@
     session_start();
     //grab the auditID from the session
 
-    var_dump($_SESSION['auditID']);
-    $auditID = $_SESSION['auditID'];
+    $auditID = implode($_GET);;
 
-    //session no longer needs auditID value stored
-    unset($_SESSION['auditID']);
     //initialise auditQuery
     $auditQuery = new AuditQuery();
     //query the unscored query and store the results

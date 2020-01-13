@@ -123,7 +123,7 @@ if(isset($_SESSION['loggedIn']) && ($_SESSION['accessLevel'] == 'S'))
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-    <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+    <form action="/Controllers/scoring.php" method="post">
     <div class="container">
         <h2>Assigned Audits:</h2>
         <?php
@@ -134,10 +134,10 @@ if(isset($_SESSION['loggedIn']) && ($_SESSION['accessLevel'] == 'S'))
             <div class="card-body">
                 <h4 class="card-title"><?php echo $unscoredAudit['location'];?></h4>
                 <p class="card-text">Created: <?php echo $unscoredAudit['dateCreated'];?></p>
-                <input type="hidden" name="auditID" value="<?php echo $unscoredAudit['auditID'];  $_SESSION['auditID'] = $unscoredAudit['auditID'];?>">
-                <input type=submit class="btn btn-outline-primary" name="scoreAudit" value="Score">
+                <a href="/Controllers/scoring.php?auditID=<?= $unscoredAudit['auditID']?>"><input type=submit class="btn btn-outline-primary" name="scoreAudit" value="Score"></a>
+                <input type="hidden" name="auditID" value="<?php echo $unscoredAudit['auditID'];?>">
             </div>
-        </div> <?php var_dump($_SESSION['auditID']);?>
+        </div>
         <?php } ?>
     </div>
     </form>
