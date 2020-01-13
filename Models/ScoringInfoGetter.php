@@ -68,6 +68,7 @@ class ReportInfoGetter
      *
      *
      * @param String $auditID audit to fetch information for
+     * @return array
      */
     public function getScoringInfo($auditID)
     {
@@ -76,6 +77,8 @@ class ReportInfoGetter
         $scoringInfo['audit'] = $this->auditQuery->getUnscoredAudit($auditID);
         $scoringInfo['client'] = $this->userQuery->getUsername($clientID);
         $scoringInfo['scoringContent'] = $this->getScoringContent($clientID);
+
+        return $scoringInfo;
     }
 
     /**
