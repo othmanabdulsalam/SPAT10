@@ -20,4 +20,12 @@ class QuestionQueryTest extends TestCase
         var_dump($questionList);
         $this->assertTrue($questionList[0]['questionID'] == 1);
     }
+
+    public function  testGetQuestionIDs()
+    {
+        $questionQuery = new QuestionQuery();
+        $questionList = $questionQuery->getQuestionIDs(2);
+        var_dump($questionList);
+        $this->assertTrue($questionList[0] == 1);
+    }
 }
