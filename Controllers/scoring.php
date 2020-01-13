@@ -15,12 +15,12 @@
     }
 
 
-    var_dump($auditID);
+    //var_dump($auditID);
     //initialise auditQuery
     $scoringQuery = new ScoringInfoGetter();
     //query the unscored query and store the results
     $unscoredAudit = $scoringQuery->getScoringInfo($auditID);
-    var_dump($unscoredAudit);
+    //var_dump($unscoredAudit);
     //set view value currentAudit to be the result of the query
     $view->unscoredAudit = $unscoredAudit;
 

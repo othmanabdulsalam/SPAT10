@@ -25,7 +25,6 @@ class QuestionQueryTest extends TestCase
     {
         $questionQuery = new QuestionQuery();
         $questionList = $questionQuery->getQuestionIDs(2);
-        var_dump($questionList);
         $this->assertTrue($questionList[0] == 1);
     }
 }

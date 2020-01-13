@@ -76,7 +76,7 @@ class ScoringInfoGetter
         $clientID = $this->auditQuery->getClientID($auditID);
         $scoringInfo['audit'] = $this->auditQuery->getUnscoredAudit($auditID);
         $scoringInfo['client'] = $this->userQuery->getUsername($clientID);
-        $scoringInfo['scoringContent'] = $this->getScoringContent($clientID);
+        $scoringInfo['scoringContent'] = $this->getScoringContent($auditID);
 
         return $scoringInfo;
     }
@@ -92,7 +92,6 @@ class ScoringInfoGetter
     {
         //gets Question IDs
         $questionIDs = $this->questionQuery->getQuestionIDs($auditID);
-        var_dump($questionIDs);
         //gets SubCategory IDs
         $subCatIDs = $this->subCatQuery->getCatID(join(",",$questionIDs)); //join turns array to comma separated string -> "1,2,3"...
         //gets Category IDs
