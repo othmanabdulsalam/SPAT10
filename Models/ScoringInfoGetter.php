@@ -14,7 +14,7 @@ require_once __DIR__."/AnswerQuery.php";
 require_once __DIR__."/ScoreQuery.php";
 
 
-class ReportInfoGetter
+class ScoringInfoGetter
 {
     private $auditQuery;
     private $userQuery;

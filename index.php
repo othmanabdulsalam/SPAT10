@@ -61,6 +61,9 @@
 
 if(isset($_SESSION['userID']) && $_SESSION['accessLevel'] == 'S')
 {
+
+
+
     if(isset($_POST['scoreAudit']))
     {
         header("Location: /Controllers/scoring.php");
