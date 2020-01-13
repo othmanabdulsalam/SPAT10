@@ -134,7 +134,7 @@ if(isset($_SESSION['loggedIn']) && ($_SESSION['accessLevel'] == 'S'))
             <div class="card-body">
                 <h4 class="card-title"><?php echo $unscoredAudit['location'];?></h4>
                 <p class="card-text">Created: <?php echo $unscoredAudit['dateCreated'];?></p>
-                <a href="/Controllers/scoring.php?auditID=<?= $unscoredAudit['auditID']?>"><input type=submit class="btn btn-outline-primary" name="scoreAudit" value="Score"></a>
+                <input href="../Controllers/scoring.php?auditID=<?= $unscoredAudit['auditID']?>" type=submit class="btn btn-outline-primary" name="scoreAudit" value="Score">
                 <input type="hidden" name="auditID" value="<?php echo $unscoredAudit['auditID'];?>">
             </div>
         </div>
