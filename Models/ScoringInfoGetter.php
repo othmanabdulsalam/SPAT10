@@ -92,6 +92,7 @@ class ScoringInfoGetter
     {
         //gets Question IDs
         $questionIDs = $this->questionQuery->getQuestionIDs($auditID);
+        var_dump($questionIDs);
         //gets SubCategory IDs
         $subCatIDs = $this->subCatQuery->getCatID(join(",",$questionIDs)); //join turns array to comma separated string -> "1,2,3"...
         //gets Category IDs
