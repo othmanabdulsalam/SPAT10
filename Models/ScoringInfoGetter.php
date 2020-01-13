@@ -64,7 +64,7 @@ class ScoringInfoGetter
      *                                                                                            'legalFlag'         => (String/null)
      *                                                                                            'answer'            => (array) answer
      *                                                                                                                          'content' => (String)
-     *                                                                                                                          'comment' => (String)
+     *                                                                                                                          'comment' => (String/null)
      *
      *
      * @param String $auditID audit to fetch information for
