@@ -49,6 +49,7 @@
 
     }
 
+    //check if the user was a client
     if(isset($_SESSION['userID']) && $_SESSION['accessLevel'] == 'C')
     {
         // initialise the audit query
@@ -59,16 +60,21 @@
         $view->clientAudits = $clientAudits;
     }
 
-if(isset($_SESSION['userID']) && $_SESSION['accessLevel'] == 'S')
-{
-
-
-
-    if(isset($_POST['scoreAudit']))
+    if(isset($_SESSION['userID']) && $_SESSION['accessLevel'] == 'S')
     {
-        header("Location: /Controllers/scoring.php");
+        // initialise the audit query
+        $auditQuery = new AuditQuery();
+
+        //grab all audits that have not been scored
+        $unscoredAudits = $auditQuery->getUnscoredAudits();
+
+        $view->unscoredAudits = $unscoredAudits;
+
+        if(isset($_POST['scoreAudit']))
+        {
+            header("Location: /Controllers/scoring.php");
+        }
     }
-}
 
     //phtml file for the index page
     require("Views/index.phtml");

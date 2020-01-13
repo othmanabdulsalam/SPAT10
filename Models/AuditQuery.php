@@ -61,6 +61,6 @@ class AuditQuery
      */
     public function getUnscoredAudits()
     {
-        return $this->database->retrieve("SELECT auditID,location,dateCreated FROM Audit WHERE completed = true AND auditID NOT IN (SELECT questionID FROM ScoredAudits)");
+        return $this->database->retrieve("SELECT auditID,location,dateCreated FROM Audit WHERE completed = true AND auditID NOT IN (SELECT auditID FROM ScoredAudits)");
     }
 }

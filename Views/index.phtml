@@ -127,14 +127,14 @@ if(isset($_SESSION['loggedIn']) && ($_SESSION['accessLevel'] == 'S'))
     <div class="container">
         <h2>Assigned Audits:</h2>
         <?php
-        //$scorerAudits = $view->scorerAudits;
-        //foreach ($scorerAudits as $sa)
+            $unscoredAudits = $view->unscoredAudits;
+            foreach ($unscoredAudits as $unscoredAudit)
         {?>
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title">South China Sea oil rig #10120</h4>
-                <p class="card-text">Created: 09/01/2020</p>
-                <input type=submit class="btn btn-outline-primary" name="scoreAudit" value="Score">
+                <h4 class="card-title"><?php echo $unscoredAudit['location'];?></h4>
+                <p class="card-text">Created: <?php echo $unscoredAudit['dateCreated'];?></p>
+                <input type=submit class="btn btn-outline-primary" name="scoreAudit" value="<?php if(isset($_POST['scoreAudit'])) { $_SESSION['scorerAudit'] = $unscoredAudit['auditID'];}?>Score">
             </div>
         </div>
         <?php } ?>
