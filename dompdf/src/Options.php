@@ -157,7 +157,7 @@ class Options
      *
      * @var bool
      */
-    private $isPhpEnabled = false;
+    private $isPhpEnabled = true;
 
     /**
      * Enable remote file access
