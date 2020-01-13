@@ -63,7 +63,7 @@ class ReportInfoGetter
      *                                                                                          'questionID'        => (String)
      *                                                                                          'questionContent'   => (String)
      *                                                                                          'subCatID'          => (String)
-     *                                                                                          'legalFlag'         => (String/null) 
+     *                                                                                          'legalFlag'         => (String/null)
      *                                                                                          'answer'            => (array) answer
      *                                                                                                                      'content' => (String)
      *                                                                                                                      'score'   => (array) score
