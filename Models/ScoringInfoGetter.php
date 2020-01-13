@@ -62,6 +62,7 @@ class ScoringInfoGetter
      *                                                                                            'questionID'        => (String)
      *                                                                                            'questionContent'   => (String)
      *                                                                                            'subCatID'          => (String)
+     *                                                                                            'legalFlag'         => (String/null)
      *                                                                                            'answer'            => (array) answer
      *                                                                                                                          'content' => (String)
      *                                                                                                                          'score'   => (array) score
@@ -110,6 +111,7 @@ class ScoringInfoGetter
                 {
                     $question['answer'] = $this->answerQuery->getAnswer($auditID,$question['questionID']); //gets answer for question
                     $question['answer']['comment'] = $this->answerQuery->getComment($auditID,$question['questionID']); //gets comment for answer (null if no comment)
+                    $question['legalFlag'] = $this->questionQuery->getQuestionFlag($auditID,$question['questionID']);
                 }
             }
         }
