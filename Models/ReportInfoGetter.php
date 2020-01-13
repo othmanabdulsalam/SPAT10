@@ -51,12 +51,12 @@ class ReportInfoGetter
      * 'user'           => (array) user
      *                      'username'      =>(String)
      *
-     * 'reportContent'  => (array) Categories
+     * 'reportContent'  => (array) categories
      *                      [0..X]
      *                          'catID'             => (String)
      *                          'catCode'           => (String)
      *                          'catDescription'    => (String)
-     *                          'subCategories'       => (array) subCategory
+     *                          'subCategories'       => (array) subCategories
      *                                                      [0..X]
      *                                                          'subCatID'          =>  (String)
      *                                                          'subCatCode'        =>  (String)
@@ -112,6 +112,7 @@ class ReportInfoGetter
                 {
                     $question['answer'] = $this->answerQuery->getAnswer($auditID,$question['questionID']); //gets answer for question
                     $question['answer']['score'] = $this->scoreQuery->getScore($auditID,$question['questionID']); //gets score tuple for answer
+                    $question['legalFlag'] = $this->questionQuery->getQuestionFlag($auditID, $question['questionID']); //gets QuestionFlag if one exists
                 }
             }
         }
