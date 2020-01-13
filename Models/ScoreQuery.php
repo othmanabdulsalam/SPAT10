@@ -27,4 +27,17 @@ class ScoreQuery
     {
         return $this->database->retrieve("SELECT score,comment FROM Scores WHERE auditID = \"$auditID\" AND questionID = \"$questionID\"")[0];
     }
+
+    /**
+     * inserts supplied score into database
+     *
+     * @param String $auditID
+     * @param String $questionID
+     * @param int $score
+     * @param String $comment
+     */
+    public function insertScore($auditID,$questionID,$score,$comment)
+    {
+        $this->database->update("INSERT INTO Answers VALUE (\"$questionID\",\"$auditID\",\"$score\",\"$comment\")");
+    }
 }
