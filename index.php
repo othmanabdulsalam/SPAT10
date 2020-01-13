@@ -67,7 +67,7 @@
 
         //grab all audits that have not been scored
         $unscoredAudits = $auditQuery->getUnscoredAudits();
-
+        //set view's unscoredAudits variable
         $view->unscoredAudits = $unscoredAudits;
 
     }
