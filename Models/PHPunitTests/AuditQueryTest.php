@@ -27,7 +27,7 @@ class AuditQueryTest extends TestCase
     public function testGetAudit()
     {
         $auditQuery = new AuditQuery();
-        $audit = $auditQuery->getAudit(1);
+        $audit = $auditQuery->getScoredAudit(1);
         //var_dump($audit);
         $this->assertTrue($audit['location'] == "bigg Stiggs oil rigg");
     }

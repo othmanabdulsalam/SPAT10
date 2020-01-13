@@ -25,10 +25,42 @@ class AuditQuery
     }
 
     /*
-     * gets specific audit by ID
+     * gets specific scored audit by ID
      */
-    public function getAudit($auditID)
+    public function getScoredAudit($auditID)
     {
-        return $this->database->retrieve("SELECT location, dateScored FROM Audit,ScoredAudits WHERE Audit.auditID = \"$auditID\"")[0]; //returns the single tuple from array
+        return $this->database->retrieve("SELECT location, dateScored, dateCreated FROM Audit,ScoredAudits WHERE Audit.auditID = \"$auditID\"")[0]; //returns the single tuple from array
+    }
+
+    /**
+     * gets specific unscored audit by ID
+     *
+     * @param $auditID
+     * @return array
+     */
+    public function getUnscoredAudit($auditID)
+    {
+        return $this->database->retrieve("SELECT location, dateCreated FROM Audit WHERE auditID = \"$auditID\"");
+    }
+
+    /**
+     * Gets the ID of the client who owns audit
+     *
+     * @param String $auditID the audit to get the Client of
+     * @return mixed ID of audits Client
+     */
+    public function getClientID($auditID)
+    {
+        return $this->database->retrieve("SELECT clientID FROM Audit WHERE auditID = \"$auditID\"")[0]['clientID'];
+    }
+
+    /**
+     * Gets all audits that have been completed but not yet scored
+     *
+     * @return array
+     */
+    public function getUnscoredAudits()
+    {
+        return $this->database->retrieve("SELECT auditID,location,dateCreated FROM Audit WHERE completed = true AND auditID NOT IN (SELECT questionID FROM ScoredAudits)");
     }
 }

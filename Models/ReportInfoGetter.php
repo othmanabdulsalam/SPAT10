@@ -36,10 +36,7 @@ class ReportInfoGetter
         $this->scoreQuery = new ScoreQuery();
     }
 
-    /*
-     * gets all information needed to create a report for specific audit
-     * and returns it in an associatively index array
-     */
+
     /**
      * gets all information needed to create a report and returns it in the following format:
      *
@@ -65,7 +62,11 @@ class ReportInfoGetter
      *                                                                                      [0..X]
      *                                                                                          'questionID'        => (String)
      *                                                                                          'questionContent'   => (String)
-     *                                                                                          'subCatID'          => (String)
+     *                                            (XMark = scoring guideline for that mark)     'oneMark'           => (String)
+     *                                                                                          'twoMark'           => (String)
+     *                                                                                          'threeMark'         => (String)
+     *                                                                                          'fourMark'          => (String)
+     *                                                                                          'fiveMark'          => (String)
      *                                                                                          'answer'            => (array) answer
      *                                                                                                                      'content' => (String)
      *                                                                                                                      'score'   => (array) score
@@ -79,7 +80,7 @@ class ReportInfoGetter
     public function getAudit($clientID, $auditID)
     {
         $reportInfo = []; //array in which information will be gathered to be passed out
-        $reportInfo['audit'] = $this->auditQuery->getAudit($auditID); //location, date scored
+        $reportInfo['audit'] = $this->auditQuery->getScoredAudit($auditID); //location, date scored
         $reportInfo['user'] = $this->userQuery->getUsername($clientID); //name of client
         $reportInfo['reportContent'] = $this->getContent('auditID'); //gets cats, subCats, questions, answers and scores
 
