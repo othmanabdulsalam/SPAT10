@@ -8,15 +8,15 @@ require_once('../Views/template/header.phtml'); ?>
         <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
             <?php $unscoredAudit = $view->unscoredAudit; ?>
             <div class="container">
-             <?php $audits = $unscoredAudit['audit']; ?>
-            <?php foreach ($audits as $audit)
-                {?>
-                <h2>Location: <?php echo $audit['location']; ?></h2>
-                <h3>Date: <?php echo $audit['dateCreated']; ?> </h3>
-                <?php } ?>
                 <div class="card">
                     <div class="card-body">
-                <p><strong>*</strong> = required</p>
+                        <?php $audits = $unscoredAudit['audit']; ?>
+                        <?php foreach ($audits as $audit)
+                        {?>
+                            <h3>Location: <?php echo $audit['location']; ?></h3>
+                            <h3>Date: <?php echo $audit['dateCreated']; ?> </h3>
+                        <?php } ?>
+                <p><strong class="text-danger">*</strong> = required</p>
                 <?php
                 $Categories = $unscoredAudit['scoringContent'];
                 foreach ($Categories as $Category) { ?>
@@ -35,6 +35,7 @@ require_once('../Views/template/header.phtml'); ?>
                                 <p <?php if ($question['legalFlag'] !== null){ ?>class="text-danger"<?php } ?>><?php echo $question['questionContent']; ?></p>
                                 <?php if ($question['legalFlag'] !== null) {
                                     ?>
+                                    <p>This question has been flagged:</p>
                                     <p><?php echo $question['legalFlag']; ?></p>
                                 <?php } ?>
                             </div>
@@ -65,7 +66,7 @@ require_once('../Views/template/header.phtml'); ?>
                                     </select>
                                 </div>
                                 <div class="card-body">
-                                    <p><strong>*Comment on your score:</strong></p>
+                                    <p><strong><span class="text-danger">*</span>Comment on your score:</strong></p>
                                     <div class="form-group shadow-textarea">
                                         <label for="scoreAnswer"></label>
                                         <textarea class="form-control z-depth-1" id="scoreAnswer" rows="3"
