@@ -21,7 +21,7 @@ class AuditQuery
      */
     public function getAudits($clientID)
     {
-        return $this->database->retrieve("SELECT auditID, location, dateScored FROM Audit WHERE scored = 1 AND clientID = \"$clientID\"");
+        return $this->database->retrieve("SELECT Audit.auditID, location, dateScored, dateCreated FROM Audit,ScoredAudits WHERE clientID = \"$clientID\" AND Audit.auditID NOT IN(SELECT auditID FROM ScoredAudits) ");
     }
 
     /*
@@ -29,6 +29,6 @@ class AuditQuery
      */
     public function getAudit($auditID)
     {
-        return $this->database->retrieve("SELECT location, dateScored FROM Audit WHERE auditID = \"$auditID\"")[0]; //returns the single tuple from array
+        return $this->database->retrieve("SELECT location, dateScored FROM Audit,ScoredAudits WHERE Audit.auditID = \"$auditID\"")[0]; //returns the single tuple from array
     }
 }
