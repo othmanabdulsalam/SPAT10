@@ -7,10 +7,11 @@
     //session is started
     session_start();
     //grab the auditID
+if(isset($_GET['auditID']))
+{
+    $auditID = $_GET['auditID'];
+}
 
-    $auditID = implode($_GET);;
-
-    var_dump($auditID);
     //initialise auditQuery
     $auditQuery = new AuditQuery();
     //query the unscored query and store the results
