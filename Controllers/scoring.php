@@ -2,10 +2,13 @@
     $view = new stdClass(); //creating the view
     $view->pageTitle = 'Scoring an audit'; //giving tab a name
 
+    require_once('../Models/AuditQuery.php');
+
     //session is started
     session_start();
     //grab the auditID from the session
 
+    var_dump($_SESSION['auditID']);
     $auditID = $_SESSION['auditID'];
 
     //session no longer needs auditID value stored
