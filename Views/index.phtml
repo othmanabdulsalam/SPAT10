@@ -85,7 +85,7 @@ if(isset($_SESSION['loggedIn']) && ($_SESSION['accessLevel'] == 'C'))
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-<form action="../Controllers/report.php" method="post">
+<form action="/Controllers/report.php" method="post">
     <div class="container">
         <h2>Audit Reports:</h2>
 
@@ -101,14 +101,15 @@ if(isset($_SESSION['loggedIn']) && ($_SESSION['accessLevel'] == 'C'))
             <div class="card-body">
                 <h4 class="card-title"><?php echo $ca['location'];?></h4>
                 <p class="card-text"><?php echo $ca['dateScored'];?></p>
-                <!-- <a href="/images/Compliance%20Audit%20Report.pdf" class="card-link">View</a> -->
-                <input onclick="location.href='/Controllers/report.php?auditID=<?php echo $ca['auditID'];?>" type=submit class="btn btn-outline-primary" name="view" value="View">
+                <input onclick="location.href='/Controllers/report.php?auditID=<?=$ca['auditID'];?>" type=submit class="btn btn-outline-primary" name="view" value="View">
                 <input type="submit" class="btn btn-outline-primary" name="download" value="Download">
-                <input type="hidden" name="audit" value="<?php echo $ca['auditID']?>">
             </div>
         </div>
             <br/>
-        <?php } ?>
+        <?php}
+
+
+        ?>
     </div>
 </form>
 
