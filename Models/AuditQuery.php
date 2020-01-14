@@ -45,6 +45,17 @@ class AuditQuery
     }
 
     /**
+     * returns single tuple of audit which has not been completed
+     *
+     * @param String $auditID
+     * @return array
+     */
+    public function getInProgressAudit($auditID)
+    {
+        return $this->database->retrieve("SELECT auditID, clientID, location, dateCreated FROM Audit WHERE completed = false AND auditID = \"$auditID\"")[0];
+    }
+
+    /**
      * Gets the ID of the client who owns audit
      *
      * @param String $auditID the audit to get the Client of

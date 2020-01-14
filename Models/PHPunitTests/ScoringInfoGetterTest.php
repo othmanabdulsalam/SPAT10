@@ -26,6 +26,7 @@ class ScoringInfoGetterTest extends TestCase
         $this->assertTrue(true);
     }
 
+
     public function testidk()
     {
         $var = [];

@@ -41,6 +41,13 @@ class ScoreQuery
         $this->database->update("INSERT INTO Answers VALUE (\"$questionID\",\"$auditID\",\"$score\",\"$comment\")");
     }
 
+    /**
+     * inserts each supplied score into the Scores table.
+     * creates entry in ScoredAudits table.
+     *
+     * @param string $auditID
+     * @param $scoreArray
+     */
     public function submitScores($auditID,$scoreArray)
     {
         foreach($scoreArray as $score) //for each score submitted
