@@ -101,6 +101,7 @@ if(isset($_SESSION['loggedIn']) && ($_SESSION['accessLevel'] == 'C'))
                 <!-- <a href="/images/Compliance%20Audit%20Report.pdf" class="card-link">View</a> -->
                 <input type=submit class="btn btn-outline-primary" name="view" value="View">
                 <input type="submit" class="btn btn-outline-primary" name="download" value="Download">
+                <input type="hidden" name="audit" value="<?php echo $ca['auditID']?>">
             </div>
         </div>
             <br/>

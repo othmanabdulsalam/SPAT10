@@ -79,7 +79,7 @@ class ReportInfoGetter
         $reportInfo = []; //array in which information will be gathered to be passed out
         $reportInfo['audit'] = $this->auditQuery->getScoredAudit($auditID); //location, date scored
         $reportInfo['user'] = $this->userQuery->getUsername($clientID); //name of client
-        $reportInfo['reportContent'] = $this->getContent('auditID'); //gets cats, subCats, questions, answers and scores
+        $reportInfo['reportContent'] = $this->getContent($auditID); //gets cats, subCats, questions, answers and scores
 
         return $reportInfo;
     }

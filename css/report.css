@@ -18,3 +18,15 @@ body {
         box-shadow: none;
     }
 }
+
+.borderless {
+    border: none!important;
+}
+
+.break {
+    page-break-before: always;
+}
+
+.hidden {
+    display:none;
+}

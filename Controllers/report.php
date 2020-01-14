@@ -7,10 +7,13 @@
      */
 
 
-    session_start();
 
+
+    session_start();
+    $_SESSION['audit'] = $_POST['audit'];
     //require the autoloader from dompdf
     require_once('../dompdf/autoload.inc.php');
+    require_once('../Views/report.phtml');
 
     //reference dompdf namespace
     use Dompdf\Dompdf;
