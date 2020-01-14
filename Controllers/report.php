@@ -11,21 +11,9 @@
 
     //require the autoloader from dompdf
     require_once('../dompdf/autoload.inc.php');
-    require_once('../Models/AuditQuery.php');
+    require_once('../Models/ReportInfoGetter.php');
     session_start();
 
-    //grab the auditID
-    if(isset($_GET['auditID']))
-    {
-        $auditID = $_GET['auditID'];
-        //report info getter
-        $auditQuery = new AuditQuery();
-        //grab the correct report from the database
-        $audit = $auditQuery->getScoredAudit($auditID);
-
-
-
-    }
 
 
 
@@ -35,9 +23,22 @@
     //instantiate dompdf object
     $dompdf = new Dompdf();
 
+    ob_start();
+    //grab the auditID
+    $auditID = $_POST['audit'];
+    $clientID = $_SESSION['userID'];
+    var_dump($auditID); var_dump($clientID);
+    //report info getter
+    $reportInfo = new ReportInfoGetter();
+    //grab the correct report from the database
+    $audit = $reportInfo->getAudit($clientID,$auditID);
 
-    //load the content of the report.phtml
-    $report = file_get_contents("../Views/report.phtml");
+    $view = new stdClass();
+    $view->test = $audit;
+
+    include_once("../Views/report.phtml");
+
+    $report = ob_get_clean();
     $dompdf->loadHtml($report);
 
     //setup report size

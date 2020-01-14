@@ -2,6 +2,14 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="../css/report.css">
+<div class="hidden">
+<?php
+    //require_once('../Models/ReportInfoGetter.php');
+    //$data = new ReportInfoGetter();
+   // $info = $data->getAudit($_SESSION['userID'], $_SESSION['audit']);
+?>
+</div>
+
 <div class="page" size="A4">
     <div class="hidden">
         <?php
@@ -19,7 +27,7 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-8">
-                <h6>Location: South China Sea oil rig #10120</h6> <!-- Return location -->
+                <h6>Location: South China Sea oil rig #10120</h6> <?php echo $view->test ?> <!-- Return location -->
             </div>
             <div class="col-sm-3"></div>
         </div>
