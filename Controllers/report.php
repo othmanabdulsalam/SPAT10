@@ -25,7 +25,7 @@
 
     ob_start();
     //grab the auditID
-    $auditID = implode($_GET);
+    $auditID = $_POST['audit'];
     $clientID = $_SESSION['userID'];
     var_dump($auditID); var_dump($clientID);
     //report info getter

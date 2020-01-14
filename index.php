@@ -58,6 +58,7 @@
         $clientAudits = $auditQuery->getAudits($_SESSION['userID']);
         //create view variable
         $view->clientAudits = $clientAudits;
+
         $view->clientID = $_SESSION['userID'];
 
 

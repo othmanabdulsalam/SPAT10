@@ -24,6 +24,7 @@ require_once('../Views/template/header.phtml'); ?>
                 <p><strong class="text-danger">*</strong> = required</p>
                 <?php
                 $Categories = $unscoredAudit['scoringContent'];
+                $questionID = 0;
                 $count = 0;
                 foreach ($Categories as $Category) { ?>
                         <hr class="scorerSeparation">
@@ -39,7 +40,9 @@ require_once('../Views/template/header.phtml'); ?>
                         $questions = $subCategory['questions'];
                         foreach ($questions as $question) {
                         $count = $count + 1;
+                        $questionID = $question['questionID']
                         ?>
+                            <input hidden type="text" name="questionID<?php echo $count?>" value="<?php echo $questionID ?>">
                         <hr class="scorerSeparation">
                         <div class="card-body">
                             <p><strong>Question:</strong></p>
@@ -81,7 +84,7 @@ require_once('../Views/template/header.phtml'); ?>
                         ?>
 
                         <div class="card-body">
-                            <label for="inputScore"><strong>*Score 1-5</strong></label>
+                            <label for="inputScore"><strong><span class="text-danger">*</span>Score 1-5</strong></label>
                             <select id="inputScore" class="form-control" name="inputScore<?php echo $count; ?>"
                                     required>
                                 <option value="" selected disabled>Please select a score</option>
@@ -105,6 +108,7 @@ require_once('../Views/template/header.phtml'); ?>
                         }
                 }
                 ?>
+                        <input hidden type="text" name="questionCount" value="<?php echo $count ?>">
                         <input type=submit class="btn btn-outline-primary btn btn-lg float-right " name="scoreAudit" value="Score">
                     </div>
                 </div>
