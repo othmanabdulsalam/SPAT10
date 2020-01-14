@@ -12,7 +12,7 @@ require_once __DIR__."/SubCatQuery.php";
 require_once __DIR__."/CategoryQuery.php";
 require_once __DIR__."/AnswerQuery.php";
 require_once __DIR__."/ScoreQuery.php";
-
+require_once __DIR__."/EvidenceQuery.php";
 
 class ScoringInfoGetter
 {
@@ -23,6 +23,7 @@ class ScoringInfoGetter
     private $categoryQuery;
     private $answerQuery;
     private $scoreQuery;
+    private $evidenceQuery;
 
     public function __construct()
     {
@@ -33,6 +34,7 @@ class ScoringInfoGetter
         $this->categoryQuery = new CategoryQuery();
         $this->answerQuery = new AnswerQuery();
         $this->scoreQuery = new ScoreQuery();
+        $this->evidenceQuery = new EvidenceQuery();
     }
 
 
@@ -65,7 +67,10 @@ class ScoringInfoGetter
      *                                                                                            'answer'            => (array) answer
      *                                                                                                                          'content' => (String)
      *                                                                                                                          'comment' => (String/null)
-     *
+     *                                                                                                                          'evidence' => (array)
+     *                                                                                                                                          [0..X]
+     *                                                                                                                                              'type' => (String) -e.g "Image", "Video"
+     *                                                                                                                                              'path' => (string) - path to file on server
      *
      * @param String $auditID audit to fetch information for
      * @return array
@@ -110,7 +115,8 @@ class ScoringInfoGetter
                 {
                     $question['answer'] = $this->answerQuery->getAnswer($auditID,$question['questionID']); //gets answer for question
                     $question['answer']['comment'] = $this->answerQuery->getComment($auditID,$question['questionID']); //gets comment for answer (null if no comment)
-                    $question['legalFlag'] = $this->questionQuery->getQuestionFlag($auditID,$question['questionID']);
+                    $question['answer']['evidence'] = $this->evidenceQuery->getEvidence($auditID,$question['questionID']); //gets array of tuples from evidence table or null
+                    $question['legalFlag'] = $this->questionQuery->getQuestionFlag($auditID,$question['questionID']); //gets flag for question or null
                 }
             }
         }

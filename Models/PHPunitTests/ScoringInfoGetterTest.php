@@ -22,6 +22,7 @@ class ScoringInfoGetterTest extends TestCase
         var_dump($scoringInfo['scoringContent']['0']);
         echo "first subCategory of category 1";
         var_dump($scoringInfo['scoringContent'][0]['subCategories'][0]);
+        var_dump($scoringInfo['scoringContent'][0]['subCategories'][0]['questions'][0]['answer']['evidence']);
         $this->assertTrue(true);
     }
 
