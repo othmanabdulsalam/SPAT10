@@ -23,14 +23,11 @@
     //instantiate dompdf object
     $dompdf = new Dompdf();
 
-
-    //load the content of the report.phtml
-
     ob_start();
     //grab the auditID
-    $link = implode($_GET);
-    var_dump($link);
-    //var_dump($auditID); var_dump($clientID);
+    $auditID = implode($_GET);
+    $clientID = $_SESSION['userID'];
+    var_dump($auditID); var_dump($clientID);
     //report info getter
     $reportInfo = new ReportInfoGetter();
     //grab the correct report from the database
