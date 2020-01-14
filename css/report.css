@@ -1,4 +1,4 @@
-body {
+/* body {
     background: rgb(204,204,204);
 }
 .page[size="A4"] {
@@ -18,7 +18,7 @@ body {
         box-shadow: none;
     }
 }
-
+*/
 .borderless {
     border: none!important;
 }
