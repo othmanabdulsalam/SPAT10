@@ -6,48 +6,78 @@ require_once('../Views/template/header.phtml'); ?>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
         <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+            <?php $unscoredAudit = $view->unscoredAudit; ?>
             <div class="container">
-                <h2>Location: South China Sea oil rig #10120</h2>
                 <div class="card">
                     <div class="card-body">
-                <p><strong>*</strong> = required</p>
+                        <?php $audits = $unscoredAudit['audit']; ?>
+                        <?php foreach ($audits as $audit)
+                        {?>
+                            <h3>Location: <?php echo $audit['location']; ?></h3>
+                            <h3>Date: <?php echo $audit['dateCreated']; ?> </h3>
+                        <?php } ?>
+                <p><strong class="text-danger">*</strong> = required</p>
                 <?php
-                //$scorerAudits = $view->scorerAudits;
-                //foreach ($scorerAudits as $sa)
-                {?>
-                            <h4 class="card-title">Category:</h4>
-                            <h5 class="card-title">Sub-Category:</h5>
+                $Categories = $unscoredAudit['scoringContent'];
+                foreach ($Categories as $Category) { ?>
+                    <h4 class="card-title">Category: <?php echo $Category['catDescription']; ?></h4>
+                    <?php
+                    $subCategories = $Category['subCategories'];
+                    foreach ($subCategories as $subCategory) {
+                        ?>
+                        <h5 class="card-title">Sub-Category: <?php echo $subCategory['subCatDescription']; ?></h5>
+                        <?php
+                        $questions = $subCategory['questions'];
+                        foreach ($questions as $question) {
+                            ?>
                             <div class="card-body">
                                 <p><strong>Question:</strong></p>
-                            <p>This is where question will go</p>
+                                <p <?php if ($question['legalFlag'] !== null){ ?>class="text-danger"<?php } ?>><?php echo $question['questionContent']; ?></p>
+                                <?php if ($question['legalFlag'] !== null) {
+                                    ?>
+                                    <p>This question has been flagged:</p>
+                                    <p><?php echo $question['legalFlag']; ?></p>
+                                <?php } ?>
                             </div>
-                            <div class="card-body">
-                            <p><strong>Answer:</strong></p>
-                            <p>This is where answer will go</p>
-                            </div>
-                            <div class="card-body">
-                            <p><strong>Answer Comment: (if no comment don't show this part)</strong></p>
-                            <p>This is where the comment of the answer will go if not null</p>
-                            </div>
-                            <div class="card-body">
-                                <label for="inputScore"><strong>Score 1-5*</strong></label>
-                                <select id="inputScore"  class="form-control" required>
-                                    <option value="" selected disabled>Please select a score</option>
-                                    <option title="Document not in place" value="">1</option>
-                                    <option title="Document in place, content quality and update frequency could be improved" value="">2</option>
-                                    <option title="Document in place, circulated, clear ownership, content quality good" value="">3</option>
-                                    <option title="In place, circulated, clear ownership, updated regularly and effective" value="">4</option>
-                                    <option title="In place, circulated, clear ownership, updated regularly in accordance with the Company Standard" value="">5</option>
-                                </select>
-                            </div>
-                            <div class="card-body">
-                                <p><strong>Comment on your score:</strong></p>
-                                <div class="form-group shadow-textarea">
-                                    <label for="scoreAnswer">Shadow and placeholder</label>
-                                    <textarea class="form-control z-depth-1" id="scoreAnswer" rows="3" placeholder="Write your answer to the score you have given above here"></textarea>
+                            <?php
+                            $answers = $question['answer'];
+                            ?>
+                                <div class="card-body">
+                                    <p><strong>Answer:</strong></p>
+                                    <p><?php echo $answers['content']; ?></p>
                                 </div>
-                            </div>
-                <?php } ?>
+                                <?php if ($answers['comment'] !== null) {
+                                    ?>
+                                    <div class="card-body">
+                                        <p><strong>Answer Comment:</strong></p>
+                                        <p><?php echo $answers['comment']; ?></p>
+                                    </div>
+                                <?php } ?>
+
+                                <div class="card-body">
+                                    <label for="inputScore"><strong>*Score 1-5</strong></label>
+                                    <select id="inputScore" class="form-control" required>
+                                        <option value="" selected disabled>Please select a score</option>
+                                        <option title="<?php echo $question['oneMark']; ?>" value="">1</option>
+                                        <option title="<?php echo $question['twoMark']; ?>" value="">2</option>
+                                        <option title="<?php echo $question['threeMark']; ?>" value="">3</option>
+                                        <option title="<?php echo $question['fourMark']; ?>" value="">4</option>
+                                        <option title="<?php echo $question['fiveMark']; ?>" value="">5</option>
+                                    </select>
+                                </div>
+                                <div class="card-body">
+                                    <p><strong><span class="text-danger">*</span>Comment on your score:</strong></p>
+                                    <div class="form-group shadow-textarea">
+                                        <label for="scoreAnswer"></label>
+                                        <textarea class="form-control z-depth-1" id="scoreAnswer" rows="3"
+                                                  placeholder="Write your answer to the score you have given above here"></textarea>
+                                    </div>
+                                </div>
+                            <?php }
+                        }
+                }
+
+                ?>
                     </div>
                 </div>
                 <br/>
