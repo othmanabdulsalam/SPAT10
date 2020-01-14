@@ -91,6 +91,7 @@ if(isset($_SESSION['loggedIn']) && ($_SESSION['accessLevel'] == 'C'))
 
         <?php
         $clientAudits = $view->clientAudits;
+        $clientID = $view->clientID;
         foreach ($clientAudits as $ca)
         { var_dump($clientAudits);?>
 
@@ -99,7 +100,7 @@ if(isset($_SESSION['loggedIn']) && ($_SESSION['accessLevel'] == 'C'))
                 <h4 class="card-title"><?php echo $ca['location'];?></h4>
                 <p class="card-text"><?php echo $ca['dateScored'];?></p>
                 <!-- <a href="/images/Compliance%20Audit%20Report.pdf" class="card-link">View</a> -->
-                <input onclick="location.href='/Controllers/report.php?auditID=<?=$ca['auditID']?>';" type=submit class="btn btn-outline-primary" name="view" value="View">
+                <input onclick="location.href='/Controllers/report.php?auditID=<?=$ca['auditID']?>?clientID=<?=$clientID?>';" type=submit class="btn btn-outline-primary" name="view" value="View">
                 <input type="submit" class="btn btn-outline-primary" name="download" value="Download">
                 <input type="hidden" name="audit" value="<?php echo $ca['auditID']?>">
             </div>
