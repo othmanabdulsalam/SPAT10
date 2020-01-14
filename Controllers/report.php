@@ -37,7 +37,10 @@
 
 
     //load the content of the report.phtml
-    $report = file_get_contents("../Views/report.phtml");
+
+    ob_start();
+    include_once("../Views/report.phtml");
+    $report = ob_get_clean();
     $dompdf->loadHtml($report);
 
     //setup report size
