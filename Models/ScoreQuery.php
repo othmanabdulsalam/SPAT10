@@ -38,7 +38,7 @@ class ScoreQuery
      */
     public function insertScore($auditID,$questionID,$score,$comment)
     {
-        $this->database->update("INSERT INTO Answers VALUE (\"$questionID\",\"$auditID\",\"$score\",\"$comment\")");
+        $this->database->update("INSERT INTO Scores (questionID, auditID, score, comment)  VALUE (\"$questionID\",\"$auditID\",\"$score\",\"$comment\")");
     }
 
     public function submitScores($auditID,$scoreArray)
@@ -47,7 +47,7 @@ class ScoreQuery
         {
             $this->insertScore($auditID,$score['questionID'],$score['score'],$score['comment']); //inserts score into database
         }
-        $date = date("Y-M-D");
-        $this->database->update("INSERT INTO ScoredAudits VALUES(\"$auditID\",$date)");
+
+        $this->database->update("INSERT INTO ScoredAudits VALUES(\"$auditID\",NOW())");
     }
 }

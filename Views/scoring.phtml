@@ -5,9 +5,12 @@ require_once('../Views/template/header.phtml'); ?>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="../css/scoring.css">
+        <script src="../js/scoring.js"></script>
+    <link rel='stylesheet' type='text/css' href='/css/scoringStyle.php' />
         <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
-            <?php $unscoredAudit = $view->unscoredAudit; ?>
+            <?php
+
+            $unscoredAudit = $view->unscoredAudit; ?>
             <div class="scorerBackground">
             <div class="container">
                 <div class="card">
@@ -72,11 +75,20 @@ require_once('../Views/template/header.phtml'); ?>
                         if($answers['evidence'] !== null) {
                             $evidences = $answers['evidence'];
                             foreach ($evidences as $evidence) { ?>
+                            <label id="evidenceLabel<?php echo $count; ?>" for="triggerEvidence<?php echo $count; ?>">Show Evidence</label>
+                            <input id="triggerEvidence<?php echo $count; ?>" type="checkbox">
+                                <div class="evidence<?php echo $count; ?>"
+                                 <div class="card-body">
 
-                                <div class="card-body">
                                     <p><strong>Evidence:</strong></p>
                                     <?php if ($evidence['type'] == "Image") { ?>
-                                        <img src="<?php echo $evidence['path']; ?>" alt="answer evidence" style="width:300px;">
+                                        <img id="myImg" src="<?php echo $evidence['path']; ?>" alt="answer evidence" style="width:100%;max-width:300px">
+                                        <div id="myModal" class="modal">
+                                        <span class="close">&times;</span>
+                                            <img class="modal-content" id="img01">
+                                            <div id="caption"></div>
+                                        </div>
+
                                     <?php } ?>
                                 </div>
                             <?php }

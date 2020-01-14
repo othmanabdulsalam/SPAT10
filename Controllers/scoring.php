@@ -11,8 +11,13 @@
     //grab the auditID
     if(isset($_GET['auditID']))
     {
-        $auditID = $_GET['auditID'];
+        $_SESSION['auditID'] = $_GET['auditID'];
     }
+    if(isset($_SESSION['auditID']))
+    {
+        $_GET['auditID'] = $_SESSION['auditID'];
+    }
+    $auditID = $_GET['auditID'];
 
 
     //initialise auditQuery
@@ -37,18 +42,16 @@
             //populate the scoreArray with values
             $scoreArray['questionID'] = $_POST['questionID'.$Q];
             $scoreArray['score'] = $_POST['inputScore'.$Q];
-            $scoreArray['scoreComments'] = $_POST['inputComment'.$Q];
+            $scoreArray['comment'] = $_POST['inputComment'.$Q];
 
             //push the arrays containing values into main array
-            array_push($arrayScoresAndComments, $scoreArray['questionID']);
-            array_push($arrayScoresAndComments, $scoreArray['score']);
-            array_push($arrayScoresAndComments, $scoreArray['scoreComments']);
+            array_push($arrayScoresAndComments, $scoreArray);
         }
         $scoreQuery = new ScoreQuery;
         //pass the auditID and array to submitScores query in ScoreQuery
         $scoreQuery->submitScores($auditID, $arrayScoresAndComments);
+        header("Location: /index.php");
     }
-
 
 
     require("../Views/scoring.phtml");
