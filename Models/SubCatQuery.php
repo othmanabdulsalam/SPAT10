@@ -17,12 +17,14 @@ class SubCatQuery
     }
 
     /**
+     * returns array containing list of subcategory ID's that hold supplied questions
+     *
      * @param String $questionID list of question IDs to get subCategories of "1,2,3"...
-     * @return array containing list of category IDs
+     * @return array containing list of subCategory IDs
      */
-    public function getCatID($questionID)
+    public function getSubCatID($questionID)
     {
-        $raw = $this->database->retrieve("SELECT subCatID FROM Questions WHERE questionID IN ($questionID)");
+        $raw = $this->database->retrieve("SELECT DISTINCT subCatID FROM Questions WHERE questionID IN ($questionID)");
         $questionIDList = [];
         foreach ($raw as $tuple)
         {
@@ -32,12 +34,14 @@ class SubCatQuery
     }
 
     /**
-     * returns tuples from categories table
-     * @param String $categoryID category IDs to get subcats of -"1,2,3"...
-     * @return array of category tuples
+     * returns tuples from subCategories which are children of category and are within list of subCatIDs
+     *
+     * @param String $categoryID category to get children of
+     * @param String $subcatIDs subcategories which are part of the audit
+     * @return array
      */
-    public function getSubCategories($categoryID)
+    public function getSubCategories($categoryID,$subcatIDs)
     {
-        return $this->database->retrieve("SELECT * FROM SubCategories WHERE catID IN ($categoryID)");
+        return $this->database->retrieve("SELECT * FROM SubCategories WHERE catID = \"$categoryID\" AND subCatID IN ($subcatIDs)");
     }
 }

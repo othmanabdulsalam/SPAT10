@@ -93,7 +93,7 @@ class ScoringInfoGetter
         //gets Question IDs
         $questionIDs = $this->questionQuery->getQuestionIDs($auditID);
         //gets SubCategory IDs
-        $subCatIDs = $this->subCatQuery->getCatID(join(",",$questionIDs)); //join turns array to comma separated string -> "1,2,3"...
+        $subCatIDs = $this->subCatQuery->getSubCatID(join(",",$questionIDs)); //join turns array to comma separated string -> "1,2,3"...
         //gets Category IDs
         $categoryIDs = $this->categoryQuery->getCategoryIDs(join(",",$subCatIDs));
 
@@ -102,7 +102,7 @@ class ScoringInfoGetter
 
         foreach($categories as &$category) //passing category by reference so it can be changes
         {
-            $category['subCategories'] = $this->subCatQuery->getSubCategories(join(",",$subCatIDs)); //puts array of subcategories into category
+            $category['subCategories'] = $this->subCatQuery->getSubCategories($category['catID'],join(",",$subCatIDs)); //puts array of subcategories into category
             foreach($category['subCategories'] as &$subCategory) //for each subCategory
             {
                 $subCategory['questions'] = $this->questionQuery->getSubCatAuditQuestionsWithGuidelines($auditID,$subCategory['subCatID']); //gets questions from subCat that appear in query and put them in questions array

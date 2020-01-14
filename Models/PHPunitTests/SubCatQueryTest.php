@@ -17,10 +17,10 @@ class SubCatQueryTest extends TestCase
     {
         $subCatQuery = new SubCatQuery();
 
-        $result1 = $subCatQuery->getCatID(1);
+        $result1 = $subCatQuery->getSubCatID(1);
         $this->assertTrue($result1[0] == 1);
 
-        $result2 = $subCatQuery->getCatID("1,4,7");
+        $result2 = $subCatQuery->getSubCatID("1,4,7");
         $this->assertTrue($result2[0] == 1 && $result2[1] == 2 && $result2[2] == 3);
     }
 }

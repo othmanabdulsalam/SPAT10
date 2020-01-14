@@ -36,6 +36,7 @@ class ReportInfoGetterTest extends TestCase
         $getContent->setAccessible(true);
 
         $content = $getContent->invokeArgs($reportInfoGetter,array(1)); // 1 = auditID
+        var_dump($content);
         var_dump($content[0]['subCategories'][0]['questions'][0]);
 
         $this->assertTrue(true); //just runs so I can vardump and see what's been retrieved

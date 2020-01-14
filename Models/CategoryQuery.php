@@ -23,7 +23,7 @@ class CategoryQuery
      */
     public function getCategoryIDs($subCatID)
     {
-        $raw = $this->database->retrieve("SELECT catID FROM SubCategories WHERE subCatID IN ($subCatID)");
+        $raw = $this->database->retrieve("SELECT DISTINCT catID FROM SubCategories WHERE subCatID IN ($subCatID)");
         $questionIDList = [];
         foreach ($raw as $tuple) //for each tuple returned
         {

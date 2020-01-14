@@ -15,7 +15,13 @@ class ScoringInfoGetterTest extends TestCase
     {
         $scoringInfoGetter = new ScoringInfoGetter();
         $scoringInfo = $scoringInfoGetter->getScoringInfo(2);
-        var_dump($scoringInfo);
+        //var_dump($scoringInfo);
+        echo "scoringInfo['scoringContent']";
+        var_dump($scoringInfo['scoringContent']); // shows categories
+        echo "scoringInfo['scoringContent']['0']";
+        var_dump($scoringInfo['scoringContent']['0']);
+        echo "first subCategory of category 1";
+        var_dump($scoringInfo['scoringContent'][0]['subCategories'][0]);
         $this->assertTrue(true);
     }
 
