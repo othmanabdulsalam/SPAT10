@@ -21,7 +21,8 @@ class AuditQuery
      */
     public function getAudits($clientID)
     {
-        return $this->database->retrieve("SELECT Audit.auditID, location, dateScored, dateCreated FROM Audit,ScoredAudits WHERE clientID = \"$clientID\" AND Audit.auditID NOT IN(SELECT auditID FROM ScoredAudits) ORDER BY dateCreated DESC");
+        return $this->database->retrieve("SELECT Audit.auditID, location, dateCreated, dateScored FROM Audit, ScoredAudits
+                                                 WHERE clientID = 4 AND Audit.auditID = ScoredAudits.auditID ORDER BY dateCreated;");
     }
 
     /*
