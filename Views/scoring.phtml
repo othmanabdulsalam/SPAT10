@@ -7,7 +7,7 @@ require_once('../Views/template/header.phtml'); ?>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
         <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
             <?php $unscoredAudit = $view->unscoredAudit; ?>
-            <div class="container">
+            <div class="container" style="background-color: #015A82">
                 <div class="card">
                     <div class="card-body">
                         <?php $audits = $unscoredAudit['audit']; ?>
@@ -30,6 +30,7 @@ require_once('../Views/template/header.phtml'); ?>
                         $questions = $subCategory['questions'];
                         foreach ($questions as $question) {
                             ?>
+                            <hr>
                             <div class="card-body">
                                 <p><strong>Question:</strong></p>
                                 <p <?php if ($question['legalFlag'] !== null){ ?>class="text-danger"<?php } ?>><?php echo $question['questionContent']; ?></p>
@@ -81,7 +82,9 @@ require_once('../Views/template/header.phtml'); ?>
                     </div>
                 </div>
                 <br/>
+                <div>
                 <input type=submit class="btn btn-outline-primary float-right" name="scoreAudit" value="Score">
+                </div>
             </div>
         </form>
 
