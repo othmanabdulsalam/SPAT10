@@ -106,9 +106,7 @@ if(isset($_SESSION['loggedIn']) && ($_SESSION['accessLevel'] == 'C'))
             </div>
         </div></form>
             <br/>
-        <?php}
-
-
+        <?php }
         ?>
     </div>
 
@@ -135,7 +133,7 @@ if(isset($_SESSION['loggedIn']) && ($_SESSION['accessLevel'] == 'S'))
         <?php
             $unscoredAudits = $view->unscoredAudits;
             foreach ($unscoredAudits as $unscoredAudit)
-        {?>
+        { ?>
         <div class="card">
             <div class="card-body">
                 <h4 class="card-title"><?php echo $unscoredAudit['location'];?></h4>
@@ -156,4 +154,3 @@ if(isset($_SESSION['loggedIn']) && ($_SESSION['accessLevel'] == 'Q'))
 
 <?php }
 require_once('Views/template/footer.phtml');
-
