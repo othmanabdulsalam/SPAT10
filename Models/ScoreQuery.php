@@ -40,4 +40,14 @@ class ScoreQuery
     {
         $this->database->update("INSERT INTO Answers VALUE (\"$questionID\",\"$auditID\",\"$score\",\"$comment\")");
     }
+
+    public function submitScores($auditID,$scoreArray)
+    {
+        foreach($scoreArray as $score) //for each score submitted
+        {
+            $this->insertScore($auditID,$score['questionID'],$score['score'],$score['comment']); //inserts score into database
+        }
+        $date = date("Y-M-D");
+        $this->database->update("INSERT INTO ScoredAudits VALUES(\"$auditID\",$date)");
+    }
 }
