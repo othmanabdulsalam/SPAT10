@@ -54,7 +54,7 @@ class QuestionerQuery
         foreach($answers as $answer) //for each answer (which is an array)
         {
             $this->answerQuery->submitAnswer($auditID,$answer['questionID'],$answer['content']); //create entry in Answers
-            if(empty($answer['comment'])) //if the answer has a comment
+            if(!empty($answer['comment'])) //if the answer has a comment
             {
                 $this->answerQuery->submitComment($auditID,$answer['questionID'],$answer['comment']); //create entry in AnswerComments
             }

@@ -19,7 +19,6 @@ require_once('../Views/template/header.phtml'); ?>
                             <h3>Client: <?php echo $client['username']; ?> </h3>
                             <h3>Date: <?php echo $audits['dateCreated']; ?> </h3>
 
-
                         <p><strong class="text-danger">*</strong> = required</p>
                         <?php
                         $Categories = $incompleteAudit['questions'];
@@ -68,7 +67,7 @@ require_once('../Views/template/header.phtml'); ?>
                                         <p><strong>Comment on your answer:</strong></p>
                                         <div class="form-group shadow-textarea">
                                             <label for="commentAnswer"></label>
-                                            <textarea required class="form-control z-depth-1" id="commentAnswer"
+                                            <textarea class="form-control z-depth-1" id="commentAnswer"
                                                       name="inputComment<?php echo $count; ?>" rows="3"
                                                       placeholder="Write your comment on answer you gave above"></textarea>
                                         </div>
@@ -95,7 +94,6 @@ require_once('../Views/template/header.phtml'); ?>
                 <div>
                 </div>
             </div>
-        </div>
     </form>
 
 <?php require_once('../Views/template/footer.phtml');
