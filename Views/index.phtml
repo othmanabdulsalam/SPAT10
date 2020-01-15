@@ -5,7 +5,7 @@ if(!isset($_SESSION['loggedIn']))
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    
+
     <!------ Include the above in your HEAD tag ---------->
 
     <html lang="en">
@@ -151,7 +151,27 @@ if(isset($_SESSION['loggedIn']) && ($_SESSION['accessLevel'] == 'S'))
 if(isset($_SESSION['loggedIn']) && ($_SESSION['accessLevel'] == 'Q'))
 {
     require_once('Views/template/header.phtml'); ?>
-
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <form action="<?php echo $_SERVER["PHP_SELF"] ?>" method="post">
+        <div class="container">
+            <h2>Audits to questions:</h2>
+            <?php
+            //$unscoredAudits = $view->unscoredAudits;
+            //foreach ($unscoredAudits as $unscoredAudit)
+            //{ ?>
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Location goes here<?php //echo $unscoredAudit['location'];?></h4>
+                        <p class="card-text">Created: *date* <?php //echo $unscoredAudit['dateCreated'];?></p>
+                        <input onclick="//location.href='/Controllers/questioner.php?auditID=<?php //echo $unscoredAudit['auditID']?>';" type=button class="btn btn-outline-primary" name="questionAudit" value="Answer">
+                    </div>
+                </div>
+            <?php //} ?>
+        </div>
+    </form>
 
 <?php }
 require_once('Views/template/footer.phtml');
