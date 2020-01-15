@@ -166,7 +166,7 @@ if(isset($_SESSION['loggedIn']) && ($_SESSION['accessLevel'] == 'Q'))
                     <div class="card-body">
                         <h4 class="card-title"><?php echo $incompleteAudit['location'];?></h4>
                         <p class="card-text">Created: <?php echo $incompleteAudit['dateCreated'];?></p>
-                        <input onclick="location.href='/Controllers/questioner.php?auditID=<?php echo $unscoredAudit['auditID']?>';" type=button class="btn btn-outline-primary" name="questionAudit" value="Answer">
+                        <input onclick="location.href='/Controllers/questioner.php?auditID=<?php echo $incompleteAudit['auditID']?>';" type=button class="btn btn-outline-primary" name="questionAudit" value="Answer">
                     </div>
                 </div>
             <?php } ?>
