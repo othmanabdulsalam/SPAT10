@@ -85,7 +85,7 @@ class AuditQuery
      *      'location'      => (String)
      *      'dateCreated'   => (DATETIME)
      *
-     * @return array
+     * @return array of incomplete audits
      */
     public function getIncompleteAudits()
     {

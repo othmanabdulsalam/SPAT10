@@ -50,6 +50,6 @@ class AnswerQuery
 
     public function submitAnswer($auditID,$answer)
     {
-        $this->database->update("");
+        $this->database->update("INSERT INTO");
     }
 }
