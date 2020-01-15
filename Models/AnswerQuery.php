@@ -47,4 +47,9 @@ class AnswerQuery
             return null;
         }
     }
+
+    public function submitAnswer($auditID,$answer)
+    {
+        $this->database->update("");
+    }
 }

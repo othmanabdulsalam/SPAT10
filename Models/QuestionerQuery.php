@@ -35,6 +35,14 @@ class QuestionerQuery
         $this->userQuery = new UserQuery();
     }
 
+    public function submitAnswers($aduitID,$answers)
+    {
+        foreach($answers as $answer)
+        {
+
+        }
+    }
+
     /**
      * returns all information that needs to be displayed for questioning
      * in an easily accessible format.
