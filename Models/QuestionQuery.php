@@ -86,4 +86,21 @@ class QuestionQuery
             return null;
         }
     }
+
+    /**
+     * returns all questions which are children of subCategory in the form of an array
+     *
+     * (array) questions
+     *  [0.X]
+     *      (array) questions
+     *          'questionID'    => (String)
+     *          'questionContent'       => (String) -content of the question
+     *
+     * @param String $subcatID
+     * @return array of question tuples
+     */
+    public function getAllQuestions($subcatID)
+    {
+        return $this->database->retrieve("SELECT questionID, questionContent FROM Questions WHERE subCatID = \"$subcatID\"");
+    }
 }

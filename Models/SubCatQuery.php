@@ -44,4 +44,15 @@ class SubCatQuery
     {
         return $this->database->retrieve("SELECT * FROM SubCategories WHERE catID = \"$categoryID\" AND subCatID IN ($subcatIDs)");
     }
+
+    /**
+     * returns tuples from SubCategories that are children of category
+     *
+     * @param $catID
+     * @return array of SubCategory Tuples (- catID)
+     */
+    public function getAllSubcategories($catID)
+    {
+        return $this->database->retrieve("SELECT subCatID, subCatCode, subCatDescription FROM SubCategories WHERE catID = \"$catID\"");
+    }
 }
