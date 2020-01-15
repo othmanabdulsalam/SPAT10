@@ -31,4 +31,12 @@ class AuditQueryTest extends TestCase
         //var_dump($audit);
         $this->assertTrue($audit['location'] == "bigg Stiggs oil rigg");
     }
+
+    public function testGetIncompleteAudits()
+    {
+        $auditQuery = new AuditQuery();
+        $audits = $auditQuery->getIncompleteAudits();
+        var_dump($audits);
+        $this->assertTrue($audits[0]['auditID']==3);
+    }
 }

@@ -75,4 +75,20 @@ class AuditQuery
     {
         return $this->database->retrieve("SELECT auditID,location,dateCreated FROM Audit WHERE completed = true AND auditID NOT IN (SELECT auditID FROM ScoredAudits)");
     }
+
+    /**
+     * Returns array of audits WHERE completed = false
+     *
+     * (array) audits
+     *  [0..X]
+     *      'auditID'       => (String)
+     *      'location'      => (String)
+     *      'dateCreated'   => (DATETIME)
+     *
+     * @return array
+     */
+    public function getIncompleteAudits()
+    {
+        return $this->database->retrieve("SELECT auditID,location,dateCreated FROM Audit WHERE completed = false");
+    }
 }
