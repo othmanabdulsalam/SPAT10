@@ -49,7 +49,7 @@
 
     }
 
-    //check if the user was a client
+    //check if the user is a client
     if(isset($_SESSION['userID']) && $_SESSION['accessLevel'] == 'C')
     {
         // initialise the audit query
@@ -64,6 +64,7 @@
 
     }
 
+    //check if user is a scorer
     if(isset($_SESSION['userID']) && $_SESSION['accessLevel'] == 'S')
     {
         // initialise the audit query
@@ -73,6 +74,19 @@
         $unscoredAudits = $auditQuery->getUnscoredAudits();
         //set view's unscoredAudits variable
         $view->unscoredAudits = $unscoredAudits;
+
+    }
+
+    //check if user is a questioner
+    if(isset($_SESSION['userID']) && $_SESSION['accessLevel'] == 'Q')
+    {
+        // initialise the audit query
+        $auditQuery = new AuditQuery();
+
+        //grab all audits that have not been completed
+        $incompleteAudits = $auditQuery->getIncompleteAudits();
+        //set view's incompleteAudits variable
+        $view->incompleteAudits = $incompleteAudits;
 
     }
 
