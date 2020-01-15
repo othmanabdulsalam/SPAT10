@@ -51,7 +51,7 @@ class QuestionerQuery
      */
     public function submitAnswers($auditID,$answers)
     {
-        foreach($answers as $answer)
+        foreach($answers as $answer) //for each answer (which is an array)
         {
             $this->answerQuery->submitAnswer($auditID,$answer['questionID'],$answer['content']); //create entry in Answers
             if(isset($answer['comment'])) //if the answer has a comment
