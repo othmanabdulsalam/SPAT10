@@ -8,17 +8,25 @@
 
     $view = new stdClass(); //creating the view
     $view->pageTitle = 'Questions'; //giving tab a name
-    require_once('Models/AuditQuery.php'); //for querying the audits that need to be displayed
+    require_once('../Models/QuestionerQuery.php'); //for querying the audits that need to be displayed
 
     session_start();//start session
-    $auditID = $_GET;
+if(isset($_GET['auditID']))
+{
+    $_SESSION['auditID'] = $_GET['auditID'];
+}
+if(isset($_SESSION['auditID']))
+{
+    $_GET['auditID'] = $_SESSION['auditID'];
+}
+$auditID = $_GET['auditID'];
 
-    $auditQuery = new AuditQuery();//create AuditQuery object
-    $incompleteAudit = $auditQuery->getInProgressAudit($auditID);//grab the specific audit the questioner wants to complete
 
+    $auditQuery = new QuestionerQuery();//create AuditQuery object
+    $incompleteAudit = $auditQuery->getQuestionerInfo($auditID);//grab the specific audit the questioner wants to complete
     $view->incompleteAudit = $incompleteAudit;
 
     //require the questioner page
-    //require_once('../Views/questioner.phtml');
+    require_once('../Views/questioner.phtml');
 
 
