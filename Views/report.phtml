@@ -4,9 +4,7 @@
 <link rel="stylesheet" type="text/css" href="../css/report.css">
 <div class="hidden">
 <?php
-    //require_once('../Models/ReportInfoGetter.php');
-    //$data = new ReportInfoGetter();
-   // $info = $data->getAudit($_SESSION['userID'], $_SESSION['audit']);
+    $audit = $view->audit;
 ?>
 </div>
 
@@ -27,21 +25,21 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-8">
-                <h6>Location: South China Sea oil rig #10120</h6> <?php echo $view->test ?> <!-- Return location -->
+                <h6>Location: <?php echo $audit['audit']['location'] ?></h6>  <!-- Return location -->
             </div>
             <div class="col-sm-3"></div>
         </div>
         <div class="row">
             <div class="col-sm-1"></div>
             <div class="col-sm-8">
-                <h6>Date: 09/01/2020 </h6> <!-- Return date -->
+                <h6>Date: <?php echo $audit['audit']['dateScored'] ?> </h6> <!-- Return date -->
             </div>
             <div class="col-sm-3"></div>
         </div>
         <div class="row">
             <div class="col-sm-1"></div>
             <div class="col-sm-8">
-                <h6>Client: EnergyCorp</h6> <!-- Return client -->
+                <h6>Client: <?php echo $audit['user']['username'] ?></h6> <!-- Return client -->
             </div>
             <div class="col-sm-3"></div>
         </div>
@@ -62,20 +60,26 @@
                     </thead>
                     <tbody>
                     <!-- Recursive Loop 1 -->
+                    <?php   $categories = $audit['reportContent'];
+                            foreach($categories as $category) { ?>
                         <tr class="table-secondary">
-                            <td>Plant</td> <!-- Pull the Category -->
+                            <td><?php echo $category['catDescription'] ?></td> <!-- Pull the Category -->
                             <td></td>
-                            <td>50%</td> <!-- Pull scores in category and if statement using % brackets. Red > Green -->
-                            <td>Compliant</td>
+                            <td><?php echo 'score' ?></td> <!-- Pull scores in category and if statement using % brackets. Red > Green -->
+                            <td><?php echo 'Compliant' ?></td>
                         </tr>
                         <!-- Recursive Loop 2 -->
+                        <?php   $subcategories = $categories['subCategories'];
+                                foreach($subcategories as $subcategory) { ?>
                             <tr>
                                 <td class="borderless"></td>
-                                <td>Condition Based Maintenance</td>
-                                <td>0%</td> <!-- if statement using % brackets. Red > Green -->
-                                <td>Major Non-Compliance</td>
+                                <td><?php echo $subcategory['subCatDescription'] ?></td>
+                                <td><?php echo 'score' ?></td> <!-- if statement using % brackets. Red > Green -->
+                                <td><?php echo 'Compliant' ?>></td>
                             </tr>
+                        <?php } ?>
                         <!-- END Recursive Loop 2 -->
+                    <?php } ?>
                     <!-- END Recursive Loop 1 -->
                     </tbody>
                 </table>

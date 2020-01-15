@@ -34,7 +34,7 @@
     $audit = $reportInfo->getAudit($clientID,$auditID);
 
     $view = new stdClass();
-    $view->test = $audit;
+    $view->audit = $audit;
 
     include_once("../Views/report.phtml");
 
