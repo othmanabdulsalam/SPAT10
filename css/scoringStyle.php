@@ -32,7 +32,13 @@ for ($i; $i<=100; $i++)
     {
     font-size: 15px;
     border-style: outset;
-    border-color: green;
+    border-color: #015A82;
+    }
+
+    #evidenceLabel<?php echo $i?>:hover
+    {
+        background-color: #015A82;
+        color: white;
     }
 <?php } ?>
 
