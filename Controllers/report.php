@@ -27,12 +27,11 @@
     //grab the auditID
     $auditID = $_POST['audit'];
     $clientID = $_SESSION['userID'];
-    var_dump($auditID); var_dump($clientID);
     //report info getter
     $reportInfo = new ReportInfoGetter();
     //grab the correct report from the database
     $audit = $reportInfo->getAudit($clientID,$auditID);
-
+    //var_dump($audit['reportContent'][0]['subCategories'][1]['questions'][0]['answer']['score']);
     $view = new stdClass();
     $view->audit = $audit;
 
