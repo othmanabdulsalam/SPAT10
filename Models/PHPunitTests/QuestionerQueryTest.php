@@ -27,4 +27,35 @@ class QuestionerQueryTest extends TestCase
         var_dump($questionerInfo['questions'][0]['subCategories'][0]);
         $this->assertTrue(true);
     }
+
+    public function testSubmitAnswers()
+    {
+        $questionerQuery = new QuestionerQuery();
+        $auditID = 3;
+
+        //creates answers for 3 questions and pushes them to answer array
+        $answer = [];
+        $answer['questionID'] = 1;
+        $answer['content'] = "answering text to do an answer";
+        $answer['comment'] = null; //no comment
+
+        $answers = [];
+        array_push($answers,$answer);
+
+        $answer = [];
+        $answer['questionID'] = 2;
+        $answer['content'] = "answering text to do an answer for question 2";
+        $answer['comment'] = "yeah this answer seems legit ngl";
+        array_push($answers,$answer);
+
+        $answer = [];
+        $answer['questionID'] = 3;
+        $answer['content'] = "this is the answer to question number three";
+        $answer['comment'] = "nah bro this guy's full of it innit";
+        array_push($answers,$answer);
+
+        $questionerQuery->submitAnswers($auditID,$answers);
+
+        $this->assertTrue(true); //just runs query then go check result in database
+    }
 }
