@@ -159,17 +159,17 @@ if(isset($_SESSION['loggedIn']) && ($_SESSION['accessLevel'] == 'Q'))
         <div class="container">
             <h2>Audits to questions:</h2>
             <?php
-            //$unscoredAudits = $view->unscoredAudits;
-            //foreach ($unscoredAudits as $unscoredAudit)
-            //{ ?>
+            $incompleteAudits = $view->incompleteAudits;
+            foreach ($incompleteAudits as $incompleteAudit)
+            { ?>
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">Location goes here<?php //echo $unscoredAudit['location'];?></h4>
-                        <p class="card-text">Created: *date* <?php //echo $unscoredAudit['dateCreated'];?></p>
-                        <input onclick="//location.href='/Controllers/questioner.php?auditID=<?php //echo $unscoredAudit['auditID']?>';" type=button class="btn btn-outline-primary" name="questionAudit" value="Answer">
+                        <h4 class="card-title"><?php echo $incompleteAudit['location'];?></h4>
+                        <p class="card-text">Created: <?php echo $incompleteAudit['dateCreated'];?></p>
+                        <input onclick="location.href='/Controllers/questioner.php?auditID=<?php echo $incompleteAudit['auditID']?>';" type=button class="btn btn-outline-primary" name="questionAudit" value="Answer">
                     </div>
                 </div>
-            <?php //} ?>
+            <?php } ?>
         </div>
     </form>
 

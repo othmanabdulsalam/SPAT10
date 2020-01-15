@@ -11,7 +11,7 @@ border-color: #015A82;
 }
 
 
-/** Show and Hide Comments */
+/** Show and Hide Evidence */
 <?php
 $i = 1;
 for ($i; $i<=100; $i++)
