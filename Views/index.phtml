@@ -5,6 +5,7 @@ if(!isset($_SESSION['loggedIn']))
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    
     <!------ Include the above in your HEAD tag ---------->
 
     <html lang="en">
@@ -85,7 +86,6 @@ if(isset($_SESSION['loggedIn']) && ($_SESSION['accessLevel'] == 'C'))
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-<form action="../Controllers/report.php" method="post">
     <div class="container">
         <h2>Audit Reports:</h2>
 
@@ -96,21 +96,21 @@ if(isset($_SESSION['loggedIn']) && ($_SESSION['accessLevel'] == 'C'))
         var_dump($clientID);
         foreach ($clientAudits as $ca)
         { ?>
-
+            <form action="../Controllers/report.php" method="post">
         <div class="card">
             <div class="card-body">
                 <h4 class="card-title"><?php echo $ca['location'];?></h4>
                 <p class="card-text"><?php echo $ca['dateScored'];?></p>
                 <!-- <a href="/images/Compliance%20Audit%20Report.pdf" class="card-link">View</a> -->
-                <input onclick="location.href='/Controllers/report.php?auditID=<?php echo $ca['auditID'];?>" type=submit class="btn btn-outline-primary" name="view" value="View">
+                <input onclick="location.href='/Controllers/report.php?auditID=<?php echo $ca['auditID'];?>'" type=submit class="btn btn-outline-primary" name="view" value="View">
                 <input type="submit" class="btn btn-outline-primary" name="download" value="Download">
-                <input type="hidden" name="audit" value="<?php echo $ca['auditID']?>">
             </div>
-        </div>
+        </div></form>
             <br/>
-        <?php } ?>
+        <?php }
+        ?>
     </div>
-</form>
+
 
 <?php }
 //Admin page
@@ -134,7 +134,7 @@ if(isset($_SESSION['loggedIn']) && ($_SESSION['accessLevel'] == 'S'))
         <?php
             $unscoredAudits = $view->unscoredAudits;
             foreach ($unscoredAudits as $unscoredAudit)
-        {?>
+        { ?>
         <div class="card">
             <div class="card-body">
                 <h4 class="card-title"><?php echo $unscoredAudit['location'];?></h4>
@@ -155,4 +155,3 @@ if(isset($_SESSION['loggedIn']) && ($_SESSION['accessLevel'] == 'Q'))
 
 <?php }
 require_once('Views/template/footer.phtml');
-

@@ -5,9 +5,11 @@ require_once('../Views/template/header.phtml'); ?>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="../css/scoring.css">
+    <link rel='stylesheet' type='text/css' href='../css/scoringStyle.php'/>
         <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
-            <?php $unscoredAudit = $view->unscoredAudit; ?>
+            <?php
+
+            $unscoredAudit = $view->unscoredAudit; ?>
             <div class="scorerBackground">
             <div class="container">
                 <div class="card">
@@ -70,17 +72,38 @@ require_once('../Views/template/header.phtml'); ?>
                         <?php }
 
                         if($answers['evidence'] !== null) {
-                            $evidences = $answers['evidence'];
-                            foreach ($evidences as $evidence) { ?>
+                            $evidences = $answers['evidence'];  ?>
+                            <label id="evidenceLabel<?php echo $count; ?>" for="triggerEvidence<?php echo $count; ?>">Show Evidence</label>
+                            <input id="triggerEvidence<?php echo $count; ?>" type="checkbox">
+                            <div class="evidence<?php echo $count; ?>"
+                        <div class="card-body">
+                                <?php
+                                foreach ($evidences as $evidence) { ?>
 
-                                <div class="card-body">
                                     <p><strong>Evidence:</strong></p>
                                     <?php if ($evidence['type'] == "Image") { ?>
-                                        <img src="<?php echo $evidence['path']; ?>" alt="answer evidence" style="width:300px;">
+                                        <img src="<?php echo $evidence['path']; ?>" alt="evidence" style="width:100%;max-width:300px">
                                     <?php } ?>
-                                </div>
+                                     <?php if ($evidence['type'] == "doc") { ?>
+                                         <a href="<?php echo $evidence['path']; ?>" target="_blank"><img src="../icons/Google_Docs_logo.png" alt="evidence" style="width:30px;"></a>
+                                     <?php } ?>
+                                     <?php if ($evidence['type'] == "audio") { ?>
+                                         <audio controls>
+                                             <source src="<?php echo $evidence['path']; ?>" type="audio/wav">
+                                             Your browser does not support the audio tag.
+                                         </audio>
+                                     <?php } ?>
+                                     <?php if ($evidence['type'] == "video") { ?>
+                                         <video width="320" height="240" controls>
+                                             <source src="<?php echo $evidence['path']; ?>" type="video/mp4">
+                                             <source src="<?php echo $evidence['path']; ?>" type="video/mov">
+                                             Your browser does not support the video tag.
+                                         </video>
+                                     <?php } ?>
                             <?php }
-                        }
+                                ?>
+                        </div>
+                            <?php }
                         ?>
 
                         <div class="card-body">
