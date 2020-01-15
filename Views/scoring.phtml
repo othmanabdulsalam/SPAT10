@@ -82,10 +82,10 @@ require_once('../Views/template/header.phtml'); ?>
 
                                     <p><strong>Evidence:</strong></p>
                                     <?php if ($evidence['type'] == "Image") { ?>
-                                        <img src="<?php echo $evidence['path']; ?>" alt="evidence" style="width:100%;max-width:300px">
+                                        <a href="<?php echo $evidence['path']; ?>" target="_blank"><img src="<?php echo $evidence['path']; ?>" alt="evidence" style="width:100%;max-width:300px"></a>
                                     <?php } ?>
                                      <?php if ($evidence['type'] == "doc") { ?>
-                                         <a href="<?php echo $evidence['path']; ?>" target="_blank"><img src="../icons/Google_Docs_logo.png" alt="evidence" style="width:30px;"></a>
+                                         <a href="<?php echo $evidence['path']; ?>" target="_blank"><img src="../icons/Google_Docs_logo.png" alt="evidence" style="width:50px;"></a>
                                      <?php } ?>
                                      <?php if ($evidence['type'] == "audio") { ?>
                                          <audio controls>

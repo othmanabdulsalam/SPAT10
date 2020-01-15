@@ -8,24 +8,21 @@ require_once('../Views/template/header.phtml'); ?>
     <link rel='stylesheet' type='text/css' href='../css/scoringStyle.php'/>
     <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
         <?php
-
         $incompleteAudit = $view->incompleteAudit; ?>
         <div class="scorerBackground">
             <div class="container">
                 <div class="card">
                     <div class="card-body">
-                        <?php $audits = $unscoredAudit['audit']; ?>
-                        <?php foreach ($audits as $audit)
-                        {?>
-                            <?php $client = $unscoredAudit['client']; ?>
-                            <h3>Location: <?php echo $audit['location']; ?></h3>
+                        <?php $audits = $incompleteAudit['audit']; ?>
+                            <?php $client = $incompleteAudit['client']; ?>
+                            <h3>Location: <?php echo $audits['location']; ?></h3>
                             <h3>Client: <?php echo $client['username']; ?> </h3>
-                            <h3>Date: <?php echo $audit['dateCreated']; ?> </h3>
+                            <h3>Date: <?php echo $audits['dateCreated']; ?> </h3>
 
-                        <?php } ?>
+
                         <p><strong class="text-danger">*</strong> = required</p>
                         <?php
-                        $Categories = $unscoredAudit['scoringContent'];
+                        $Categories = $incompleteAudit['questions'];
                         $questionID = 0;
                         $count = 0;
                         foreach ($Categories as $Category) { ?>
@@ -56,77 +53,28 @@ require_once('../Views/template/header.phtml'); ?>
                                             <p>Flag: <strong><?php echo $question['legalFlag']; ?></strong></p>
                                         <?php } ?>
                                     </div>
-                                    <?php
-                                    $answers = $question['answer'];
-                                    ?>
-                                    <div class="card-body">
-                                        <p><strong>Answer:</strong></p>
-                                        <p><?php echo $answers['content']; ?></p>
-                                    </div>
-                                    <?php if ($answers['comment'] !== null) {
-                                        ?>
-                                        <div class="card-body">
-                                            <p><strong>Answer Comment:</strong></p>
-                                            <p><?php echo $answers['comment']; ?></p>
-                                        </div>
-                                    <?php }
-
-                                    if($answers['evidence'] !== null) {
-                                        $evidences = $answers['evidence'];  ?>
-                                        <label id="evidenceLabel<?php echo $count; ?>" for="triggerEvidence<?php echo $count; ?>">Show Evidence</label>
-                                        <input id="triggerEvidence<?php echo $count; ?>" type="checkbox">
-                                        <div class="evidence<?php echo $count; ?>"
-                                        <div class="card-body">
-                                            <?php
-                                            foreach ($evidences as $evidence) { ?>
-
-                                                <p><strong>Evidence:</strong></p>
-                                                <?php if ($evidence['type'] == "Image") { ?>
-                                                    <img src="<?php echo $evidence['path']; ?>" alt="evidence" style="width:100%;max-width:300px">
-                                                <?php } ?>
-                                                <?php if ($evidence['type'] == "doc") { ?>
-                                                    <a href="<?php echo $evidence['path']; ?>" target="_blank"><img src="../icons/Google_Docs_logo.png" alt="evidence" style="width:30px;"></a>
-                                                <?php } ?>
-                                                <?php if ($evidence['type'] == "audio") { ?>
-                                                    <audio controls>
-                                                        <source src="<?php echo $evidence['path']; ?>" type="audio/wav">
-                                                        Your browser does not support the audio tag.
-                                                    </audio>
-                                                <?php } ?>
-                                                <?php if ($evidence['type'] == "video") { ?>
-                                                    <video width="320" height="240" controls>
-                                                        <source src="<?php echo $evidence['path']; ?>" type="video/mp4">
-                                                        <source src="<?php echo $evidence['path']; ?>" type="video/mov">
-                                                        Your browser does not support the video tag.
-                                                    </video>
-                                                <?php } ?>
-                                            <?php }
-                                            ?>
-                                        </div>
-                                    <?php }
-                                    ?>
 
                                     <div class="card-body">
-                                        <label for="inputScore"><strong><span class="text-danger">*</span>Score 1-5</strong></label>
-                                        <select id="inputScore" class="form-control" name="inputScore<?php echo $count; ?>"
-                                                required>
-                                            <option value="" selected disabled>Please select a score</option>
-                                            <option title="<?php echo $question['oneMark']; ?>" value="1">1</option>
-                                            <option title="<?php echo $question['twoMark']; ?>" value="2">2</option>
-                                            <option title="<?php echo $question['threeMark']; ?>" value="3">3</option>
-                                            <option title="<?php echo $question['fourMark']; ?>" value="4">4</option>
-                                            <option title="<?php echo $question['fiveMark']; ?>" value="5">5</option>
-                                        </select>
-                                    </div>
-                                    <div class="card-body">
-                                        <p><strong><span class="text-danger">*</span>Comment on your score:</strong></p>
+                                        <p><strong><span class="text-danger">*</span>Answer the question:</strong></p>
                                         <div class="form-group shadow-textarea">
-                                            <label for="scoreAnswer"></label>
-                                            <textarea required class="form-control z-depth-1" id="scoreAnswer"
-                                                      name="inputComment<?php echo $count; ?>" rows="3"
-                                                      placeholder="Write your answer to the score you have given above here"></textarea>
+                                            <label for="answerQuestion"></label>
+                                            <textarea required class="form-control z-depth-1" id="answerQuestion"
+                                                      name="inputAnswer<?php echo $count; ?>" rows="3"
+                                                      placeholder="Write your answer to the question above"></textarea>
                                         </div>
                                     </div>
+
+                                    <div class="card-body">
+                                        <p><strong>Comment on your answer:</strong></p>
+                                        <div class="form-group shadow-textarea">
+                                            <label for="commentAnswer"></label>
+                                            <textarea required class="form-control z-depth-1" id="commentAnswer"
+                                                      name="inputComment<?php echo $count; ?>" rows="3"
+                                                      placeholder="Write your comment on answer you gave above"></textarea>
+                                        </div>
+                                    </div>
+
+
                                 <?php }
                             }
                         }
