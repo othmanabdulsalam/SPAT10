@@ -48,8 +48,23 @@ class AnswerQuery
         }
     }
 
-    public function submitAnswer($auditID,$answer)
+    /**
+     * @param String $auditID
+     * @param String $questionID
+     * @param String $content the text of the answer
+     */
+    public function submitAnswer($auditID,$questionID,$content)
     {
-        $this->database->update("INSERT INTO");
+        $this->database->update("INSERT INTO Answers (questionID, auditID, content) VALUES (\"$questionID\",\"$auditID\",\"$content\")");
+    }
+
+    /**
+     * @param String $auditID
+     * @param String $questionID
+     * @param String $comment the text of the comment
+     */
+    public function submitComment($auditID,$questionID,$comment)
+    {
+        $this->database->update("INSERT INTO AnswerComments (questionID, auditID, comment) VALUES (\"$questionID\",\"$auditID\",\"$comment\")");
     }
 }

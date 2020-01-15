@@ -35,12 +35,31 @@ class QuestionerQuery
         $this->userQuery = new UserQuery();
     }
 
-    public function submitAnswers($aduitID,$answers)
+
+    /**
+     * puts submitted comments and answers in database, submit as formatted below:
+     *
+     * (array) answers
+     *  [0..X]
+     *      (array) answer
+     *          'questionID'    => (String)
+     *          'content'       => (String) -content of the answer
+     *          'comment'       => (String/null) -comment for the answer, or null if no comment
+     *
+     * @param String $auditID audit these answers are for
+     * @param array $answers array of answers (arrays themselves)
+     */
+    public function submitAnswers($auditID,$answers)
     {
         foreach($answers as $answer)
         {
-
+            $this->answerQuery->submitAnswer($auditID,$answer['questionID'],$answer['content']); //create entry in Answers
+            if(isset($answer['comment'])) //if the answer has a comment
+            {
+                $this->answerQuery->submitComment($auditID,$answer['questionID'],$answer['comment']); //create entry in AnswerComments
+            }
         }
+        $this->auditQuery->flagAsComplete($auditID); //sets complete to true for audit in audit table
     }
 
     /**

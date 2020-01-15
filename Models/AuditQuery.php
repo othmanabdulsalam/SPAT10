@@ -91,4 +91,14 @@ class AuditQuery
     {
         return $this->database->retrieve("SELECT auditID,location,dateCreated FROM Audit WHERE completed = false");
     }
+
+    /**
+     * sets completed field to true for audit
+     *
+     * @param $auditID
+     */
+    public function flagAsComplete($auditID)
+    {
+        $this->database->update("UPDATE Audit SET completed = true WHERE auditID = \"$auditID\"");
+    }
 }
