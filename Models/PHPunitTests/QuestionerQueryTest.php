@@ -37,7 +37,7 @@ class QuestionerQueryTest extends TestCase
         $answer = [];
         $answer['questionID'] = 1;
         $answer['content'] = "answering text to do an answer";
-        $answer['comment'] = null; //no comment
+        $answer['comment'] = ""; //no comment
 
         $answers = [];
         array_push($answers,$answer);
