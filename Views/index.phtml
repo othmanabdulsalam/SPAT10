@@ -91,9 +91,7 @@ if(isset($_SESSION['loggedIn']) && ($_SESSION['accessLevel'] == 'C'))
 
         <?php
         $clientAudits = $view->clientAudits;
-        var_dump($clientAudits);
         $clientID = $view->clientID;
-        var_dump($clientID);
         foreach ($clientAudits as $ca)
         { ?>
             <form action="../Controllers/report.php" method="post">
