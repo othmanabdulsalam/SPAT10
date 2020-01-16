@@ -90,5 +90,36 @@
 
     }
 
+    //check is user is an admin
+    if(isset($_SESSION['userID']) && $_SESSION['accessLevel'] == 'A')
+    {
+        //check if createClient button is clicked
+        if(isset($_POST['createClient']))
+        {
+            //load createClient page
+            header('Location: /Controllers/createClient.php');
+        }
+        //check if createCategories button is clicked
+        if(isset($_POST['createCategories']))
+        {
+            //load createCategories page
+        }
+        //check if createSubCategories button is clicked
+        if(isset($_POST['createSubCategories']))
+        {
+            //load createSubCategories
+        }
+        //check if createQuestions button is clicked
+        if(isset($_POST['createQuestions']))
+        {
+            //load createQuestions
+        }
+        //check if createAudit button is clicked
+        if(isset($_POST['createAudit']))
+        {
+            //load createAudit page
+        }
+    }
+
     //phtml file for the index page
     require("Views/index.phtml");
