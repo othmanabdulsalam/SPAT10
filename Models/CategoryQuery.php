@@ -55,4 +55,15 @@ class CategoryQuery
     {
         return $this->database->retrieve("SELECT * FROM Categories");
     }
+
+    /**
+     *creates new categories
+     *
+     * @param String $catCode
+     * @param String $catDescription
+     */
+    public function createNewCategories($catCode,$catDescription)
+    {
+        $this->database->update("INSERT INTO Categories (catCode,catDescription) VALUES (\"$catCode\",\"$catDescription\")");
+    }
 }

@@ -57,4 +57,14 @@ class FlagQuery
     {
         $this->database->update("INSERT INTO QuestionFlags VALUES (\"$auditID\",\"$questionID\",\"$flagID\")");
     }
+
+    /**
+     * Creates a flg to assign to a question
+     *
+     * @param String $description
+     */
+    public function createNewFlag($description)
+    {
+        $this->database->update("INSERT INTO LegalFlags ($description) VALUES (\"$description\")");
+    }
 }
