@@ -119,6 +119,7 @@
         if(isset($_POST['createAudit']))
         {
             //load createAudit page
+            header('Location: /Controllers/createAudit.php');
         }
     }
 
