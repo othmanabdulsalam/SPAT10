@@ -96,7 +96,7 @@ class AuditCreationQuery
      *
      * @return array
      */
-    public function getAllQuestionsAndCategories()
+    private function getAllQuestionsAndCategories()
     {
         $categories = $this->categoryQuery->getAllCategories(); //gets all categories
         foreach($categories as &$category) //passing by reference
