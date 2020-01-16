@@ -119,15 +119,16 @@ class AuditCreationQuery
      *  [0..X]
      *      'questionID'    =>  (String)
      *
-     * (array) questionFlagIDs -empty array if no flags are assigned
+     * (array) questionFlags -empty array if no flags are assigned
      *  [0..X]
-     *      'flagID'    => (String)
+     *      'questionID'    => (String)
+     *      'flagID'        => (String)
      *
      *  @param String $clientID     client that owns audit
      *  @param String $location     audit location
      *  @param array $questionIDs   array of IDs of questions selected for audit
      */
-    public function submitAudit($clientID,$location,$questionIDs,$questionFLagIDs)
+    public function submitAudit($clientID,$location,$questionIDs,$questionFLags)
     {
         $auditID = $this->auditQuery->submitAudit($clientID,$location); //creates audit in DB and gets auditID
         //iterate through questionIDs and use auditID to create populate AuditQuestions
@@ -136,9 +137,9 @@ class AuditCreationQuery
 
             $this->questionQuery->submitQuestionToAudit($auditID,$questionID);
         }
-        foreach($questionFLagIDs as $questionFlagID) //links flags
+        foreach($questionFLags as $questionFlag) //links flags
         {
-            $this->flagQuery->linkFlag($auditID,$questionID,$questionFlagID);
+            $this->flagQuery->linkFlag($auditID,$questionFlag['questionID'],$questionFlag['flagID']);
         }
     }
 }
