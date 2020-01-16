@@ -122,7 +122,7 @@ class AuditCreationQuery
      *  @param String $location     audit location
      *  @param array $questionIDs   array of IDs of questions selected for audit
      */
-    public function submitAudit($clientID,$location,$questionIDs)
+    public function submitAudit($clientID,$location,$questionIDs,$questionFLags)
     {
         $auditID = $this->auditQuery->submitAudit($clientID,$location); //creates audit in DB and gets auditID
         //iterate through questionIDs and use auditID to create populate AuditQuestions
@@ -130,6 +130,10 @@ class AuditCreationQuery
         {
 
             $this->questionQuery->submitQuestionToAudit($auditID,$questionID);
+        }
+        foreach($questionFLags as $questionFlag)
+        {
+            $this->flagQuery->
         }
     }
 }
