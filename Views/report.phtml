@@ -5,7 +5,6 @@
 <div class="hidden">
 <?php
     $audit = $view->audit;
-    var_dump($audit);
 ?>
 </div>
 
@@ -57,23 +56,85 @@
                     </thead>
                     <tbody>
                     <!-- Recursive Loop 1 -->
-                    <?php   $categories = $audit['reportContent'];
-                            foreach($categories as $category) { ?>
-                        <tr class="table-secondary">
-                            <td><?php echo $category['catDescription'] ?></td> <!-- Pull the Category -->
-                            <td></td>
-                            <td><?php echo 'score' ?></td> <!-- Pull scores in category and if statement using % brackets. Red > Green -->
-                            <td><?php echo 'Compliant' ?></td>
+                    <?php
+                            $categories = $audit['reportContent'];
+                            foreach($categories as $category) {
+                    $totalScoreCount = 0;
+                    $totalQuestionCount = 0;?>
+
+                    <tr class="table-secondary">
+                        <td><?php echo $category['catDescription'] ?></td> <!-- Pull the Category -->
+                        <td></td>
+
+                        <?php $subCategories = $category['subCategories'];
+                        foreach ($subCategories as $subCategory) {
+                            $scoreCount = 0;
+                            $questions = $subCategory['questions'];
+                            foreach ($questions as $question) {
+                                $totalQuestionCount++;
+
+                                $answer = $question['answer'];
+                                $score = $answer['score'];
+                                $scoreCount += (int)$score['score'];
+
+                            }
+                            $totalScoreCount += $scoreCount;
+                        }
+                        ?>
+                        <td><?php $totalComplianceScore = round((($totalScoreCount / ($totalQuestionCount * 5)) * 100));
+                            echo $totalComplianceScore; ?>%
+                        </td> <!-- Pull scores in category and if statement using % brackets. Red > Green -->
+                        <td><?php if ($totalComplianceScore <= 24) {
+                                ?><l style="color: darkred;">Major Non-Compliance</l><?php
+                            } elseif ($totalComplianceScore <= 49) {
+                                ?><l style="color: red;">Minor Non-Compliance</l><?php
+                            } elseif ($totalComplianceScore <= 74) {
+                                ?><l style="color: orange;">Compliant</l><?php
+                            } elseif ($totalComplianceScore <= 99) {
+                                ?><l style="color: green;">Top Quartile</l><?php
+                            } else {
+                                ?><l style="color: lightgreen;">Best Practice</l><?php
+                            } ?></td>
                         </tr>
+
                         <!-- Recursive Loop 2 -->
-                        <?php   $subcategories = $category['subCategories'];
-                                foreach($subcategories as $subcategory) { ?>
+                        <?php   $subCategories = $category['subCategories'];
+                                foreach($subCategories as $subCategory) {
+                                    $scoreCount = 0;
+                                    $questionCount = 0; ?>
+
                             <tr>
                                 <td class="borderless"></td>
-                                <td><?php echo $subcategory['subCatDescription'] ?></td>
-                                <td><?php echo 'score' ?></td> <!-- if statement using % brackets. Red > Green -->
-                                <td><?php echo 'Compliant' ?>></td>
+                                <td><?php echo $subCategory['subCatDescription'] ?></td>
+                                <?php   $questions = $subCategory['questions'];
+                                    foreach($questions as $question) {
+                                        $questionCount++;
+
+                                        $answer = $question['answer'];
+                                        $score = $answer['score'];
+
+                                        $scoreCount += (int)$score['score'];
+                                   ?>
+
+                                <?php } ?>
+                                    <td>
+                              <?php  $complianceScore = round((($scoreCount / ($questionCount * 5)) * 100));
+                                        echo $complianceScore ?>%
+                                     </td>
+                                    <!-- if statement using % brackets. Red > Green -->
+                                <td><?php if ($complianceScore <= 24) {
+                                        ?><l style="color: darkred;">Major Non-Compliance</l><?php
+                                    } elseif ($complianceScore <= 49) {
+                                        ?><l style="color: red;">Minor Non-Compliance</l><?php
+                                    } elseif ($complianceScore <= 74) {
+                                        ?><l style="color: orange;">Compliant</l><?php
+                                    } elseif ($complianceScore <= 99) {
+                                        ?><l style="color: green;">Top Quartile</l><?php
+                                    } else {
+                                        ?><l style="color: lightgreen;">Best Practice</l><?php
+                                    } ?></td>
                             </tr>
+
                         <?php } ?>
                         <!-- END Recursive Loop 2 -->
                     <?php } ?>
