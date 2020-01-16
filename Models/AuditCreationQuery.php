@@ -119,7 +119,7 @@ class AuditCreationQuery
      *  [0..X]
      *      'questionID'    =>  (String)
      *
-     * (array) questionFlagIDs
+     * (array) questionFlagIDs -empty array if no flags are assigned
      *  [0..X]
      *      'flagID'    => (String)
      *
