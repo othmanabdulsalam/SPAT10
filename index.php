@@ -103,7 +103,7 @@
         if(isset($_POST['createCategories']))
         {
             //load createCategories page
-            header('Location: /Controllers/createCategories');
+            header('Location: /Controllers/createCategories.php');
         }
         //check if createSubCategories button is clicked
         if(isset($_POST['createSubCategories']))

@@ -11,3 +11,5 @@
     require_once('../Models/UserQuery.php');//require the userQuery class
 
     session_start();//start session
+
+require_once('../Views/createCategories.phtml');

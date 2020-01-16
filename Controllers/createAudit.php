@@ -13,4 +13,4 @@
 
     session_start();//start session
 
-
+require_once('../Views/createAudit.phtml');
