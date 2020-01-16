@@ -67,25 +67,7 @@ class QuestionQuery
         return $idArray;
     }
 
-    /**
-     * returns description of question flag, null if there isn't one
-     *
-     * @param $auditID
-     * @param $questionID
-     * @return mixed|null
-     */
-    public function getQuestionFlag($auditID,$questionID)
-    {
-        $resultTuple = $this->database->retrieve("SELECT description FROM QuestionFlag WHERE auditID = \"$auditID\" AND questionID = \"$questionID\"");
-        if(isset($resultTuple[0])) //if a flag exists
-        {
-            return $resultTuple[0]['description']; //return string
-        }
-        else
-        {
-            return null;
-        }
-    }
+
 
     /**
      * returns all questions which are children of subCategory in the form of an array

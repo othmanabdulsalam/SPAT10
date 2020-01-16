@@ -35,6 +35,16 @@ class AuditCreationQuery
         $this->userQuery = new UserQuery();
     }
 
+
+    public function getAllAuditCreationInfo()
+    {
+        $auditCreationinfo = [];
+        $auditCreationinfo['clients'] = $this->userQuery->getAllClients(); //gets every client, which the admin can select
+        $auditCreationinfo['questionsAndCategories'] = $this->getAllQuestionsAndCategories(); //gets datastructure of all categories, subCategories and questions
+        $auditCreationinfo['legalFLags'] =
+    }
+
+
     /**
      * returns all categories, their subCategories and their questions, in the following format:
      *
@@ -68,6 +78,7 @@ class AuditCreationQuery
         }
         return $categories;
     }
+
 
     /**
      * Creates audit and populates AuditQuestion with questionIDs in the following format:

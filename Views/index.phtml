@@ -117,21 +117,61 @@ if(isset($_SESSION['loggedIn']) && ($_SESSION['accessLevel'] == 'A'))
 {
     require_once('Views/template/header.phtml'); ?>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/index.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
     <div class="container">
         <h2>Admin Controls:</h2>
 
-            <form action="../Controllers/report.php" method="post">
+            <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">Create Categories</h4>
-                        <p class="card-text"></p>
-                        <input type=submit class="btn btn-outline-primary" name="create" value="Create">
+                        <div class="row">
+                            <div class="col-sm-1"></div>
+                            <div class="col-sm-4">
+                                <input type=submit class="btn btn-outline-primary btn-block btn-lg btn-t" name="createClient" value="Create Client">
+                            </div>
+                            <div class="col-sm-2"></div>
+                            <div class="col-sm-4">
+                                <input type=submit class="btn btn-outline-primary btn-block btn-lg btn-t" name="createCategories" value="Create Categories">
+                            </div>
+                            <div class="col-sm-1"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12"><br></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-1"></div>
+                            <div class="col-sm-4">
+                                <input type=submit class="btn btn-outline-primary btn-block btn-lg btn-t" name="createSubCategories" value="Create Sub-Categories">
+                            </div>
+                            <div class="col-sm-2"></div>
+                            <div class="col-sm-4">
+                                <input type=submit class="btn btn-outline-primary btn-block btn-lg btn-t" name="createQuestions" value="Create Questions">
+                            </div>
+                            <div class="col-sm-1"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12"><br></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-1"></div>
+                            <div class="col-sm-4">
+                                <input type=submit class="btn btn-outline-primary btn-block btn-lg btn-t" name="createAudit" value="Create Audit">
+                            </div>
+                            <div class="col-sm-2"></div>
+                            <div class="col-sm-4">
+                                <!-- <input type=submit class="btn btn-outline-primary btn-block btn-lg btn-t" name="create" value="Create"> -->
+                            </div>
+                            <div class="col-sm-1"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12"><br></div>
+                        </div>
                     </div>
-                </div></form>
-            <br/>
+                </div>
+            </form>
     </div>
 <?php }
 

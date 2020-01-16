@@ -27,7 +27,7 @@
     $incompleteAudit = $questionerQuery->getQuestionerInfo($auditID);//grab the specific audit the questioner wants to complete
     $view->incompleteAudit = $incompleteAudit;
 
-
+    //if questioner has pressed the answer questions button
     if(isset($_POST['answerQuestions']))
     {
         //create empty array
