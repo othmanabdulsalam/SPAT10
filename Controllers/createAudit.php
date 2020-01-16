@@ -9,8 +9,36 @@
 
     $view = new stdClass(); //creating a view
     $view->pageTitle = 'Create a new audit'; //giving tab a name
-    require_once('../Models/UserQuery.php');//require the userQuery class
+    require_once('../Models/AuditCreationQuery.php');//require the userQuery class
 
     session_start();//start session
 
+
+    //check if create audit button is set
+    //if(isset($_POST['createAudit']))
+    //{
+        //set audit's values
+        //$clientID = $_POST['clientID'];
+        //$questionIDArray = [];
+        //$questionIDCount = $_POST['questionIDCount'];
+        //for($i=0;$i<=$questionIDCount;$i++)
+        //{
+            //$questionID = $_POST['questionID'.$i];
+            //array_push($questionIDArray,$questionID);
+        //}
+        //$questionFlagArray = []
+        //$questionFlagCount = $_POST['questionFlagCount'];
+        //for($i=0;$i<=$questionFlagCount;$i++)
+        //{
+            //$questionFlag = []
+            //$questionFlag['questionID'] = $_POST['questionID'.$i];
+            //$questionFlag['flagID'] = $_POST['flagID'.$i];
+            //array_push($questionFlagArray,$questionFlag);
+        //}
+        //$location = $_POST['location'];
+        //some bullshit for the questionFlags array, idk still figuring that one out
+        //$auditCreationQuery = new AuditCreationQuery();
+        //$auditCreationQuery->submitAudit($clientID,$location,$questionIDArray,$questionFLagArray);
+        //header('Location: ../index.php');
+    //}
 require_once('../Views/createAudit.phtml');
