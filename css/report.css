@@ -30,3 +30,38 @@
 .hidden {
     display:none;
 }
+
+.tb-t {
+    border-left: none;
+    border-right: none;
+    border-bottom: none;
+}
+
+.tb-l {
+    border-top: none;
+    border-right: none;
+    border-bottom: none;
+}
+
+.tb-r {
+    border-top: none;
+    border-left: none;
+    border-bottom: none;
+}
+
+.tb-b {
+    border-top: none;
+    border-left: none;
+    border-right: none;
+}
+
+.tb-br {
+    border-top: none;
+    border-left: none;
+}
+
+.dark th {
+    color:#fff;
+    background-color:#343a40;
+    border-color:#454d55
+}

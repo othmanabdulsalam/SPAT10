@@ -40,6 +40,7 @@
             <div class="col-sm-3"></div>
         </div>
     </div>
+    <p class="break"></p>
     <p><br></p>
             <div class="row">
                 <div class="col-sm-12"></div>
@@ -93,7 +94,7 @@
                             } elseif ($totalComplianceScore <= 99) {
                                 ?><l style="color: green;">Top Quartile</l><?php
                             } else {
-                                ?><l style="color: lightgreen;">Best Practice</l><?php
+                                ?><l style="color: blue;">Best Practice</l><?php
                             } ?></td>
                         </tr>
 
@@ -131,7 +132,7 @@
                                     } elseif ($complianceScore <= 99) {
                                         ?><l style="color: green;">Top Quartile</l><?php
                                     } else {
-                                        ?><l style="color: lightgreen;">Best Practice</l><?php
+                                        ?><l style="color: blue;">Best Practice</l><?php
                                     } ?></td>
                             </tr>
 
@@ -146,4 +147,64 @@
 </div>
 <p class="break"></p>
 <h1>Addendum</h1>
+
+<div class="row">
+    <div class="col-sm-12"></div>
+</div>
+<div class="row">
+    <div class="col-sm-12">
+        <table class="table table-sm">
+            <?php
+            $categories = $audit['reportContent'];
+            foreach($categories as $category) {
+            $totalScoreCount = 0;
+            $totalQuestionCount = 0;?>
+                <tbody>
+            <tr>
+                <th class="thead-dark"><?php echo $category['catDescription'] ?></th>
+            </tr>
+
+                <!-- Recursive Loop 2 -->
+                <?php   $subCategories = $category['subCategories'];
+                foreach($subCategories as $subCategory) {
+                    ?>
+
+                    <tr>
+                        <th class="table-secondary"><?php echo $subCategory['subCatDescription'] ?></th>
+                    </tr>
+
+                        <?php   $questions = $subCategory['questions'];
+
+                        foreach($questions as $question) { ?>
+                           <tr>
+                            <td>
+                               <?php echo "Question: ".$question['questionContent'] ?>
+                           </td>
+                            </tr>
+                            <?php $answer = $question['answer']?>
+                            <tr>
+                                <td>
+                                    <?php echo "Answer: ".$answer['content'] ?>
+                                </td>
+                            </tr>
+                            <?php $score = $answer['score']?>
+                            <tr>
+                                <td>
+                                    <?php echo "Comment: ".$score['comment'] ?>
+                                </td>
+                            </tr>
+                             <tr>
+                                 <td class="blank">0</td>
+                             </tr>
+                        <?php } ?>
+                        <!-- if statement using % brackets. Red > Green -->
+                <?php } ?>
+                <!-- END Recursive Loop 2 -->
+                </tbody>
+            <?php } ?>
+            <!-- END Recursive Loop 1 -->
+
+        </table>
+    </div>
+</div>
 </html>
