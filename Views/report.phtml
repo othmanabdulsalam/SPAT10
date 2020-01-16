@@ -85,19 +85,16 @@
                             echo $totalComplianceScore; ?>%
                         </td> <!-- Pull scores in category and if statement using % brackets. Red > Green -->
                         <td><?php if ($totalComplianceScore <= 24) {
-                                echo "Major Non-Compliance";
+                                ?><l style="color: darkred;">Major Non-Compliance</l><?php
                             } elseif ($totalComplianceScore <= 49) {
-                                echo "Minor Non-Compliance";
+                                ?><l style="color: red;">Minor Non-Compliance</l><?php
                             } elseif ($totalComplianceScore <= 74) {
-                                echo "Compliant";
-                            } elseif ($totalComplianceScore <= 99)
-                            {
-                                echo "Top Quartile";
-                            }
-                            else
-                            {
-                                echo "Best Practice";
-                            }?></td>
+                                ?><l style="color: orange;">Compliant</l><?php
+                            } elseif ($totalComplianceScore <= 99) {
+                                ?><l style="color: green;">Top Quartile</l><?php
+                            } else {
+                                ?><l style="color: lightgreen;">Best Practice</l><?php
+                            } ?></td>
                         </tr>
 
                         <!-- Recursive Loop 2 -->
@@ -126,15 +123,15 @@
                                      </td>
                                     <!-- if statement using % brackets. Red > Green -->
                                 <td><?php if ($complianceScore <= 24) {
-                                        echo "Major Non-Compliance";
+                                        ?><l style="color: darkred;">Major Non-Compliance</l><?php
                                     } elseif ($complianceScore <= 49) {
-                                        echo "Minor Non-Compliance";
+                                        ?><l style="color: red;">Minor Non-Compliance</l><?php
                                     } elseif ($complianceScore <= 74) {
-                                        echo "Compliant";
+                                        ?><l style="color: orange;">Compliant</l><?php
                                     } elseif ($complianceScore <= 99) {
-                                        echo "Top Quartile";
+                                        ?><l style="color: green;">Top Quartile</l><?php
                                     } else {
-                                        echo "Best Practice";
+                                        ?><l style="color: lightgreen;">Best Practice</l><?php
                                     } ?></td>
                             </tr>
 

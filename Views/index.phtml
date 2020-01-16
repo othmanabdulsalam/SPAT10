@@ -43,14 +43,14 @@ if(!isset($_SESSION['loggedIn']))
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="fas fa-user"></i></span>
                                 </div>
-                                <input type="text" class="form-control" placeholder="username" name="username" value="<?php if (isset($_POST['username'])) {echo $_POST['username']; 	} ?>">
+                                <input required type="text" class="form-control" placeholder="username" name="username" value="<?php if (isset($_POST['username'])) {echo $_POST['username']; 	} ?>">
 
                             </div>
                             <div class="input-group form-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="fas fa-key"></i></span>
                                 </div>
-                                <input type="password" class="form-control" placeholder="password" name="password" value="<?php if (isset($_POST['password'])) {echo $_POST['password']; 	} ?>">
+                                <input required type="password" class="form-control" placeholder="password" name="password" value="<?php if (isset($_POST['password'])) {echo $_POST['password']; 	} ?>">
                             </div>
                             <div class="form-group">
                                 <?php if (isset($view->loginError)) : ?>
@@ -115,9 +115,25 @@ if(isset($_SESSION['loggedIn']) && ($_SESSION['accessLevel'] == 'C'))
 //Admin page
 if(isset($_SESSION['loggedIn']) && ($_SESSION['accessLevel'] == 'A'))
 {
-    require_once('Views/template/header.phtml');
+    require_once('Views/template/header.phtml'); ?>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <div class="container">
+        <h2>Admin Controls:</h2>
 
- }
+            <form action="../Controllers/report.php" method="post">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Create Categories</h4>
+                        <p class="card-text"></p>
+                        <input type=submit class="btn btn-outline-primary" name="create" value="Create">
+                    </div>
+                </div></form>
+            <br/>
+    </div>
+<?php }
 
 //Scorer page
 if(isset($_SESSION['loggedIn']) && ($_SESSION['accessLevel'] == 'S'))
