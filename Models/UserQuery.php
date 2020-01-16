@@ -24,4 +24,30 @@ class UserQuery
     {
         return $this->database->retrieve("SELECT username FROM Users Where userID = \"$userID\"")[0];
     }
+
+    /**
+     * Creates a client user with information provided
+     *
+     * @param String $username
+     * @param String $email
+     * @param String $passwordHash
+     */
+    public function createClient($username,$email,$passwordHash)
+    {
+        $this->createUser($username,$email,$passwordHash,"C"); //passes information to createUser
+    }
+
+    /**
+     * creates user using provided information
+     *
+     * @param $username
+     * @param $email
+     * @param $passwordHash
+     * @param $accessLevel
+     */
+    private function createUser($username,$email,$passwordHash,$accessLevel)
+    {
+        $this->database->update("INSERT INTO Users (username, passwordHash, email, accessLevel) VALUES(\"$username\",\"$passwordHash\",\"$email\",\"$accessLevel\")");
+    }
+
 }

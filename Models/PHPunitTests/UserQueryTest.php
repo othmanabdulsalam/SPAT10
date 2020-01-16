@@ -20,4 +20,11 @@ class UserQueryTest extends TestCase
         //var_dump($user);
         $this->assertTrue($user['username'] == "admin");
     }
+    
+    public function testCreateClient()
+    {
+        $userQuery = new UserQuery();
+        $userQuery->createClient("TestClient","TestClient@example.com","examplePassWordHash");
+        $this->assertTrue(true);
+    }
 }

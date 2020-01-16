@@ -103,4 +103,15 @@ class QuestionQuery
     {
         return $this->database->retrieve("SELECT questionID, questionContent FROM Questions WHERE subCatID = \"$subcatID\"");
     }
+
+    /**
+     * Creates an entry in AuditQuestion linking the audit with the question supplied
+     *
+     * @param String $auditID
+     * @param String $questionID
+     */
+    public function submitQuestionToAudit($auditID,$questionID)
+    {
+        $this->database->update("INSERT INTO AuditQuestions VALUES(\"$auditID\",\"$questionID\")");
+    }
 }

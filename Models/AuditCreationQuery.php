@@ -68,4 +68,26 @@ class AuditCreationQuery
         }
         return $categories;
     }
+
+    /**
+     * Creates audit and populates AuditQuestion with questionIDs in the following format:
+     *
+     * (array) questionIDs
+     *  [0..X]
+     *      'questionID'    =>  (String) -name of index does not matter
+     *
+     *  @param String $clientID     client that owns audit
+     *  @param String $location     audit location
+     *  @param array $questionIDs   array of IDs of questions selected for audit
+     */
+    public function submitAudit($clientID,$location,$questionIDs)
+    {
+        $auditID = $this->auditQuery->submitAudit($clientID,$location); //creates audit in DB and gets auditID
+        //iterate through questionIDs and use auditID to create populate AuditQuestions
+        foreach($questionIDs as $questionID)
+        {
+
+            $this->questionQuery->submitQuestionToAudit($auditID,$questionID);
+        }
+    }
 }

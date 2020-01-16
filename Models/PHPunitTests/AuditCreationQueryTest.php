@@ -27,4 +27,19 @@ class AuditCreationQueryTest extends TestCase
         var_dump($result[3]['subCategories'][2]['questions']);
         $this->assertTrue(true);
     }
+
+    public function testSubmitAudit()
+    {
+        $auditCreationQuery = new AuditCreationQuery();
+        $clientID = 1;
+        $location = "The place with lots of oil";
+        $questionIDs = [];
+        $questionIDs[0] = 1;
+        $questionIDs[1] = 2;
+        $questionIDs[2] = 3;
+        $questionIDs[3] = 4;
+        $questionIDs[4] = 5;
+        $auditCreationQuery->submitAudit($clientID,$location,$questionIDs);
+        $this->assertTrue(true);
+    }
 }

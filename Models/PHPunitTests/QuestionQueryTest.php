@@ -27,4 +27,11 @@ class QuestionQueryTest extends TestCase
         $questionList = $questionQuery->getQuestionIDs(2);
         $this->assertTrue($questionList[0] == 1);
     }
+
+    public function testSubmitQuestionToAudit()
+    {
+        $questionQuery = new QuestionQuery();
+        $questionQuery->submitQuestionToAudit(5,2);
+        $this->assertTrue(true);
+    }
 }

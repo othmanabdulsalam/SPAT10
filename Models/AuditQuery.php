@@ -101,4 +101,18 @@ class AuditQuery
     {
         $this->database->update("UPDATE Audit SET completed = true WHERE auditID = \"$auditID\"");
     }
+
+    /**
+     * creates audit in db using provided information.
+     * returns ID of audit that it creates.
+     *
+     * @param String $clientID
+     * @param String $location
+     * @return int ID of audit just created
+     */
+    public function submitAudit($clientID,$location)
+    {
+        $this->database->update("INSERT INTO Audit (clientID,location,dateCreated) VALUES(\"$clientID\",\"$location\", NOW())"); //creates Audit Entry
+        return $this->database->retrieve("SELECT auditID FROM Audit ORDER BY auditID DESC LIMIT 1")[0]['auditID']; // returns the ID of the last inserted audit
+    }
 }
