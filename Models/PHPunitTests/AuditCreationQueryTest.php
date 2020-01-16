@@ -31,7 +31,7 @@ class AuditCreationQueryTest extends TestCase
     public function testSubmitAudit()
     {
         $auditCreationQuery = new AuditCreationQuery();
-        $clientID = 1;
+        $clientID = 4;
         $location = "The place with lots of oil";
         $questionIDs = [];
         $questionIDs[0] = 1;

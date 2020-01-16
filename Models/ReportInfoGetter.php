@@ -13,6 +13,7 @@ require_once __DIR__."/SubCatQuery.php";
 require_once __DIR__."/CategoryQuery.php";
 require_once __DIR__."/AnswerQuery.php";
 require_once __DIR__."/ScoreQuery.php";
+require_once __DIR__."/FlagQuery.php";
 
 
 class ReportInfoGetter
@@ -24,6 +25,7 @@ class ReportInfoGetter
     private $categoryQuery;
     private $answerQuery;
     private $scoreQuery;
+    private $flagQuery;
 
     public function __construct()
     {
@@ -34,6 +36,7 @@ class ReportInfoGetter
         $this->categoryQuery = new CategoryQuery();
         $this->answerQuery = new AnswerQuery();
         $this->scoreQuery = new ScoreQuery();
+        $this->flagQuery = new FlagQuery();
     }
 
 
@@ -102,7 +105,7 @@ class ReportInfoGetter
 
         foreach($categories as &$category) //passing category by reference so it can be changes
         {
-            $category['subCategories'] = $this->subCatQuery->getSubCategories($category['catID'],ajoin(",",$subCatIDs)); //puts array of subcategories into category
+            $category['subCategories'] = $this->subCatQuery->getSubCategories($category['catID'],join(",",$subCatIDs)); //puts array of subcategories into category
             foreach($category['subCategories'] as &$subCategory) //for each subCategory
             {
                 $subCategory['questions'] = $this->questionQuery->getSubCatAuditQuestions($auditID,$subCategory['subCatID']); //gets questions from subCat that appear in query and put them in questions array
@@ -110,7 +113,7 @@ class ReportInfoGetter
                 {
                     $question['answer'] = $this->answerQuery->getAnswer($auditID,$question['questionID']); //gets answer for question
                     $question['answer']['score'] = $this->scoreQuery->getScore($auditID,$question['questionID']); //gets score tuple for answer
-                    $question['legalFlag'] = $this->questionQuery->getQuestionFlag($auditID, $question['questionID']); //gets QuestionFlag if one exists
+                    $question['legalFlag'] = $this->flagQuery->getQuestionFlag($auditID, $question['questionID']); //gets QuestionFlag if one exists
                 }
             }
         }

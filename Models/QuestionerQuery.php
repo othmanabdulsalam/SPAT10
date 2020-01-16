@@ -13,6 +13,7 @@ require_once __DIR__."/AnswerQuery.php";
 require_once __DIR__."/EvidenceQuery.php";
 require_once __DIR__."/QuestionQuery.php";
 require_once __DIR__."/UserQuery.php";
+require_once __DIR__."/FlagQuery.php";
 
 class QuestionerQuery
 {
@@ -23,6 +24,7 @@ class QuestionerQuery
     private $evidenceQuery;
     private $questionQuery;
     private $userQuery;
+    private $flagQuery;
 
     public function __construct()
     {
@@ -33,6 +35,7 @@ class QuestionerQuery
         $this->evidenceQuery = new EvidenceQuery();
         $this->questionQuery = new QuestionQuery();
         $this->userQuery = new UserQuery();
+        $this->flagQuery = new FlagQuery();
     }
 
 
@@ -132,7 +135,7 @@ class QuestionerQuery
                 $subCategory['questions'] = $this->questionQuery->getSubCatAuditQuestions($auditID,$subCategory['subCatID']); //gets questions from subCat that appear in query and put them in questions array
                 foreach($subCategory['questions'] as &$question) //for each question
                 {
-                    $question['legalFlag'] = $this->questionQuery->getQuestionFlag($auditID,$question['questionID']); //gets flag for question or null
+                    $question['legalFlag'] = $this->flagQuery->getQuestionFlag($auditID,$question['questionID']); //gets flag for question or null
                 }
             }
         }

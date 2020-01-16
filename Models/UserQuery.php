@@ -50,4 +50,19 @@ class UserQuery
         $this->database->update("INSERT INTO Users (username, passwordHash, email, accessLevel) VALUES(\"$username\",\"$passwordHash\",\"$email\",\"$accessLevel\")");
     }
 
+    /**
+     * Returns array of client tuples in the following format:
+     * (array) Clients
+     *  [0..X]
+     *      'userID'    => (String)
+     *      'username'  => (String)
+     *
+     *
+     * @return array
+     */
+    public function getAllClients()
+    {
+        return $this->database->retrieve("SELECT UserID, username FROM Users WHERE accessLevel = \"C\" ");
+    }
+
 }

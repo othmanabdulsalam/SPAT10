@@ -13,6 +13,7 @@ require_once __DIR__."/CategoryQuery.php";
 require_once __DIR__."/AnswerQuery.php";
 require_once __DIR__."/ScoreQuery.php";
 require_once __DIR__."/EvidenceQuery.php";
+require_once __DIR__."/FlagQuery.php";
 
 class ScoringInfoGetter
 {
@@ -24,6 +25,7 @@ class ScoringInfoGetter
     private $answerQuery;
     private $scoreQuery;
     private $evidenceQuery;
+    private $flagQuery;
 
     public function __construct()
     {
@@ -35,6 +37,7 @@ class ScoringInfoGetter
         $this->answerQuery = new AnswerQuery();
         $this->scoreQuery = new ScoreQuery();
         $this->evidenceQuery = new EvidenceQuery();
+        $this->flagQuery = new FlagQuery();
     }
 
 
@@ -116,7 +119,7 @@ class ScoringInfoGetter
                     $question['answer'] = $this->answerQuery->getAnswer($auditID,$question['questionID']); //gets answer for question
                     $question['answer']['comment'] = $this->answerQuery->getComment($auditID,$question['questionID']); //gets comment for answer (null if no comment)
                     $question['answer']['evidence'] = $this->evidenceQuery->getEvidence($auditID,$question['questionID']); //gets array of tuples from evidence table or null
-                    $question['legalFlag'] = $this->questionQuery->getQuestionFlag($auditID,$question['questionID']); //gets flag for question or null
+                    $question['legalFlag'] = $this->flagQuery->getQuestionFlag($auditID,$question['questionID']); //gets flag for question or null
                 }
             }
         }
