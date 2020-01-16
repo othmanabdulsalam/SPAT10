@@ -46,6 +46,13 @@ class FlagQuery
         return $this->database->retrieve("SELECT * FROM LegalFlags");
     }
 
+    /**
+     * Takes info and creates an entry in the QuestionFlags link table
+     *
+     * @param $auditID
+     * @param $questionID
+     * @param $flagID
+     */
     public function linkFlag($auditID,$questionID,$flagID)
     {
         $this->database->update("INSERT INTO QuestionFlags VALUES (\"$auditID\",\"$questionID\",\"$flagID\")");

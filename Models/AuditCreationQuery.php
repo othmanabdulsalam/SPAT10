@@ -112,28 +112,33 @@ class AuditCreationQuery
 
 
     /**
-     * Creates audit and populates AuditQuestion with questionIDs in the following format:
+     * Creates audit and populates AuditQuestion with questionIDs and questionFlagIDs
+     * in the following format:
      *
      * (array) questionIDs
      *  [0..X]
-     *      'questionID'    =>  (String) -name of index does not matter
+     *      'questionID'    =>  (String)
+     *
+     * (array) questionFlagIDs
+     *  [0..X]
+     *      'flagID'    => (String)
      *
      *  @param String $clientID     client that owns audit
      *  @param String $location     audit location
      *  @param array $questionIDs   array of IDs of questions selected for audit
      */
-    public function submitAudit($clientID,$location,$questionIDs,$questionFLags)
+    public function submitAudit($clientID,$location,$questionIDs,$questionFLagIDs)
     {
         $auditID = $this->auditQuery->submitAudit($clientID,$location); //creates audit in DB and gets auditID
         //iterate through questionIDs and use auditID to create populate AuditQuestions
-        foreach($questionIDs as $questionID)
+        foreach($questionIDs as $questionID) //links questions
         {
 
             $this->questionQuery->submitQuestionToAudit($auditID,$questionID);
         }
-        foreach($questionFLags as $questionFlag)
+        foreach($questionFLagIDs as $questionFlagID) //links flags
         {
-            $this->flagQuery->
+            $this->flagQuery->linkFlag($auditID,$questionID,$questionFlagID);
         }
     }
 }
