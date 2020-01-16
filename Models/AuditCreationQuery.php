@@ -13,6 +13,7 @@ require_once __DIR__."/AnswerQuery.php";
 require_once __DIR__."/EvidenceQuery.php";
 require_once __DIR__."/QuestionQuery.php";
 require_once __DIR__."/UserQuery.php";
+require_once __DIR__."/FlagQuery.php";
 
 class AuditCreationQuery
 {
@@ -23,6 +24,7 @@ class AuditCreationQuery
     private $evidenceQuery;
     private $questionQuery;
     private $userQuery;
+    private $flagQuery;
 
     public function __construct()
     {
@@ -33,15 +35,44 @@ class AuditCreationQuery
         $this->evidenceQuery = new EvidenceQuery();
         $this->questionQuery = new QuestionQuery();
         $this->userQuery = new UserQuery();
+        $this->flagQuery = new FlagQuery();
     }
 
 
+    /**
+     * This method provides an API to get all information needed for an admin to
+     * create an audit, it is returned in the following format:
+     *
+     * (array) auditCreationInfo
+     *  'clients'
+     *     [0..X]
+     *         'userID'    =>   (String)
+     *         'username'  =>   (String)
+     *  'questionsAndCategories' => (array) Categories
+     *                                  [0..X]
+     *                                      'catID'             =>  (String)
+     *                                      'catCode'           =>  (String)
+     *                                      'catDescription'    =>  (String)
+     *                                      'subCategories'     =>  (array) subCategories
+     *                                                                  [0..X]
+     *                                                                      'subCatID'          =>  (String)
+     *                                                                      'subCatCode'        =>  (String)
+     *                                                                      'subCatDescription' =>  (String)
+     *                                                                      'questions'         =>  (array) questions
+     *                                                                                                  [0..X]
+     *                                                                                                      'questionID'       =>  (String)
+     *                                                                                                      'questionContent'  =>  (String)
+     * 'legalFLags' => (array) legalFlags
+     *                  [0..X]
+     *                      'flagID'    => (String)
+     *                      'Content'   => (String)
+     */
     public function getAllAuditCreationInfo()
     {
         $auditCreationinfo = [];
         $auditCreationinfo['clients'] = $this->userQuery->getAllClients(); //gets every client, which the admin can select
         $auditCreationinfo['questionsAndCategories'] = $this->getAllQuestionsAndCategories(); //gets datastructure of all categories, subCategories and questions
-        $auditCreationinfo['legalFLags'] =
+        $auditCreationinfo['legalFLags'] = $this->flagQuery->getAllFlags(); //gets all flags
     }
 
 
