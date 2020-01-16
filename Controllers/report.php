@@ -23,6 +23,7 @@
     //instantiate dompdf object
     $dompdf = new Dompdf();
 
+    $dompdf->set_option('isHtml5ParserEnabled', true);
     ob_start();
     //grab the auditID
     $auditID = $_POST['audit'];

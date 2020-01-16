@@ -13,8 +13,10 @@
     session_start();//start session
 
     //if admin presses create client account
-    //{
+    if(isset($_POST['makeClient']))
+    {
         //grab all the information from the page
+        
         //hash the two passwords
         //check if hashed passwords do not match
         //{
@@ -27,7 +29,7 @@
             //pass the client details to the createClient query
             //load the index page again
         //}
-    //}
+    }
 
 
     //require the createClient phtml file
