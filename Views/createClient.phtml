@@ -6,10 +6,40 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-    <link rel='stylesheet' type='text/css' href='../css/scoringAndQuestioningStyle.php'/>
+    <link rel='stylesheet' type='text/css' href='../css/admin.css'/>
 
     <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
-        So this will be the create client page. As you can see, there's nothing to see
+       <div class="clientBackground">
+           <div class="container">
+        <div class="card">
+            <div class="card-body">
+                <div class="form-group">
+                    <label for="inputUsername">Username</label>
+                    <input name="username" value="<?php if (isset($_POST['username'])) {echo $_POST['username']; 	} ?>" required type="text" class="form-control" id="inputUsername" placeholder="Enter Username">
+                </div>
+                <div class="form-group">
+                    <label for="inputEmail">Email address</label>
+                    <input name="email" value="<?php if (isset($_POST['email'])) {echo $_POST['email']; 	} ?>" required type="email" class="form-control"  id="inputEmail" placeholder="Enter email">
+                </div>
+                <div class="form-group">
+                    <label for="inputPassword1">Password</label>
+                    <input name="password" value="<?php if (isset($_POST['password'])) {echo $_POST['password']; 	} ?>"  required type="password" class="form-control" id="inputPassword1" placeholder="Password">
+                </div>
+                <div class="form-group">
+                    <label for="inputPassword2">Re-enter the password</label>
+                    <input name="passwordCheck" value="<?php if (isset($_POST['passwordCheck'])) {echo $_POST['passwordCheck']; 	} ?>" required type="password" class="form-control" id="inputPassword2" placeholder="Password">
+                </div>
+                <div class="form-group">
+                    <?php if (isset($view->passwordNoMatch)) : ?>
+                        <p id="errormessage"><?php echo $view->passwordNoMatch; ?></p>
+                    <?php endif; ?>
+                </div>
+                <button type="submit" name="makeClient" class="btn btn-primary">Submit</button>
+            </div>
+
+        </div>
+       </div>
+       </div>
     </form>
 
 <?php require_once('../Views/template/footer.phtml');

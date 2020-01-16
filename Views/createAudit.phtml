@@ -1,1 +1,54 @@
 <?php
+require_once('../Views/template/header.phtml'); ?>
+
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <link rel='stylesheet' type='text/css' href='../css/admin.css'/>
+
+    <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+        <div class="auditBackground">
+            <div class="container">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label for="inputScore"> Client: </label>
+                           <select id="inputScore" class="form-control" name="inputScore" required>
+                                <option value="" selected disabled>Please select a client</option>
+                                <option title="" value="1">Hard Coded Client</option>
+                                <option title="" value="2">Hard Coded Client</option>
+                                <option title="" value="3">Hard Coded Client</option>
+                                <option title="" value="4">Hard Coded Client</option>
+                                <option title="" value="5">Hard Coded Client</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <div>
+                                <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+                                <script src="//code.jquery.com/jquery-1.9.1.js"></script>
+                                <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+                                <label>Date:</label>
+                                <input class="form-control" required type="text" name="date" id="datepicker" value="<?php if (isset($_POST['date'])) {echo $_POST['date']; 	} ?>" placeholder="Please select a date" />
+
+                                <script>
+                                    $("#datepicker").datepicker();
+                                </script>
+                            </div>
+
+                        </div>
+                        <div class="form-group">
+                            <label for="inputLocation"> Location: </label>
+                        <input name="location" value="<?php if (isset($_POST['location'])) {echo $_POST['location']; 	} ?>" required type="text" class="form-control"  id="inputLocation" placeholder="Enter location of audit">
+                        </div>
+                        
+                        <button type="submit" name="makeAudit" class="btn btn-primary">Submit</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </form>
+
+<?php require_once('../Views/template/footer.phtml');

@@ -25,22 +25,22 @@
         <li class="nav-item">
             <?php if(isset($_SESSION['loggedIn']) && ($_SESSION['accessLevel'] == 'A'))
             {?>
-                <a class="nav-link">You are logged in as Admin</a>
+                <a class="nav-link">You are logged in as <?php echo $_SESSION['username'];?></a>
                 <?php
             }
             if(isset($_SESSION['loggedIn']) && ($_SESSION['accessLevel'] == 'C'))
             {?>
-                <a class="nav-link">You are logged in as Client</a>
+                <a class="nav-link">You are logged in as <?php echo $_SESSION['username'];?></a>
                 <?php
             }
             if(isset($_SESSION['loggedIn']) && ($_SESSION['accessLevel'] == 'S'))
             {?>
-                <a class="nav-link">You are logged in as Scorer</a>
+                <a class="nav-link">You are logged in as <?php echo $_SESSION['username'];?></a>
                 <?php
             }
             if(isset($_SESSION['loggedIn']) && ($_SESSION['accessLevel'] == 'Q'))
             {?>
-                <a class="nav-link">You are logged in as Questioner</a>
+                <a class="nav-link">You are logged in as <?php echo $_SESSION['username'];?></a>
                 <?php
             }
             ?>

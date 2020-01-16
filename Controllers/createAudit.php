@@ -13,6 +13,7 @@
 
     session_start();//start session
 
+
     //check if create audit button is set
     //if(isset($_POST['createAudit']))
     //{
@@ -40,3 +41,4 @@
         //$auditCreationQuery->submitAudit($clientID,$location,$questionIDArray,$questionFLagArray);
         //header('Location: ../index.php');
     //}
+require_once('../Views/createAudit.phtml');

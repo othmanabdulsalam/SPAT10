@@ -81,7 +81,7 @@ require_once('../Views/template/header.phtml'); ?>
                                 foreach ($evidences as $evidence) { ?>
 
                                     <p><strong>Evidence:</strong></p>
-                                    <?php if ($evidence['type'] == "Image") { ?>
+                                    <?php if ($evidence['type'] == "image") { ?>
                                         <a href="<?php echo $evidence['path']; ?>" target="_blank"><img src="<?php echo $evidence['path']; ?>" alt="evidence" style="width:100%;max-width:300px"></a>
                                     <?php } ?>
                                      <?php if ($evidence['type'] == "doc") { ?>

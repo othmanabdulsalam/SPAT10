@@ -1,0 +1,31 @@
+
+ .clientBackground {
+      background-color: #015A82;
+      height: 92.9vh;
+      padding-top: 15vh;
+  }
+ .categoryBackground {
+     background-color: #015A82;
+     height: 92.9vh;
+     padding-top: 15vh;
+ }
+ .subCategoryBackground {
+     background-color: #015A82;
+     height: 92.9vh;
+     padding-top: 15vh;
+ }
+ .auditBackground {
+      background-color: #015A82;
+     height: 92.9vh;
+      padding-top: 15vh;
+  }
+
+
+.scorerSeparation {
+    border-width: 4px;
+    border-color: #015A82;
+}
+
+ .form-group #errormessage{
+     color: red;
+ }
