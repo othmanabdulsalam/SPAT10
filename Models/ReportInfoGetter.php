@@ -102,7 +102,7 @@ class ReportInfoGetter
 
         foreach($categories as &$category) //passing category by reference so it can be changes
         {
-            $category['subCategories'] = $this->subCatQuery->getSubCategories($category['catID'],ajoin(",",$subCatIDs)); //puts array of subcategories into category
+            $category['subCategories'] = $this->subCatQuery->getSubCategories($category['catID'],join(",",$subCatIDs)); //puts array of subcategories into category
             foreach($category['subCategories'] as &$subCategory) //for each subCategory
             {
                 $subCategory['questions'] = $this->questionQuery->getSubCatAuditQuestions($auditID,$subCategory['subCatID']); //gets questions from subCat that appear in query and put them in questions array
