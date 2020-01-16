@@ -41,4 +41,4 @@
 
 
     //require the createClient phtml file
-    //require_once('../Views/createClient.phtml');
+    require_once('../Views/createClient.phtml');
