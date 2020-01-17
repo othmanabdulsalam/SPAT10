@@ -111,11 +111,11 @@ require_once('../Views/template/header.phtml'); ?>
                             <select id="inputScore" class="form-control" name="inputScore<?php echo $count; ?>"
                                     required>
                                 <option value="" selected disabled>Please select a score</option>
-                                <option title="<?php echo $question['oneMark']; ?>" value="1">1</option>
-                                <option title="<?php echo $question['twoMark']; ?>" value="2">2</option>
-                                <option title="<?php echo $question['threeMark']; ?>" value="3">3</option>
-                                <option title="<?php echo $question['fourMark']; ?>" value="4">4</option>
-                                <option title="<?php echo $question['fiveMark']; ?>" value="5">5</option>
+                                <option value="1">1- <?php echo $question['oneMark']; ?></option>
+                                <option value="2">2- <?php echo $question['twoMark']; ?></option>
+                                <option value="3">3- <?php echo $question['threeMark']; ?></option>
+                                <option value="4">4- <?php echo $question['fourMark']; ?></option>
+                                <option value="5">5- <?php echo $question['fiveMark']; ?></option>
                             </select>
                         </div>
                         <div class="card-body">
