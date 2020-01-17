@@ -8,7 +8,8 @@
 
     $view = new stdClass(); //creating the view
     $view->pageTitle = 'Questions'; //giving tab a name
-    require_once('../Models/QuestionerQuery.php'); //for querying the audits that need to be displayed
+    require_once('../Models/QuestionerQuery.php'); //for querying the audits that need to be displayed#
+    require_once('../Models/EvidenceProcessor.php');
 
     session_start();//start session
     //someone else did this, not exactly sure why but it works i guess
@@ -30,6 +31,7 @@
     //if questioner has pressed the answer questions button
     if(isset($_POST['answerQuestions']))
     {
+        $evidenceProcessor = new EvidenceProcessor();
         //create empty array
         $arrayQuestionerCompleted = [];
         //grab the count from the phtml
@@ -42,9 +44,18 @@
             $questionArray['questionID'] = $_POST['questionID'.$i];
             $questionArray['content'] = $_POST['inputAnswer'.$i];
             $questionArray['comment'] = $_POST['inputComment'.$i];
+            //check if evidence has been submitted
+            if(isset($_FILES['file'.$i]))
+            {
+                $evidenceProcessor->submitEvidence($auditID,$questionArray['questionID'],$_FILES['file'.$i]);
+            }
             //push into the larger array that will store everything from the page
             array_push($arrayQuestionerCompleted,$questionArray);
+
+            $evidenceArray = [];
+
         }
+
 
         //pass to query to update the database
         $questionerQuery->submitAnswers($auditID,$arrayQuestionerCompleted);
