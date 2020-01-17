@@ -51,7 +51,7 @@ class SubCatQuery
      * @param $catID
      * @return array of SubCategory Tuples (- catID)
      */
-    public function getAllSubcategories($catID)
+    public function getAllSubcategory($catID)
     {
         return $this->database->retrieve("SELECT subCatID, subCatCode, subCatDescription FROM SubCategories WHERE catID = \"$catID\"");
     }

@@ -30,4 +30,10 @@ class CategoryQueryTest extends TestCase
         var_dump($result);
         self::assertTrue($result[0]["catID"] == 1);
     }
+    public function testCreateNewCategories()
+    {
+        $categoryQuery = new CategoryQuery();
+        $categoryQuery->createNewCategories("bbb","lol");
+        $this->assertTrue(true);
+    }
 }
