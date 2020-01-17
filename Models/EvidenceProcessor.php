@@ -33,7 +33,7 @@ class EvidenceProcessor
 //        }
         $numberExtension = $this->evidenceQuery->getNumEvidence($type)+1; //number of (eg) videos already present +1 (ensures no file name conflicts)
         $fileName = $type.$numberExtension;
-        $a=1;
+        move_uploaded_file();
 
     }
 

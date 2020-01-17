@@ -46,7 +46,7 @@ class EvidenceQuery
      */
     public function getNumEvidence($type)
     {
-        $result = $this->database->retrieve("SELECT COUNT(evidenceID) FROM Evidence WHERE type = \"$type\"")[0][0];
-        return $result;
+        return $this->database->retrieve("SELECT COUNT(evidenceID) FROM Evidence WHERE type = \"$type\"")[0]['COUNT(evidenceID)'];
+
     }
 }
