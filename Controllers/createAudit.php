@@ -12,7 +12,9 @@
     require_once('../Models/AuditCreationQuery.php');//require the userQuery class
 
     session_start();//start session
-
+$auditCreationQuery = new AuditCreationQuery();//create AuditQuery object
+$auditInfo = $auditCreationQuery->getAllAuditCreationInfo();//grab the specific audit the questioner wants to complete
+$view->auditInfo = $auditInfo;
 
     //check if create audit button is set
     //if(isset($_POST['createAudit']))
@@ -36,9 +38,8 @@
             //array_push($questionFlagArray,$questionFlag);
         //}
         //$location = $_POST['location'];
-        //some bullshit for the questionFlags array, idk still figuring that one out
         //$auditCreationQuery = new AuditCreationQuery();
-        //$auditCreationQuery->submitAudit($clientID,$location,$questionIDArray,$questionFLagArray);
+        //$auditCreationQuery->submitAudit($clientID,$location,$questionIDArray,$questionFlagArray);
         //header('Location: ../index.php');
     //}
 require_once('../Views/createAudit.phtml');

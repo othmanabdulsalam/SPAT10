@@ -24,23 +24,15 @@ require_once('../Views/template/header.phtml'); ?>
                                 <option title="" value="5">Hard Coded Client</option>
                             </select>
                         </div>
-                        <div class="form-group">
-                            <div>
-                                <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
-                                <script src="//code.jquery.com/jquery-1.9.1.js"></script>
-                                <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
-                                <label>Date:</label>
-                                <input class="form-control" required type="text" name="date" id="datepicker" value="<?php if (isset($_POST['date'])) {echo $_POST['date']; 	} ?>" placeholder="Please select a date" />
 
-                                <script>
-                                    $("#datepicker").datepicker();
-                                </script>
-                            </div>
-
-                        </div>
                         <div class="form-group">
                             <label for="inputLocation"> Location: </label>
                         <input name="location" value="<?php if (isset($_POST['location'])) {echo $_POST['location']; 	} ?>" required type="text" class="form-control"  id="inputLocation" placeholder="Enter location of audit">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="inputLocation"> Location: </label>
+                            <input name="location" value="<?php if (isset($_POST['location'])) {echo $_POST['location']; 	} ?>" required type="text" class="form-control"  id="inputLocation" placeholder="Enter location of audit">
                         </div>
                         
                         <button type="submit" name="makeAudit" class="btn btn-primary">Submit</button>

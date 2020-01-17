@@ -109,6 +109,7 @@
         if(isset($_POST['createSubCategories']))
         {
             //load createSubCategories
+            header('Location: /Controllers/createSubCategories.php');
         }
         //check if createQuestions button is clicked
         if(isset($_POST['createQuestions']))
