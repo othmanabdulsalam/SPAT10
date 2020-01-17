@@ -96,4 +96,20 @@ class QuestionQuery
     {
         $this->database->update("INSERT INTO AuditQuestions VALUES(\"$auditID\",\"$questionID\")");
     }
+
+    /**
+     * creates a new question
+     *
+     * @param String $questionContent
+     * @param int $subCatID
+     * @param String $oneMark
+     * @param String $twoMark
+     * @param String $threeMark
+     * @param String $fourMark
+     * @param String $fiveMark
+     */
+    public function createNewQuestions($questionContent,$subCatID,$oneMark,$twoMark,$threeMark,$fourMark,$fiveMark)
+    {
+        $this->database->update("INSERT INTO Questions (questionContent,subCatID,oneMark,twoMark,threeMark,fourMark,fiveMark) VALUES (\"$questionContent\",\"$subCatID\",\"$oneMark\",\"$twoMark\",\"$threeMark\",\"$fourMark\",\"$fiveMark\")");
+    }
 }

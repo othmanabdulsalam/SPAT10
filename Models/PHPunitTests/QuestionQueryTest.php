@@ -34,4 +34,11 @@ class QuestionQueryTest extends TestCase
         $questionQuery->submitQuestionToAudit(5,2);
         $this->assertTrue(true);
     }
+
+    public function testCreateNewQuestions()
+    {
+        $questionQuery = new QuestionQuery();
+        $questionQuery->createNewQuestions("lol",2, "a","b","c","d","e");
+        $this->assertTrue(true);
+    }
 }

@@ -161,7 +161,7 @@
             $totalQuestionCount = 0;?>
                 <tbody>
             <tr>
-                <th class="thead-dark"><?php echo $category['catDescription'] ?></th>
+                <th colspan="2" class="dark"><?php echo $category['catDescription'] ?></th>
             </tr>
 
                 <!-- Recursive Loop 2 -->
@@ -170,31 +170,36 @@
                     ?>
 
                     <tr>
-                        <th class="table-secondary"><?php echo $subCategory['subCatDescription'] ?></th>
+                        <th colspan="2" class="table-secondary"><?php echo $subCategory['subCatDescription'] ?></th>
                     </tr>
 
                         <?php   $questions = $subCategory['questions'];
 
                         foreach($questions as $question) { ?>
                            <tr>
-                            <td>
+                            <td class="tb-tr">
                                <?php echo "Question: ".$question['questionContent'] ?>
                            </td>
-                            </tr>
-                            <?php $answer = $question['answer']?>
+                               <?php $answer = $question['answer']?>
+                               <?php $score = $answer['score']?>
+                           <td rowspan="3" class="tb-tl align-middle">
+                               <?php echo $score['score'] ?>/5
+                           </td>
+                           </tr>
+
                             <tr>
-                                <td>
+                                <td class="tb-r">
                                     <?php echo "Answer: ".$answer['content'] ?>
                                 </td>
                             </tr>
-                            <?php $score = $answer['score']?>
+
                             <tr>
-                                <td>
+                                <td class="tb-r">
                                     <?php echo "Comment: ".$score['comment'] ?>
                                 </td>
                             </tr>
                              <tr>
-                                 <td class="blank">0</td>
+                                 <td class="blank tb-br">0</td>
                              </tr>
                         <?php } ?>
                         <!-- if statement using % brackets. Red > Green -->

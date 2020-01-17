@@ -55,4 +55,16 @@ class SubCatQuery
     {
         return $this->database->retrieve("SELECT subCatID, subCatCode, subCatDescription FROM SubCategories WHERE catID = \"$catID\"");
     }
+
+    /**
+     * Creates new subCategories
+     *
+     * @param String $subCatCode
+     * @param String $subCatDescription
+     * @param int $catID
+     */
+    public function createNewSubCategories($subCatCode,$subCatDescription,$catID)
+    {
+        $this->database->update("INSERT INTO SubCategories (subCatCode,subCatDescription,catID) VALUES (\"$subCatCode\",\"$subCatDescription\",\"$catID\")");
+    }
 }
