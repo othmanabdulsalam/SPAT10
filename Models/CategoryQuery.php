@@ -62,7 +62,7 @@ class CategoryQuery
      * @param String $catCode
      * @param String $catDescription
      */
-    public function createNewCategories($catCode,$catDescription)
+    public function createNewCategory($catCode,$catDescription)
     {
         $this->database->update("INSERT INTO Categories (catCode,catDescription) VALUES (\"$catCode\",\"$catDescription\")");
     }

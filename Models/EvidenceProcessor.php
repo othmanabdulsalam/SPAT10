@@ -24,13 +24,16 @@ class EvidenceProcessor
         $pathParts = pathinfo($evidence); //gets information about the file
         $type = $this->getType($pathParts['extension']); //gets type of file
 
-        $numExtension = 0; //number to append
+//        $numExtension = 0; //number to append
 
-        while($this->exists($pathParts)) //tests if file name still conflicts
-        {
-            $numExtension++; //increment number to append
-            $pathParts['filename'] += $numExtension; //appends
-        }
+//        while($this->exists($pathParts)) //tests if file name still conflicts
+//        {
+//            $numExtension++; //increment number to append
+//            $pathParts['filename'] += $numExtension; //appends
+//        }
+        $numberExtension = $this->evidenceQuery->getNumEvidence($type)+1; //number of (eg) videos already present +1 (ensures no file name conflicts)
+        $fileName = $type.$numberExtension;
+        $a=1;
 
     }
 

@@ -63,7 +63,7 @@ class SubCatQuery
      * @param String $subCatDescription
      * @param int $catID
      */
-    public function createNewSubCategories($subCatCode,$subCatDescription,$catID)
+    public function createNewSubCategory($subCatCode,$subCatDescription,$catID)
     {
         $this->database->update("INSERT INTO SubCategories (subCatCode,subCatDescription,catID) VALUES (\"$subCatCode\",\"$subCatDescription\",\"$catID\")");
     }

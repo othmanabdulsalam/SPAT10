@@ -38,7 +38,7 @@ class QuestionQueryTest extends TestCase
     public function testCreateNewQuestions()
     {
         $questionQuery = new QuestionQuery();
-        $questionQuery->createNewQuestions("lol",2, "a","b","c","d","e");
+        $questionQuery->createNewQuestion("lol",2, "a","b","c","d","e");
         $this->assertTrue(true);
     }
 }
