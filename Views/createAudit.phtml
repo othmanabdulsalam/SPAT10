@@ -7,21 +7,27 @@ require_once('../Views/template/header.phtml'); ?>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
     <link rel='stylesheet' type='text/css' href='../css/admin.css'/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
+    <script> $('select').selectpicker(); </script>
 
     <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+        <?php  $auditInfo = $view->auditInfo; ?>
         <div class="auditBackground">
             <div class="container">
                 <div class="card">
                     <div class="card-body">
                         <div class="form-group">
-                            <label for="inputScore"> Client: </label>
-                           <select id="inputScore" class="form-control" name="inputScore" required>
+                            <label for="selectClient"> Client: </label>
+                            <?php $clients = $auditInfo['clients']; ?>
+                           <select id="selectClient" class="form-control" name="client" required>
                                 <option value="" selected disabled>Please select a client</option>
-                                <option title="" value="1">Hard Coded Client</option>
-                                <option title="" value="2">Hard Coded Client</option>
-                                <option title="" value="3">Hard Coded Client</option>
-                                <option title="" value="4">Hard Coded Client</option>
-                                <option title="" value="5">Hard Coded Client</option>
+                               <?php foreach ($clients as $client) { ?>
+                                <option title="" value="<?php echo $client['userID']?>"><?php echo $client['username']?></option>
+                                <?php } ?>
                             </select>
                         </div>
 
@@ -29,13 +35,58 @@ require_once('../Views/template/header.phtml'); ?>
                             <label for="inputLocation"> Location: </label>
                         <input name="location" value="<?php if (isset($_POST['location'])) {echo $_POST['location']; 	} ?>" required type="text" class="form-control"  id="inputLocation" placeholder="Enter location of audit">
                         </div>
+                        <?php $categories = $auditInfo['questionsAndCategories']; ?>
+                        <div class="row">
+                            <div class="col-sm-2"></div>
+                        <div class="form-group col-sm-8">
+                            <label for="inputLocation"> Select questions for the audit: </label>
+                            <?php $count= 0;
+                            foreach ($categories as $category) {
+                                $subCategories = $category['subCategories']; ?>
+                                <h5><strong>Category: <?php echo $category['catDescription']; ?></strong></h5>
+                              <?php  foreach ($subCategories as $subCategory) {
+                                    $count = $count + 1;
+                                    $questions = $subCategory['questions']; ?>
 
-                        <div class="form-group">
-                            <label for="inputLocation"> Location: </label>
-                            <input name="location" value="<?php if (isset($_POST['location'])) {echo $_POST['location']; 	} ?>" required type="text" class="form-control"  id="inputLocation" placeholder="Enter location of audit">
+                                    <p> <strong>Sub-Category: <?php echo $subCategory['subCatDescription']; ?></strong></p>
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                    <label for="auditQuestions">Audit Questions:</label>
+                                        </div>
+                                    <div class="col-sm-8">
+                                        <select required id="auditQuestions" name="selectQuestion<?php echo $count?>" class="selectpicker long" multiple data-live-search="true" >
+                                            <option value="" disabled selected>Choose audit questions</option>
+                                            <?php foreach ($questions as $question) { ?>
+                                                <?php $questionID = $question['questionID'] ?>
+                                                <option title="" value="<?php echo $questionID ?>"><?php echo $question['questionContent']; ?></option>
+                                            <?php } ?>
+                                        </select>
+                                    </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                    <label for="questionFlags">Flag Questions:</label>
+                                        </div>
+                                        <div class="col-sm-8">
+                                            <select id="questionFlags" name="selectQuestionsToFlag<?php echo $count?>" class="selectpicker long" data-live-search="true" >
+                                                <option value="" disabled selected>Flag question</option>
+                                                <?php foreach ($questions as $question) { ?>
+                                                    <?php $questionID = $question['questionID'] ?>
+                                                    <option title="" value="<?php echo $questionID ?>"><?php echo $question['questionContent']; ?></option>
+                                                <?php } ?>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <?php
+                                }
+                            }?>
+
                         </div>
-                        
+
+                            <div class="col-sm-2"></div>
+
                         <button type="submit" name="makeAudit" class="btn btn-primary">Submit</button>
+                    </div>
                     </div>
 
                 </div>

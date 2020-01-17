@@ -53,8 +53,6 @@
             //push into the larger array that will store everything from the page
             array_push($arrayQuestionerCompleted,$questionArray);
 
-            $evidenceArray = [];
-
         }
 
 
