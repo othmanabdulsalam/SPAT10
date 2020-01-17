@@ -45,8 +45,8 @@
             $questionArray['content'] = $_POST['inputAnswer'.$i];
             $questionArray['comment'] = $_POST['inputComment'.$i];
             //check if evidence has been submitted
-            //var_dump($_FILES);
-            if($_FILES['file'.$i]['error']!=4) //if file was selected (error 4 = no file chosen)
+            var_dump($_FILES);
+            if($_FILES['file'.$i]['error'][0]==0) //if file was selected (error 4 = no file chosen)
             {
                 $evidenceProcessor->submitEvidence($auditID,$questionArray['questionID'],$_FILES['file'.$i]);
             }
@@ -62,7 +62,7 @@
 
 
         //questioner is completed, load them back to the front page
-        header('Location: /index.php');
+        //header('Location: /index.php');
     }
 
 
