@@ -17,7 +17,11 @@ class EvidenceProcessorTest extends TestCase
     public function testSubmitEvidence()
     {
         $evidenceProcessor = new EvidenceProcessor();
-        $evidenceProcessor->submitEvidence("D:\\university\\Second Year\\SPAT\\project\\SPAT10\\evidence\\distillation_tower.jpg");
+        $file = [];
+        $file['name'] = "distillation_tower.jpg";
+        $file['type'] = "image/jpg";
+        $file['tmp_name'] =
+        $evidenceProcessor->submitEvidence(1,1,"D:\\university\\Second Year\\SPAT\\project\\SPAT10\\evidence\\distillation_tower.jpg");
         $this->assertTrue(true);
     }
 }

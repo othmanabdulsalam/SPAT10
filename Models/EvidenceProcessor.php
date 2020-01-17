@@ -19,21 +19,21 @@ class EvidenceProcessor
     }
 
 
-    public function submitEvidence($evidence)
+    /**
+     * @param $auditID
+     * @param $questionID
+     * @param File $evidence
+     * @throws Exception
+     */
+    public function submitEvidence($auditID,$questionID,$evidence)
     {
         $pathParts = pathinfo($evidence); //gets information about the file
         $type = $this->getType($pathParts['extension']); //gets type of file
 
-//        $numExtension = 0; //number to append
-
-//        while($this->exists($pathParts)) //tests if file name still conflicts
-//        {
-//            $numExtension++; //increment number to append
-//            $pathParts['filename'] += $numExtension; //appends
-//        }
         $numberExtension = $this->evidenceQuery->getNumEvidence($type)+1; //number of (eg) videos already present +1 (ensures no file name conflicts)
-        $fileName = $type.$numberExtension;
-        move_uploaded_file();
+        $newFileName = $type.$numberExtension; //creates name that will not conflict
+        move_uploaded_file($evidence['tmp_name'],"/../evidence/".$newFileName); //moves file from temporary directory to permanent with new name
+        $this->evidenceQuery->insertNewEvidence($auditID,$questionID,$type,$newFileName); //creates database entry
 
     }
 

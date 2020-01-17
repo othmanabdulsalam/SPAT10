@@ -49,4 +49,16 @@ class EvidenceQuery
         return $this->database->retrieve("SELECT COUNT(evidenceID) FROM Evidence WHERE type = \"$type\"")[0]['COUNT(evidenceID)'];
 
     }
+
+    /**
+     * Creates entry in evidence table
+     * @param $auditID
+     * @param $questionID
+     * @param $fileType
+     * @param $filePath
+     */
+    public function insertNewEvidence($auditID,$questionID,$fileType,$filePath)
+    {
+        $this->database->update("INSERT INTO Evidence VALUES(\"$questionID\",\"$auditID\".\"$fileType\",\"$filePath\" )");
+    }
 }
