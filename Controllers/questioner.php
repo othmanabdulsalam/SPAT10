@@ -44,6 +44,11 @@
             $questionArray['questionID'] = $_POST['questionID'.$i];
             $questionArray['content'] = $_POST['inputAnswer'.$i];
             $questionArray['comment'] = $_POST['inputComment'.$i];
+            //check if evidence has been submitted
+            if(isset($_FILES['file'.$i]))
+            {
+                $evidenceProcessor->submitEvidence($auditID,$questionArray['questionID'],$_FILES['file'.$i]);
+            }
             //push into the larger array that will store everything from the page
             array_push($arrayQuestionerCompleted,$questionArray);
 
