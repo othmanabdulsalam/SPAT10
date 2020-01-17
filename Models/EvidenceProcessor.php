@@ -27,15 +27,24 @@ class EvidenceProcessor
      */
     public function submitEvidence($auditID,$questionID,$evidence)
     {
-        //var_dump($evidence);
-        $pathParts = pathinfo($evidence['name']); //gets information about the file
-        //var_dump($pathParts);
-        $type = $this->getType($pathParts['extension']); //gets type of file
+        var_dump($evidence);
+        $fileOffset = -1;
+        while(isset($evidence['name'][++$fileOffset]))
+        {
+            $pathParts = pathinfo($evidence['name'][$fileOffset]); //gets information about the file
+            //var_dump($pathParts);
+            $type = $this->getType($pathParts['extension']); //gets type of file
 
-        $numberExtension = $this->evidenceQuery->getNumEvidence($type)+1; //number of (eg) videos already present +1 (ensures no file name conflicts)
-        $newFileName = $type.$numberExtension.".".$pathParts['extension']; //creates name that will not conflict
-        move_uploaded_file($evidence['tmp_name'],__DIR__."\\..\\evidence\\".$newFileName); //moves file from temporary directory to permanent with new name
-        $this->evidenceQuery->insertNewEvidence($auditID,$questionID,$type,"/evidence/".$newFileName); //creates database entry
+            $numberExtension = $this->evidenceQuery->getNumEvidence($type) + 1; //number of (eg) videos already present +1 (ensures no file name conflicts)
+            $newFileName = $type . $numberExtension . "." . $pathParts['extension']; //creates name that will not conflict
+            move_uploaded_file($evidence['tmp_name'][$fileOffset], __DIR__ . "\\..\\evidence\\" . $newFileName); //moves file from temporary directory to permanent with new name
+            $this->evidenceQuery->insertNewEvidence($auditID, $questionID, $type, "/evidence/" . $newFileName); //creates database entry
+        }
+    }
+
+    private function submitSingleEvidence()
+    {
+
     }
 
     //checks if file already exists (duplicate names)
