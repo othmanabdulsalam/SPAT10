@@ -62,7 +62,7 @@ class UserQuery
      */
     public function getAllClients()
     {
-        return $this->database->retrieve("SELECT UserID, username FROM Users WHERE accessLevel = \"C\" ");
+        return $this->database->retrieve("SELECT userID, username FROM Users WHERE accessLevel = \"C\" ");
     }
 
 }
