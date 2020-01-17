@@ -108,7 +108,7 @@ class QuestionQuery
      * @param String $fourMark
      * @param String $fiveMark
      */
-    public function createNewQuestions($questionContent,$subCatID,$oneMark,$twoMark,$threeMark,$fourMark,$fiveMark)
+    public function createNewQuestion($questionContent,$subCatID,$oneMark,$twoMark,$threeMark,$fourMark,$fiveMark)
     {
         $this->database->update("INSERT INTO Questions (questionContent,subCatID,oneMark,twoMark,threeMark,fourMark,fiveMark) VALUES (\"$questionContent\",\"$subCatID\",\"$oneMark\",\"$twoMark\",\"$threeMark\",\"$fourMark\",\"$fiveMark\")");
     }
