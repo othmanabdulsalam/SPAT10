@@ -38,7 +38,6 @@ $view->auditInfo = $auditInfo;
             //array_push($questionFlagArray,$questionFlag);
         //}
         //$location = $_POST['location'];
-        //some bullshit for the questionFlags array, idk still figuring that one out
         //$auditCreationQuery = new AuditCreationQuery();
         //$auditCreationQuery->submitAudit($clientID,$location,$questionIDArray,$questionFlagArray);
         //header('Location: ../index.php');
