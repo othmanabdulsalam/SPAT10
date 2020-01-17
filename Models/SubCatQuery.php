@@ -51,7 +51,7 @@ class SubCatQuery
      * @param $catID
      * @return array of SubCategory Tuples (- catID)
      */
-    public function getAllSubcategory($catID)
+    public function getAllSubcategories($catID)
     {
         return $this->database->retrieve("SELECT subCatID, subCatCode, subCatDescription FROM SubCategories WHERE catID = \"$catID\"");
     }
@@ -63,7 +63,7 @@ class SubCatQuery
      * @param String $subCatDescription
      * @param int $catID
      */
-    public function createNewSubCategories($subCatCode,$subCatDescription,$catID)
+    public function createNewSubCategory($subCatCode,$subCatDescription,$catID)
     {
         $this->database->update("INSERT INTO SubCategories (subCatCode,subCatDescription,catID) VALUES (\"$subCatCode\",\"$subCatDescription\",\"$catID\")");
     }

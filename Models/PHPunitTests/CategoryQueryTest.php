@@ -33,7 +33,7 @@ class CategoryQueryTest extends TestCase
     public function testCreateNewCategories()
     {
         $categoryQuery = new CategoryQuery();
-        $categoryQuery->createNewCategories("bbb","lol");
+        $categoryQuery->createNewCategory("bbb","lol");
         $this->assertTrue(true);
     }
 }
