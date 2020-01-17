@@ -23,20 +23,27 @@
         $clientID = $_POST['clientID']; //grab clientID
         $questionIDArray = [];//fill array of questionIDs
         $questionIDCount = $_POST['questionIDCount'];
-        for($i=0;$i<=$questionIDCount;$i++)
-        {
-            $questionID = $_POST['questionID'.$i];
-            array_push($questionIDArray,$questionID);
+        //for($i=0;$i<=$questionIDCount;$i++)
+        //{
+            //$questionID = $_POST['questionID'.$i];
+            //array_push($questionIDArray,$questionID);
+        //}
+        foreach($_POST as $element)
+        { var_dump($element);
+            if(isset($element['questionID']))
+            {
+                array_push($questionIDArray,$element['questionID']);
+            }
         }
         $questionFlagArray = [];//fill array of question flags
         $questionFlagCount = $_POST['questionFlagCount'];
-        for($i=0;$i<=$questionFlagCount;$i++)
-        {
+        //for($i=0;$i<=$questionFlagCount;$i++)
+        //{
             $questionFlag = [];
-            $questionFlag['questionID'] = $_POST['questionID'.$i];
-            $questionFlag['flagID'] = $_POST['flagID'.$i];
-            array_push($questionFlagArray,$questionFlag);
-        }
+          //  $questionFlag['questionID'] = $_POST['questionID'.$i];
+          //  $questionFlag['flagID'] = $_POST['flagID'.$i];
+           // array_push($questionFlagArray,$questionFlag);
+        //}
         $location = $_POST['location'];//grab the location
         $auditCreationQuery = new AuditCreationQuery();
         //pass the information to the database so an audit has been created

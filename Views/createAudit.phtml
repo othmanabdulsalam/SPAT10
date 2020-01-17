@@ -23,7 +23,7 @@ require_once('../Views/template/header.phtml'); ?>
                         <div class="form-group">
                             <label for="selectClient"> Client: </label>
                             <?php $clients = $auditInfo['clients']; ?>
-                           <select id="selectClient" class="form-control" name="client" required>
+                           <select id="selectClient"  class="form-control" name="clientID" required>
                                 <option value="" selected disabled>Please select a client</option>
                                <?php foreach ($clients as $client) { ?>
                                 <option title="" value="<?php echo $client['userID']?>"><?php echo $client['username']?></option>
@@ -41,6 +41,7 @@ require_once('../Views/template/header.phtml'); ?>
                         <div class="form-group col-sm-8">
                             <label for="inputLocation"> Select questions for the audit: </label>
                             <?php $count= 0;
+                            $questionIDCount = 0;
                             foreach ($categories as $category) {
                                 $subCategories = $category['subCategories']; ?>
                                 <h5><strong>Category: <?php echo $category['catDescription']; ?></strong></h5>
@@ -54,11 +55,11 @@ require_once('../Views/template/header.phtml'); ?>
                                     <label for="auditQuestions">Audit Questions:</label>
                                         </div>
                                     <div class="col-sm-8">
-                                        <select required id="auditQuestions" name="selectQuestion<?php echo $count?>" class="selectpicker long" multiple data-live-search="true" >
-                                            <option value="" disabled selected>Choose audit questions</option>
-                                            <?php foreach ($questions as $question) { ?>
-                                                <?php $questionID = $question['questionID'] ?>
-                                                <option title="" value="<?php echo $questionID ?>"><?php echo $question['questionContent']; ?></option>
+                                        <select id="auditQuestions" name="questionID" class="selectpicker long" multiple data-live-search="true" >
+                                            <option value="" disabled >Choose audit questions</option>
+                                            <?php foreach ($questions as $question) {
+                                                $questionIDCount++;?>
+                                                <option title="" value="<?php echo $question['questionID']?>"><?php echo $question['questionContent']; ?></option>
                                             <?php } ?>
                                         </select>
                                     </div>
@@ -69,24 +70,37 @@ require_once('../Views/template/header.phtml'); ?>
                                         </div>
                                         <div class="col-sm-8">
                                             <select id="questionFlags" name="selectQuestionsToFlag<?php echo $count?>" class="selectpicker long" data-live-search="true" >
-                                                <option value="" disabled selected>Flag question</option>
+                                                <option value="" selected></option>
                                                 <?php foreach ($questions as $question) { ?>
-                                                    <?php $questionID = $question['questionID'] ?>
-                                                    <option title="" value="<?php echo $questionID ?>"><?php echo $question['questionContent']; ?></option>
+                                                    <option title="" value="<?php echo $question['questionID']  ?>"><?php echo $question['questionContent']; ?></option>
                                                 <?php } ?>
                                             </select>
                                         </div>
                                     </div>
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <label for="questionFlagDesc">Flag Description:</label>
+                                        </div>
+                                        <div class="col-sm-8">
+                                            <textarea class="form-control z-depth-1" id="questionFlagDesc"
+                                                      name="inputQuestionFlagDesc<?php echo $count; ?>" rows="3"
+                                                      placeholder="Write a legal problem with this question"></textarea>
+                                        </div>
+                                    </div>
+
                                     <?php
                                 }
                             }?>
 
                         </div>
-
-                            <div class="col-sm-2"></div>
-
-                        <button type="submit" name="makeAudit" class="btn btn-primary">Submit</button>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-8"></div>
+                            <div class="col-sm-2">
+                                <input hidden type="text" name="questionIDCount" value="<?php echo $questionIDCount ?>">
+                        <button type="submit" name="createAudit" class="btn btn-primary ">Submit</button>
                     </div>
+                            <div class="col-sm-2">
                     </div>
 
                 </div>
