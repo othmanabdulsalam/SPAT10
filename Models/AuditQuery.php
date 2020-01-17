@@ -22,7 +22,7 @@ class AuditQuery
     public function getAudits($clientID)
     {
         return $this->database->retrieve("SELECT Audit.auditID, location, dateCreated, dateScored FROM Audit, ScoredAudits
-                                                 WHERE clientID = 4 AND Audit.auditID = ScoredAudits.auditID ORDER BY dateCreated;");
+                                                 WHERE clientID = \"$clientID\" AND Audit.auditID = ScoredAudits.auditID ORDER BY dateCreated;");
     }
 
     /*
