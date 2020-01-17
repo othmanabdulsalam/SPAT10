@@ -73,6 +73,7 @@ class AuditCreationQuery
         $auditCreationinfo['clients'] = $this->userQuery->getAllClients(); //gets every client, which the admin can select
         $auditCreationinfo['questionsAndCategories'] = $this->getAllQuestionsAndCategories(); //gets datastructure of all categories, subCategories and questions
         $auditCreationinfo['legalFLags'] = $this->flagQuery->getAllFlags(); //gets all flags
+        return $auditCreationinfo;
     }
 
 
