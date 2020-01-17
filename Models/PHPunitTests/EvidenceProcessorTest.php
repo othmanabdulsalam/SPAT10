@@ -7,9 +7,9 @@
 
 use PHPUnit\Framework\TestCase;
 
-require_once __DIR__."../EvidenceProcessor.php";
-require_once __DIR__."../EvidenceQuery.php";
-require_once __DIR__."../Database.php";
+require_once __DIR__."/../EvidenceProcessor.php";
+require_once __DIR__."/../EvidenceQuery.php";
+require_once __DIR__."/../Database.php";
 
 class EvidenceProcessorTest extends TestCase
 {

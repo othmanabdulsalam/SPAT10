@@ -8,7 +8,7 @@
 
 require_once __DIR__."/EvidenceQuery.php";
 
-class evidenceProcessor
+class EvidenceProcessor
 {
 
     private $evidenceQuery;
@@ -22,15 +22,60 @@ class evidenceProcessor
     public function submitEvidence($evidence)
     {
         $pathParts = pathinfo($evidence); //gets information about the file
-        $type = ""; //the type of file
-        $extension = $pathParts['extension'];
-        $allowedImages = ["jpg","png"];
+        $type = $this->getType($pathParts['extension']); //gets type of file
 
+        $numExtension = 0; //number to append
 
-        if(in_array($extension,$allowedImages))
+        while($this->exists($pathParts)) //tests if file name still conflicts
         {
-            $type = "Image";
+            $numExtension++; //increment number to append
+            $pathParts['filename'] += $numExtension; //appends
         }
+
+    }
+
+    //checks if file already exists (duplicate names)
+    private function exists($pathParts)
+    {
+        return file_exists("/../evidence/".$pathParts['filename'].".".$pathParts['extension']);
+    }
+
+    /**
+     * Checks if an extension is legal and returns the file type.
+     * Throws exception of extension is illegal.
+     *
+     * @param String $extension of file
+     * @return string
+     * @throws Exception
+     */
+    private function getType($extension)
+    {
+        $allowedImages = ["jpg","png"];
+        $allowedVideos = ["mp4","mov"];
+        $allowedAudio = ["wav","mp3"];
+        $allowedDocuments = ["docx","pdf","txt"];
+
+        if(in_array($extension,$allowedImages)) //checks if extension is in array
+        {
+            $type = "image"; //sets type of file
+        }
+        elseif(in_array($extension,$allowedVideos))
+        {
+            $type = "video";
+        }
+        elseif(in_array($extension,$allowedAudio))
+        {
+            $type = "audio";
+        }
+        elseif(in_array($extension,$allowedDocuments))
+        {
+            $type = "doc";
+        }
+        else
+        {
+            throw new Exception("File type not recognised");
+        }
+        return $type;
     }
 
 }
