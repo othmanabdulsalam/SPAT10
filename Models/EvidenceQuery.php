@@ -37,4 +37,16 @@ class EvidenceQuery
         }
 
     }
+
+    /**
+     * returns int of how many entries of $type already exist
+     *
+     * @param String $type of evidence
+     * @return int
+     */
+    public function getNumEvidence($type)
+    {
+        return $this->database->retrieve("SELECT COUNT(evidenceID) FROM Evidence WHERE type = \"$type\"")[0]['COUNT(evidenceID)'];
+
+    }
 }

@@ -9,8 +9,6 @@
 require_once __DIR__."/AuditQuery.php";
 require_once __DIR__."/CategoryQuery.php";
 require_once __DIR__."/SubCatQuery.php";
-require_once __DIR__."/AnswerQuery.php";
-require_once __DIR__."/EvidenceQuery.php";
 require_once __DIR__."/QuestionQuery.php";
 require_once __DIR__."/UserQuery.php";
 require_once __DIR__."/FlagQuery.php";
@@ -20,8 +18,6 @@ class AuditCreationQuery
     private $auditQuery;
     private $categoryQuery;
     private $subCatQuery;
-    private $answerQuery;
-    private $evidenceQuery;
     private $questionQuery;
     private $userQuery;
     private $flagQuery;
@@ -31,8 +27,6 @@ class AuditCreationQuery
         $this->auditQuery = new AuditQuery();
         $this->categoryQuery = new CategoryQuery();
         $this->subCatQuery = new SubCatQuery();
-        $this->answerQuery = new AnswerQuery();
-        $this->evidenceQuery = new EvidenceQuery();
         $this->questionQuery = new QuestionQuery();
         $this->userQuery = new UserQuery();
         $this->flagQuery = new FlagQuery();

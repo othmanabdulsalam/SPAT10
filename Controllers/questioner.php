@@ -50,6 +50,7 @@
         $questionerQuery->submitAnswers($auditID,$arrayQuestionerCompleted);
 
 
+
         //questioner is completed, load them back to the front page
         header('Location: /index.php');
     }
