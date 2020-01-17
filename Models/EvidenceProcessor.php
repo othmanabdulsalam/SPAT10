@@ -27,14 +27,15 @@ class EvidenceProcessor
      */
     public function submitEvidence($auditID,$questionID,$evidence)
     {
-        $pathParts = pathinfo($evidence); //gets information about the file
+        //var_dump($evidence);
+        $pathParts = pathinfo($evidence['name']); //gets information about the file
+        //var_dump($pathParts);
         $type = $this->getType($pathParts['extension']); //gets type of file
 
         $numberExtension = $this->evidenceQuery->getNumEvidence($type)+1; //number of (eg) videos already present +1 (ensures no file name conflicts)
-        $newFileName = $type.$numberExtension; //creates name that will not conflict
-        move_uploaded_file($evidence['tmp_name'],"/../evidence/".$newFileName); //moves file from temporary directory to permanent with new name
-        $this->evidenceQuery->insertNewEvidence($auditID,$questionID,$type,$newFileName); //creates database entry
-
+        $newFileName = $type.$numberExtension.".".$pathParts['extension']; //creates name that will not conflict
+        move_uploaded_file($evidence['tmp_name'],__DIR__."\\..\\evidence\\".$newFileName); //moves file from temporary directory to permanent with new name
+        $this->evidenceQuery->insertNewEvidence($auditID,$questionID,$type,"/evidence/".$newFileName); //creates database entry
     }
 
     //checks if file already exists (duplicate names)
@@ -56,7 +57,7 @@ class EvidenceProcessor
         $allowedImages = ["jpg","png"];
         $allowedVideos = ["mp4","mov"];
         $allowedAudio = ["wav","mp3"];
-        $allowedDocuments = ["docx","pdf","txt"];
+        $allowedDocuments = ["docx","pdf","txt","xlsb"];
 
         if(in_array($extension,$allowedImages)) //checks if extension is in array
         {

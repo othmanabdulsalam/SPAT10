@@ -45,7 +45,8 @@
             $questionArray['content'] = $_POST['inputAnswer'.$i];
             $questionArray['comment'] = $_POST['inputComment'.$i];
             //check if evidence has been submitted
-            if(isset($_FILES['file'.$i]))
+            //var_dump($_FILES);
+            if($_FILES['file'.$i]['error']!=4) //if file was selected (error 4 = no file chosen)
             {
                 $evidenceProcessor->submitEvidence($auditID,$questionArray['questionID'],$_FILES['file'.$i]);
             }

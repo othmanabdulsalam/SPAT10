@@ -59,6 +59,6 @@ class EvidenceQuery
      */
     public function insertNewEvidence($auditID,$questionID,$fileType,$filePath)
     {
-        $this->database->update("INSERT INTO Evidence VALUES(\"$questionID\",\"$auditID\".\"$fileType\",\"$filePath\" )");
+        $this->database->update("INSERT INTO Evidence (questionID, auditID, type, path) VALUES(\"$questionID\",\"$auditID\",\"$fileType\",\"$filePath\")");
     }
 }
