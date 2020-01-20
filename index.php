@@ -14,7 +14,6 @@
 
     //session is started
     session_start();
-
     //check if login button has been clicked
     if(isset($_POST['submit']))
     {
