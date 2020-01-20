@@ -1,6 +1,6 @@
 <?php
     /**
-     * createAudit controller by Othman Abdulsalam
+     * createAudit controller by Jayant Kabaria/Othman Abdulsalam
      *
      * This controller will generate a client's audit that
      * questioners and scorers will work on before

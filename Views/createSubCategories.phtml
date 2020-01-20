@@ -15,7 +15,12 @@ require_once('../Views/template/header.phtml'); ?>
                     <div class="card-body">
                         <div class="form-group">
                             <label for="selectCategory">Category</label>
-                            <input name="selectCategory" value="<?php if (isset($_POST['selectCategory'])) {echo $_POST['selectCategory']; 	} ?>" required type="text" class="form-control" id="selectCategory" placeholder="Select a category">
+                            <select id="selectCategory" name="selectCategory" required class="form-control long" data-live-search="true">
+                                <?php $categories = $categoryInfo['questionsAndCategories'];
+                                foreach ($categories as $category) { ?>
+                                    <option value="<?php echo $category['catID']; ?>"><?php echo $category['catDescription']; ?></option>
+                                <?php } ?>
+                            </select>
                         </div>
                         <div class="form-group">
                             <label for="inputSubCategory">Sub-Category Name</label>
