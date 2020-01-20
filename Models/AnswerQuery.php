@@ -5,6 +5,8 @@
  * this class serves the purpose of storing queries related to Answers
  */
 
+use Database;
+
 require_once __DIR__."/Database.php";
 
 class AnswerQuery

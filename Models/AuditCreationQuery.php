@@ -6,6 +6,9 @@
  * and providing a simple api for the creation of audits by the admin.
  */
 
+use Database;
+use QuestionerQuery;
+
 require_once __DIR__."/AuditQuery.php";
 require_once __DIR__."/CategoryQuery.php";
 require_once __DIR__."/SubCatQuery.php";

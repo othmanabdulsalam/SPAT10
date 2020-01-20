@@ -6,6 +6,8 @@
 * this is a singleton class
 */
 
+use AnswerQuery;
+
 class Database
 {
     private $connection; //PDO to interact with database
