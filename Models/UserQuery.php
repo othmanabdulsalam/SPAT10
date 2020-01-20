@@ -5,7 +5,7 @@
  * this class is responsible for Querying the database to retrieve information about users
  */
 
-require_once __DIR__."\Database.php";
+require_once __DIR__."/Database.php";
 
 class UserQuery
 {

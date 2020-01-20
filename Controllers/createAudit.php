@@ -38,10 +38,12 @@
         for($i=1;$i<=$subCatCount;$i++)
         {
             $questionFlag = [];
-            if(isset($_POST['selectQuestionToFlag'.$i])) {
-                $questionFlag['questionID'] = $_POST['selectQuestionToFlag' . $i];
+            if(isset($_POST['selectQuestionToFlag'.$i]) && strlen($_POST['selectQuestionToFlag'.$i]) != 0) {
 
-                if (isset($_POST['flagID'.$i])) {
+                    $questionFlag['questionID'] = $_POST['selectQuestionToFlag' . $i];
+
+                if (isset($_POST['flagID'.$i]) && strlen($_POST['flagID'.$i]) != 0) {
+
                     $questionFlag['flagID'] = $_POST['flagID' . $i];
                     array_push($questionFlagArray, $questionFlag);
                 }

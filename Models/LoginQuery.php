@@ -4,7 +4,7 @@
  * this class is an interface to get information from the Database class, it contains all queries
  * related to the Login System
  */
-require_once __DIR__."\Database.php";
+require_once __DIR__."/Database.php";
 
 class LoginQuery
 {

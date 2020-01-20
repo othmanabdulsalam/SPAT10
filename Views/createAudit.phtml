@@ -69,7 +69,7 @@ require_once('../Views/template/header.phtml'); ?>
                                         </div>
                                         <div class="col-sm-8">
                                             <select id="questionFlags" name="selectQuestionToFlag<?php echo $subCatCount?>" class="selectpicker long" data-live-search="true" >
-                                                <option value="" selected></option>
+                                                <option selected></option>
                                                 <?php foreach ($questions as $question) { ?>
                                                     <option title="" value="<?php echo $question['questionID'] ?>"><?php echo $question['questionContent']; ?></option>
                                                 <?php } ?>
@@ -82,7 +82,7 @@ require_once('../Views/template/header.phtml'); ?>
                                         </div>
                                         <div class="col-sm-8">
                                             <select id="questionFlagID" name="flagID<?php echo $subCatCount?>" class="selectpicker long" data-live-search="true" >
-                                                <option value="" selected></option>
+                                                <option selected></option>
                                                 <?php $legalFlags = $auditInfo['legalFLags'];
                                                 foreach ($legalFlags as $legalFlag) { ?>
                                                     <option title="" value="<?php echo $legalFlag['flagID'] ?>"><?php echo $legalFlag['description']; ?></option>

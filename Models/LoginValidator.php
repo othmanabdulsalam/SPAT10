@@ -3,7 +3,7 @@
  * created by Michael Jarratt
  * this class compares supplied login information with the database to validate login attempts
  */
-require_once __DIR__."\LoginQuery.php";
+require_once __DIR__."/LoginQuery.php";
 
 class LoginValidator
 {
