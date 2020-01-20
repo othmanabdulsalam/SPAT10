@@ -114,13 +114,17 @@
         //check if createQuestions button is clicked
         if(isset($_POST['createQuestions']))
         {
-            //load createQuestions
+            header('Location: /Controllers/createQuestions.php');
         }
         //check if createAudit button is clicked
         if(isset($_POST['createAudit']))
         {
             //load createAudit page
             header('Location: /Controllers/createAudit.php');
+        }
+        if(isset($_POST['createFlag']))
+        {
+            header('Location: /Controllers/createFlag.php');
         }
     }
 

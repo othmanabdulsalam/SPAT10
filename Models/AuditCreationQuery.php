@@ -139,5 +139,7 @@ class AuditCreationQuery
         {
             $this->flagQuery->linkFlag($auditID,$questionFlag['questionID'],$questionFlag['flagID']);
         }
+
     }
+
 }

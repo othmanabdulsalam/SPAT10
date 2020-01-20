@@ -1,6 +1,6 @@
 <?php
     /**
-     * createAudit controller by Othman Abdulsalam
+     * createAudit controller by Jayant Kabaria/Othman Abdulsalam
      *
      * This controller will generate a client's audit that
      * questioners and scorers will work on before
@@ -21,30 +21,35 @@
     {
         //set audit's values
         $clientID = $_POST['clientID']; //grab clientID
+        $location = $_POST['location'];//grab the location
         $questionIDArray = [];//fill array of questionIDs
-        $questionIDCount = $_POST['questionIDCount'];
-        //for($i=0;$i<=$questionIDCount;$i++)
-        //{
-            //$questionID = $_POST['questionID'.$i];
-            //array_push($questionIDArray,$questionID);
-        //}
-        foreach($_POST as $element)
-        { var_dump($element);
-            if(isset($element['questionID']))
-            {
-                array_push($questionIDArray,$element['questionID']);
+        $subCatCount = $_POST['subCatCount'];
+        for ($i=1; $i <= $subCatCount; $i++)
+        {
+            if(isset($_POST['questionID'.$i])) {
+                $questionIDs = $_POST['questionID' . $i];
+                foreach ($questionIDs as $questionID) {
+                    array_push($questionIDArray, $questionID);
+                }
             }
         }
+
         $questionFlagArray = [];//fill array of question flags
-        $questionFlagCount = $_POST['questionFlagCount'];
-        //for($i=0;$i<=$questionFlagCount;$i++)
-        //{
+        for($i=1;$i<=$subCatCount;$i++)
+        {
             $questionFlag = [];
-          //  $questionFlag['questionID'] = $_POST['questionID'.$i];
-          //  $questionFlag['flagID'] = $_POST['flagID'.$i];
-           // array_push($questionFlagArray,$questionFlag);
-        //}
-        $location = $_POST['location'];//grab the location
+            if(isset($_POST['selectQuestionToFlag'.$i]) && strlen($_POST['selectQuestionToFlag'.$i]) != 0) {
+
+                    $questionFlag['questionID'] = $_POST['selectQuestionToFlag' . $i];
+
+                if (isset($_POST['flagID'.$i]) && strlen($_POST['flagID'.$i]) != 0) {
+
+                    $questionFlag['flagID'] = $_POST['flagID' . $i];
+                    array_push($questionFlagArray, $questionFlag);
+                }
+            }
+        }
+
         $auditCreationQuery = new AuditCreationQuery();
         //pass the information to the database so an audit has been created
         $auditCreationQuery->submitAudit($clientID,$location,$questionIDArray,$questionFlagArray);

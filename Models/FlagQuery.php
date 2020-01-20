@@ -65,6 +65,6 @@ class FlagQuery
      */
     public function createNewFlag($description)
     {
-        $this->database->update("INSERT INTO LegalFlags ($description) VALUES (\"$description\")");
+        $this->database->update("INSERT INTO LegalFlags (description) VALUES (\"$description\")");
     }
 }
