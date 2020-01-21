@@ -25,7 +25,7 @@ class AnswerQuery
      * @param String $questionID question the answer belongs to
      * @return array
      */
-    public function getAnswer($auditID,$questionID)
+        public function getAnswer($auditID,$questionID)
     {
         return $this->database->retrieve("SELECT content FROM Answers WHERE auditID = \"$auditID\" AND questionID = \"$questionID\"")[0];
     }
