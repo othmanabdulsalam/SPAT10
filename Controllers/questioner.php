@@ -5,20 +5,19 @@
      * This controller handles the grabbing of a selected incomplete audit
      * for the questioner to work on
      */
-
+session_start();//start session
+if(isset($_SESSION['loggedIn']) && ($_SESSION['accessLevel'] == 'Q')) {
     $view = new stdClass(); //creating the view
     $view->pageTitle = 'Questions'; //giving tab a name
     require_once('../Models/QuestionerQuery.php'); //for querying the audits that need to be displayed#
     require_once('../Models/EvidenceProcessor.php');
 
-    session_start();//start session
+
     //someone else did this, not exactly sure why but it works i guess
-    if(isset($_GET['auditID']))
-    {
+    if (isset($_GET['auditID'])) {
         $_SESSION['auditID'] = $_GET['auditID'];
     }
-    if(isset($_SESSION['auditID']))
-    {
+    if (isset($_SESSION['auditID'])) {
         $_GET['auditID'] = $_SESSION['auditID'];
     }
     $auditID = $_GET['auditID'];
@@ -29,36 +28,33 @@
     $view->incompleteAudit = $incompleteAudit;
 
     //if questioner has pressed the answer questions button
-    if(isset($_POST['answerQuestions']))
-    {
+    if (isset($_POST['answerQuestions'])) {
         $evidenceProcessor = new EvidenceProcessor();
         //create empty array
         $arrayQuestionerCompleted = [];
         //grab the count from the phtml
         $count = $_POST['questionCount'];
         //loop until all questions are grabbed
-        for($i=1;$i<=$count;$i++)
-        {
+        for ($i = 1; $i <= $count; $i++) {
             $questionArray = [];
             //populate array with data from the first question
-            $questionArray['questionID'] = $_POST['questionID'.$i];
-            $questionArray['content'] = $_POST['inputAnswer'.$i];
-            $questionArray['comment'] = $_POST['inputComment'.$i];
+            $questionArray['questionID'] = $_POST['questionID' . $i];
+            $questionArray['content'] = $_POST['inputAnswer' . $i];
+            $questionArray['comment'] = $_POST['inputComment' . $i];
             //check if evidence has been submitted
             var_dump($_FILES);
-            if($_FILES['file'.$i]['error'][0]==0) //if file was selected (error 4 = no file chosen)
+            if ($_FILES['file' . $i]['error'][0] == 0) //if file was selected (error 4 = no file chosen)
             {
-                $evidenceProcessor->submitEvidence($auditID,$questionArray['questionID'],$_FILES['file'.$i]);
+                $evidenceProcessor->submitEvidence($auditID, $questionArray['questionID'], $_FILES['file' . $i]);
             }
             //push into the larger array that will store everything from the page
-            array_push($arrayQuestionerCompleted,$questionArray);
+            array_push($arrayQuestionerCompleted, $questionArray);
 
         }
 
 
         //pass to query to update the database
-        $questionerQuery->submitAnswers($auditID,$arrayQuestionerCompleted);
-
+        $questionerQuery->submitAnswers($auditID, $arrayQuestionerCompleted);
 
 
         //questioner is completed, load them back to the front page
@@ -66,11 +62,7 @@
     }
 
 
-
-
-
-
     //require the questioner page
     require_once('../Views/questioner.phtml');
 
-
+}

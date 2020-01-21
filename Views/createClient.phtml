@@ -1,4 +1,5 @@
 <?php
+if(isset($_SESSION['loggedIn']) && ($_SESSION['accessLevel'] == 'A')) {
     require_once('../Views/template/header.phtml'); ?>
 
 
@@ -43,3 +44,4 @@
     </form>
 
 <?php require_once('../Views/template/footer.phtml');
+}
