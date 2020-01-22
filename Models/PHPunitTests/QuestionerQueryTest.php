@@ -22,8 +22,8 @@ class QuestionerQueryTest extends TestCase
     {
         $questionerQuery = new QuestionerQuery();
         $questionerInfo = $questionerQuery->getQuestionerInfo(3);
-        //var_dump($questionerInfo);
-        //var_dump($questionerInfo['questions'][0]);
+        var_dump($questionerInfo); //array
+        var_dump($questionerInfo['questions'][0]);
         var_dump($questionerInfo['questions'][0]['subCategories'][0]);
         $this->assertTrue(true);
     }

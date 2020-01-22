@@ -31,13 +31,14 @@ class ReportInfoGetterTest extends TestCase
     public function testGetContent()
     {
         $reportInfoGetter = new ReportInfoGetter();
-        $reflection = new \ReflectionClass(get_class($reportInfoGetter));
-        $getContent = $reflection->getMethod("getContent");
-        $getContent->setAccessible(true);
+        $reflection = new \ReflectionClass(get_class($reportInfoGetter));  //
+        $getContent = $reflection->getMethod("getContent");         //  setup that allows private method to be called for testing
+        $getContent->setAccessible(true);                        //
 
+        //$content = array of content needed to generate the audit report
         $content = $getContent->invokeArgs($reportInfoGetter,array(1)); // 1 = auditID
-        var_dump($content);
-        var_dump($content[0]['subCategories'][0]['questions'][0]);
+        var_dump($content); //shows all the information inside of $content
+        var_dump($content[0]['subCategories'][0]['questions'][0]); //shows first question of first subcategory of first category of audit 1
 
         $this->assertTrue(true); //just runs so I can vardump and see what's been retrieved
     }

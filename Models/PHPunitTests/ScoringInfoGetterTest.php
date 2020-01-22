@@ -27,6 +27,7 @@ class ScoringInfoGetterTest extends TestCase
     }
 
 
+    //this has nothing to do with scoring info, it's a proof of concept for incrementing through an associatively index array
     public function testidk()
     {
         $var = [];
