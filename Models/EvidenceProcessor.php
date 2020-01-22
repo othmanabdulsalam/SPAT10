@@ -20,9 +20,11 @@ class EvidenceProcessor
 
 
     /**
+     * Takes the auditID, questionID and all evidence uploaded for it and stores it, making a record in the database.
+     *
      * @param $auditID
      * @param $questionID
-     * @param File $evidence
+     * @param array $evidence file
      * @throws Exception
      */
     public function submitEvidence($auditID,$questionID,$evidence)
@@ -42,16 +44,6 @@ class EvidenceProcessor
         }
     }
 
-    private function submitSingleEvidence()
-    {
-
-    }
-
-    //checks if file already exists (duplicate names)
-    private function exists($pathParts)
-    {
-        return file_exists("/../evidence/".$pathParts['filename'].".".$pathParts['extension']);
-    }
 
     /**
      * Checks if an extension is legal and returns the file type.
