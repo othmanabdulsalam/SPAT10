@@ -14,17 +14,16 @@
     <p><br><br></p>
         <div class="row">
             <div class="col-sm-12">
-                <h2 class="text-sm-center"><u>Compliance Audit Report</u></h2>
+                <h2 style="color: #239AC4;" class="text-sm-center"><u><strong>Compliance Audit Report</strong></u></h2>
             </div>
         </div>
     <p><br></p>
         <!-- EZ - Return for pulling data-->
     <div class="container">
         <div class="row">
-            <div class="col-sm-8">
+            <div class="col-sm-12">
                 <h3>Location: <?php echo $audit['audit']['location'] ?></h3>  <!-- Return location -->
             </div>
-            <div class="col-sm-3"></div>
         </div>
         <div class="row">
             <div class="col-sm-1"></div>
@@ -43,21 +42,20 @@
         <p><br><br></p>
         <div class="row">
             <div class="col-sm-12">
-                <h3 class="text-sm-center"><u>Executive Summary</u></h3>
+                <h3 style="color: #239AC4;" class="text-sm-center"><u>Executive Summary</u></h3>
             </div>
         </div>
         <p><br></p>
         <div class="row">
-            <div class="col-sm-1"></div>
-            <div class="col-sm-8">
-                <p><?php echo $audit['audit']['location'] ?> was audited by Add Energy. These areas were investigated; </p>
+            <div class="col-sm-12">
+                <p><?php echo $audit['audit']['location'] ?> was audited by Add Energy. These areas were investigated;</p>
                 <?php
                 $categories = $audit['reportContent'];
                 $totalComplianceScoreFromAllCategories = 0;
                 $totalQuestionCount = 0;
                 foreach($categories as $category) {
                     $totalScoreCount = 0;
-                    ?> <p><?php echo $category['catDescription'] ?></p><?php
+                    ?> <p><strong><?php echo $category['catDescription'] ?></strong></p><?php
                     $subCategories = $category['subCategories'];
                     foreach ($subCategories as $subCategory) {
                         $scoreCount = 0;
@@ -75,19 +73,25 @@
                     $totalComplianceOverall = round((($totalComplianceScoreFromAllCategories / ($totalQuestionCount * 5)) * 100));
                 ?>   <p>The overall compliance of <?php echo $audit['audit']['location'] ?> is <?php echo $totalComplianceOverall; ?>%.</p>
                     <!-- Pull scores in category and if statement using % brackets. Red > Green -->
+                <p><br></p>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h3 style="color: #239AC4;" class="text-sm-center"><u>Audit Report Rating</u></h3>
+                    </div>
+                </div>
+                <p><br></p>
                         <?php if ($totalComplianceOverall <= 24) {
-                            ?>Compliance Rating: <p style="color: darkred;">Major Non-Compliance</p><?php
+                            ?><h4>Compliance Band:</h4><h3 style="color: darkred;"><strong>Major Non-Compliance</strong></h3><?php
                         } elseif ($totalComplianceOverall <= 49) {
-                            ?>Compliance Rating: <p style="color: red;">Minor Non-Compliance</p><?php
+                            ?><h4>Compliance Band:</h4> <h3 style="color: red;"><strong>Minor Non-Compliance</strong></h3><?php
                         } elseif ($totalComplianceOverall <= 74) {
-                            ?>Compliance Rating: <p style="color: orange;">Compliant</p><?php
+                            ?><h4>Compliance Band:</h4> <h3 style="color: orange;"><strong>Compliant</strong></h3><?php
                         } elseif ($totalComplianceOverall <= 99) {
-                            ?>Compliance Rating: <p style="color: green;">Top Quartile</p><?php
+                            ?><h4>Compliance Band:</h4> <h3 style="color: green;"><strong>Top Quartile</strong></h3><?php
                         } else {
-                            ?>Compliance Rating: <p style="color: blue;">Best Practice</p><?php
+                            ?><h4>Compliance Band:</h4> <h3 style="color: blue;"><strong>Best Practice</strong></h3><?php
                         } ?>
             </div>
-            <div class="col-sm-3"></div>
         </div>
 
     </div>
@@ -96,14 +100,20 @@
             <div class="row">
                 <div class="col-sm-12"></div>
             </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <h3 style="color: #239AC4;" class="text-sm-center"><u>Compliance Breakdown</u></h3>
+        </div>
+    </div>
+    <p><br></p>
             <div class="row">
                 <div class="col-sm-12">
                 <table class="table table-sm">
                 <thead class="thead-dark">
                     <tr>
-                        <th colspan="2">Category</th>
-                        <th>Score</th>
-                        <th>Compliance</th>
+                        <th style="color: #239AC4;" colspan="2">Category</th>
+                        <th style="color: #239AC4;">Score</th>
+                        <th style="color: #239AC4;">Compliance</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -115,7 +125,7 @@
                     $totalQuestionCount = 0;?>
 
                     <tr class="table-secondary">
-                        <td><?php echo $category['catDescription'] ?></td> <!-- Pull the Category -->
+                        <td style="color: #239AC4;"><?php echo $category['catDescription'] ?></td> <!-- Pull the Category -->
                         <td></td>
 
                         <?php $subCategories = $category['subCategories'];
@@ -197,7 +207,16 @@
             </div>
 </div>
 <p class="break"></p>
-<h1>Addendum</h1>
+
+<p><br></p>
+<div class="row">
+    <div class="col-sm-12"></div>
+</div>
+<div class="row">
+    <div class="col-sm-12">
+        <h3 style="color: #239AC4;" class="text-sm-center"><u>Addendum</u></h3>
+    </div>
+</div>
 
 <div class="row">
     <div class="col-sm-12"></div>
@@ -212,7 +231,7 @@
             $totalQuestionCount = 0;?>
                 <tbody>
             <tr>
-                <th colspan="2" class="dark"><?php echo $category['catDescription'] ?></th>
+                <th colspan="2" style="color: #239AC4;" class="dark"><?php echo $category['catDescription'] ?></th>
             </tr>
 
                 <!-- Recursive Loop 2 -->
@@ -221,7 +240,7 @@
                     ?>
 
                     <tr>
-                        <th colspan="2" class="table-secondary"><?php echo $subCategory['subCatDescription'] ?></th>
+                        <th style="color: #239AC4;" colspan="2" class="table-secondary"><?php echo $subCategory['subCatDescription'] ?></th>
                     </tr>
 
                         <?php   $questions = $subCategory['questions'];
